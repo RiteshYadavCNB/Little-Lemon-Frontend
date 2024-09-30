@@ -18,13 +18,17 @@
 
 .logo-container{
   flex: 1;
-  display: flex;
   padding-left: 5vw;
+  object-fit: contain;
 }
 
 .logo{
-  height: 20px;
+  display: block;
+  width: 50%;
+  margin: auto;
   src: url(./logo.png);
+  object-fit: contain;
+  
 }
 
 .nav{
