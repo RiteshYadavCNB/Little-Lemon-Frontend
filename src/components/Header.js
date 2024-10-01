@@ -4,7 +4,7 @@ function Header() {
     return (
         <header className="header">
             <div className="logo-container">
-                <img className='logo' alt='little lemon logo'/>
+                <img className='logo' url='https://github.com/RiteshYadavCNB/Little-Lemon-Repo/blob/main/public/logo.png' alt='little lemon logo'/>
             </div>
             <nav>
                 <ul className="nav">
