@@ -4,6 +4,7 @@ import Homepage from './components/Home'
 import Footer from './components/Footer'
 import Booking from './components/Booking'
 import { Routes, Route} from 'react-router-dom'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider';
 
 
 
@@ -11,10 +12,12 @@ function App() {
   return (
     <>
       <Header/>
-      <Routes>
-        <Route path='/' element={<Homepage />}/>
-        <Route path='/booking' element={<Booking />}/>
-      </Routes>
+      <LocalizationProvider>
+        <Routes>
+          <Route path='/' element={<Homepage />}/>
+          <Route path='/booking' element={<Booking />}/>
+        </Routes>
+      </LocalizationProvider>
       <Footer/>
     </>
   );
