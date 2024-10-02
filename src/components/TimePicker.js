@@ -9,14 +9,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState, useEffect } from 'react';
 
 
-export default function AmPMCustomization() {
+export default function DateAndTimePicker() {
     const [selectedDate, setSelectedDate] = useState(dayjs());
-    const [selectedTime, setSelectedTime] = useState(dayjs());
+    const [selectedTime, setSelectedTime] = useState(dayjs().hour(10).minute(0));
 
     useEffect(()=>{
         const currentDate = dayjs();
         setSelectedDate(currentDate);
-        const currentTime = dayjs();
+        const currentTime = dayjs().hour(10).minute(0);
         setSelectedTime(currentTime);
     }, [])
 
