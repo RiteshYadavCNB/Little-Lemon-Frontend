@@ -1,7 +1,9 @@
-function Main(){
+
+
+function Homepage(){
     return (
         <p>Site Under Development</p>
     )
 }
 
-export default Main;
+export default Homepage;
