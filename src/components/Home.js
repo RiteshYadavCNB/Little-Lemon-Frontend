@@ -2,7 +2,9 @@
 
 function Homepage(){
     return (
-        <p>Site Under Development</p>
+        <div className="home-main">
+            <p>Site Under Development</p>
+        </div>
     )
 }
 

@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header'
+import Footer from './components/Footer';
 import Homepage from './components/Home'
-import Footer from './components/Footer'
 import Booking from './components/Booking'
 import { Routes, Route} from 'react-router-dom'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider';
@@ -11,14 +11,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/L
 function App() {
   return (
     <>
-      <Header/>
+      <Header />
+
       <LocalizationProvider>
         <Routes>
           <Route path='/' element={<Homepage />}/>
           <Route path='/booking' element={<Booking />}/>
         </Routes>
       </LocalizationProvider>
-      <Footer/>
+
+      <Footer />
+
     </>
   );
 }

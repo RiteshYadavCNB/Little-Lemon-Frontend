@@ -86,10 +86,18 @@ export default function Booking(){
     /*component*/
 
     return(
-        <>
-            <div>
-                <h1>Book a Reservation</h1>
-                <button onClick={openPopUp}>Book Now</button>
+        <div className="booking-main">
+            <div className="booking-background-img-container">
+                    <img src="/booking-background.jpg" alt="background-image"/>
+            </div>
+
+            <div className="booking-container">
+
+                <div className="heading-container">
+                    <h1 className="heading"> Book a table</h1>
+                    <p style={{fontSize: '18px', fontWeight:'500', color:'green'}}>Up to 20% Off</p>
+                </div>
+                <button className="reserve-table-btn" onClick={openPopUp}>Reserve table</button>
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
                     <BookingForm
                         onDateChange={handleDateChange}
@@ -102,8 +110,8 @@ export default function Booking(){
                     />
                 </PopUp>
             </div>
-            <div style={{display: "block", width: "100vw", maxWidth: "50vw"}}>
-                <p>Reservation Confirmed</p>
+            <div className="booking-information-container">
+                <p className="booking-info-heading">Reservation Confirmed</p>
                 <p>Date: {selectedDate ? dayjs(selectedDate).format('ddd DD MMMM') : 'No date selected'}</p>
                 <p>Time: {selectedTimeSlots ? selectedTimeSlots : 'No time slots selected'}</p>
                 <p>Occasion: {occasion}</p>
@@ -112,6 +120,6 @@ export default function Booking(){
             <div>
                 <button onClick={resetAll}>Reset All</button>
             </div>
-        </>
+        </div>
     )
 }
