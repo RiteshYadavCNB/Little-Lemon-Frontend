@@ -1,51 +1,117 @@
-import { useState } from 'react';
-import DateAndTimePicker from './TimePicker';
-import { Button, Select } from '@mui/material';
+import dayjs from "dayjs";
+import { useState, useEffect } from "react";
+import PopUp from "../utility/PopUp";
+import BookingForm from "./BookingForm";
 
 export default function Booking(){
-    const [guestNumber, setGuestNumber] = useState(2);
-    const [occasion, setOccasion] = useState('');
 
-    const Guests = (e) =>{
-        console.log("input state is updating properly")
-        setGuestNumber(e.target.value)
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+    const [availableTimeSlots, setAvailableTimeSlots] = useState({});
+    const [selectedTimeSlots, setSelectedTimeSlots] = useState(null);
+    const [guestNumber, setGuestNumber] = useState(null);
+    const [occasion, setOccasion] = useState(null);
+
+
+    /*Generate time slots for the next 30 days*/
+
+    const generateTimeSlots = () => {
+        const slots ={};
+        const currentDate = dayjs();
+
+        for (let i = 0; i<30; i++){
+            const date =currentDate.add(i, 'day').format('MM-DD-YYYY');
+            slots[date]=['05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM', '09:00 PM', '10:00 PM']
+        }
+        return slots;
     }
 
-    const Occasion = (e) => {
-        setOccasion(e.target.value)
+    useEffect(()=>{
+        setAvailableTimeSlots(generateTimeSlots())
+    }, []);
+
+    /*occasion & guests*/
+
+    const occasionInfo = ['Birthday', 'Anniversary', 'Casual Dine']
+    const guests = ['2', '4', '6']
+
+    /*handle date change*/
+
+    const handleDateChange = (e) => {
+        setSelectedDate(e ? dayjs(e).format('MM-DD-YYYY') : null)
+        setSelectedTimeSlots(null);
+    };
+
+     /*handle available time slots*/
+
+     const handleTimeSlots = (timeSlot) => {
+        setSelectedTimeSlots(timeSlot)
+        // to update available time slots
+        const updatedSlots = availableTimeSlots[selectedDate].filter(slot => slot !== timeSlot);
+        setAvailableTimeSlots(prev => ({...prev, [selectedDate]: updatedSlots}));
     }
+
+    /*handle occasion*/
+
+    const handleOccasion = (e) => {
+        setOccasion(e)
+    }
+
+    /*handle guests*/
+
+    const handleGuests = (e) => {
+        setGuestNumber(e)
+    }
+
+    /*reset all time slots and states manually*/
+
+    const resetAll = () => {
+        setAvailableTimeSlots(generateTimeSlots());
+        setSelectedTimeSlots(null);
+        setSelectedDate(null);
+        setOccasion(null);
+        setGuestNumber(null);
+    }
+
+    /*booking form pop up*/
+
+    const openPopUp = () => {
+        setIsPopUpOpen(true)
+    };
+
+    const closePopUp = () => {
+        setIsPopUpOpen(false)
+    };
+
+    /*component*/
 
     return(
-        <div>
-            <form className='form'>
-                <fieldset>
-                    <div>
-                        <label>Pick Date and Time of Reservation</label>
-                        <DateAndTimePicker />
-                    </div>
-                    <div>
-                        <label htmlFor='guestnumber'>Number of Guests</label><br/>
-                        <input id='guestnumber' type='number' min={2} max={10} value={guestNumber} onChange={Guests}/>
-                    </div>
-                    <div>
-                        <label htmlFor='occasion' >Occasion</label><br/>
-                        <Select id='occasion' placeholder='select an occasion' value={occasion} onClick={Occasion}>
-                            <option>Birthday</option>
-                            <option>Anniversary</option>
-                            <option>Dining Out</option>
-                        </Select>
-                    </div>
-                    <Button>Make Reservation</Button>
-                </fieldset>
-            </form>
-
+        <>
             <div>
-                <p>{guestNumber}</p>
-                <p>{occasion}</p>
+                <h1>Book a Reservation</h1>
+                <button onClick={openPopUp}>Book Now</button>
+                <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
+                    <BookingForm
+                        onDateChange={handleDateChange}
+                        timeSlots={availableTimeSlots[selectedDate] || []}
+                        onTimeSlotSelect={handleTimeSlots}
+                        occasion={occasionInfo}
+                        onOccasionSelect={handleOccasion}
+                        guest={guests}
+                        onGuestSelect={handleGuests}
+                    />
+                </PopUp>
             </div>
-        </div>
+            <div style={{display: "block", width: "100vw", maxWidth: "50vw"}}>
+                <p>Reservation Confirmed</p>
+                <p>Date: {selectedDate ? dayjs(selectedDate).format('ddd DD MMMM') : 'No date selected'}</p>
+                <p>Time: {selectedTimeSlots ? selectedTimeSlots : 'No time slots selected'}</p>
+                <p>Occasion: {occasion}</p>
+                <p>Guests: {guestNumber}</p>
+            </div>
+            <div>
+                <button onClick={resetAll}>Reset All</button>
+            </div>
+        </>
     )
 }
-
-/* occasion wale element mein selection proper kro dekho onclick ya aur koi event handler lgega kya */
-
