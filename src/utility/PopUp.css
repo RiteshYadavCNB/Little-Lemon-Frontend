@@ -13,22 +13,27 @@
 
 .modal-content{
     display: flex;
+    flex-direction: column;
     background: white;
     justify-content: center;
     padding: 40px;
     border-radius: 5px;
     width: 100%;
     max-width: fit-content;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-wrap: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
 }
 
 .close-button{
+    width: 60px;
     background: transparent;
     border: none;
     font-size: 14px;
     color: white;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.03cm;
     cursor: pointer;
     position: absolute;

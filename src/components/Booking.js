@@ -94,10 +94,10 @@ export default function Booking(){
             <div className="booking-container">
 
                 <div className="heading-container">
-                    <h1 className="heading"> Book a table</h1>
-                    <p style={{fontSize: '18px', fontWeight:'500', color:'green'}}>Up to 20% Off</p>
+                    <h1 className="heading"> Book Table Now!</h1>
+                    <p style={{fontSize: '18px', fontWeight:'500', color:'green'}}>Get Up to 20% Off</p>
                 </div>
-                <button className="reserve-table-btn" onClick={openPopUp}>Reserve table</button>
+                <button className="reserve-table-btn" onClick={openPopUp}>Reserve a table</button>
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
                     <BookingForm
                         onDateChange={handleDateChange}
@@ -107,6 +107,7 @@ export default function Booking(){
                         onOccasionSelect={handleOccasion}
                         guest={guests}
                         onGuestSelect={handleGuests}
+                        onClose={closePopUp}
                     />
                 </PopUp>
             </div>
@@ -117,8 +118,8 @@ export default function Booking(){
                 <p>Occasion: {occasion}</p>
                 <p>Guests: {guestNumber}</p>
             </div>
-            <div>
-                <button onClick={resetAll}>Reset All</button>
+            <div className="reset">
+                <button style={{width: '60px'}} onClick={resetAll}>Reset All</button>
             </div>
         </div>
     )

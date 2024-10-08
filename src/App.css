@@ -231,32 +231,135 @@
   font-weight: 500;
 }
 
+.reset{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 80%;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 
 /*Booking Form*/
 
-.form{
-  justify-content: center;
-}
-
-.bookingform{
+.form-booking-form{
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
+}
+
+.formfield-booking-form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .timeslot{
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 280px;
+  padding: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
   font-size: 16px;
-  gap: 6px;
+  gap: 10px;
+}
+
+
+.mui-date-picker{
+  width: 100%;
+  max-width: 93.5%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.css-lxfshk-MuiInputBase-root-MuiOutlinedInput-root {
+  padding-right: 0;
+}
+
+.css-1i2hsuj-MuiInputAdornment-root{
+  justify-content: flex-end;
+}
+
+/*date-picker calender button icon*/
+.css-1a7z5rc-MuiButtonBase-root-MuiIconButton-root {
+  width: auto;
+}
+
+/*date picker calender*/
+.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root{
+  width: max-content;
+}
+
+/*calender header*/
+
+.css-cyfsxc-MuiPickersCalendarHeader-labelContainer{
+  width: inline-block;
+
+}
+
+.css-dplwbx-MuiPickersCalendarHeader-label{
+  width: inline-block;
+}
+
+.css-9reuh9-MuiPickersArrowSwitcher-root{
+  width: auto;
+}
+
+.css-5ivcmv-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
+  width: auto;
+}
+
+.css-1aqny2q-MuiPickersCalendarHeader-root{
+  width: fit-content;
+}
+
+.css-cyfsxc-MuiPickersCalendarHeader-labelContainer{
+  width: fit-content;
+}
+
+.MuiPickersArrowSwitcher-previousIconButton{
+ width: auto;
+}
+
+.css-l4cmsg-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button{
+ width: auto;
+}
+
+.css-9pafu0-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button{
+  width: auto;
+}
+
+.css-103k21f-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
+  width: auto;
 }
 
 .slotpicker{
   height: 54px;
   padding: 10px;
-  width: 246px;
+  width: 280px;
   font-size: 16px;
   color: rgb(139, 139, 139);
   border: 1px solid rgb(206, 206, 206);
   border-radius: 4px;
+}
+
+.reservation-btn{
+  width: 100%;
+  height: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  box-shadow: -3px 3px 0px 1px rgb(100, 100, 100);
 }

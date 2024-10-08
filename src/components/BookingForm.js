@@ -3,23 +3,25 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-export default function BookingForm({ onDateChange, timeSlots, onTimeSlotSelect, occasion, onOccasionSelect, guest, onGuestSelect}){
+
+export default function BookingForm({ onDateChange, timeSlots, onTimeSlotSelect, occasion, onOccasionSelect, guest, onGuestSelect, onClose}){
 
     const currentDate = dayjs();
 
     return(
         <>
-            <form className="form">
-                <formfield class="bookingform">
+            <form className="form-booking-form">
+                <formfield className="formfield-booking-form">
                     <div className="timeslot">
-                    <label>Date</label>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                label="Pick Date"
-                                minDate={currentDate}
-                                maxDate={dayjs().add(30, 'day')}
-                                onChange={(e) => onDateChange(e)} />
-                        </LocalizationProvider>
+                        <label>Date</label>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        className="mui-date-picker"
+                                        label="Pick Date"
+                                        minDate={currentDate}
+                                        maxDate={dayjs().add(30, 'day')}
+                                        onChange={(e) => onDateChange(e)} />
+                            </LocalizationProvider>
                     </div>
 
                     <div className="timeslot">
@@ -53,7 +55,14 @@ export default function BookingForm({ onDateChange, timeSlots, onTimeSlotSelect,
                     </div>
 
                 </formfield>
+
+                <div>
+                    <button className="reservation-btn" onClick={onClose}>Make Reservation</button>
+                </div>
             </form>
         </>
     )
 }
+
+
+// we can use submit button to submit form data to a list where we can store the reservation data each time button is clicked
