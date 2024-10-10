@@ -13,14 +13,12 @@ function App() {
     <>
       <Header />
 
-      {/*<LocalizationProvider>
+      <LocalizationProvider>
         <Routes>
           <Route path='/' element={<Homepage />}/>
           <Route path='/booking' element={<Booking />}/>
         </Routes>
-      </LocalizationProvider>*/}
-
-      <Booking />
+      </LocalizationProvider>
 
       <Footer />
     </>

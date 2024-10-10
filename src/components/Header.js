@@ -11,9 +11,8 @@ function Header() {
             </div>
             <nav className='nav-container'>
                 <ul className="nav-list">
-                    <li className='nav-link'>Book Table</li>
-                    {/*<li><Link to='/booking' className="nav-link" >Book Table</Link></li>
-                    <li><Link to='/' className="nav-link" >Contact</Link></li>*/}
+                    <li><Link to='/booking' className="nav-link" >Book Table</Link></li>
+                    <li><Link to='/' className="nav-link" >Contact</Link></li>
                 </ul>
             </nav>
         </header>
