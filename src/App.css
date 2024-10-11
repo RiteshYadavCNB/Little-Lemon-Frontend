@@ -260,6 +260,17 @@
   justify-content: flex-start;
 }
 
+.form-input-field{
+  width: 280px;
+  height: 54px;
+  font-size: 16px;
+  padding: 16px;
+  color: rgb(139, 139, 139);
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 .timeslot{
   display: flex;
   flex-direction: column;
@@ -276,6 +287,7 @@
 .mui-date-picker{
   width: 100%;
   max-width: 93.5%;
+  font-size: 16px;
   justify-content: space-between;
   align-items: flex-start;
 }

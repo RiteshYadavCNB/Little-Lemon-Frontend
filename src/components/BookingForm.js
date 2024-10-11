@@ -4,20 +4,24 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 
-export default function BookingForm({ onDateChange, timeSlots, onTimeSlotSelect, occasion, onOccasionSelect, guest, onGuestSelect, onClose}){
+export default function BookingForm({ onNameChange, onDateChange, timeSlots, onTimeSlotSelect, occasion, onOccasionSelect, guest, onGuestSelect, onClose, onSubmit}){
 
     const currentDate = dayjs();
 
     return(
         <>
-            <form className="form-booking-form">
+            <form onSubmit="onSubmit" className="form-booking-form">
                 <formfield className="formfield-booking-form">
+                    <div className="timeslot">
+                        <label>Name</label>
+                        <input className="form-input-field" placeholder="your name" onChange={(e) => onNameChange(e.target.value)}/>
+                    </div>
                     <div className="timeslot">
                         <label>Date</label>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
                                         className="mui-date-picker"
-                                        label="Pick Date"
+                                        label="pick date"
                                         minDate={currentDate}
                                         maxDate={dayjs().add(30, 'day')}
                                         onChange={(e) => onDateChange(e)} />

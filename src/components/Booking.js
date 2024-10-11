@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import PopUp from "../utility/PopUp";
 import BookingForm from "./BookingForm";
+import  createBooking  from '../firebaseService'
 
 export default function Booking(){
 
@@ -11,6 +12,42 @@ export default function Booking(){
     const [selectedTimeSlots, setSelectedTimeSlots] = useState(null);
     const [guestNumber, setGuestNumber] = useState(null);
     const [occasion, setOccasion] = useState(null);
+    const [name, setName] = useState("");
+
+    /* manage state for db data to be sent */
+    const [formData, setFormData] = useState({
+        userName: "",
+        bookingDate: "",
+        timeSlot: "",
+        occasionInfo: "",
+        guests: "",
+    });
+
+    /* handle form submission */
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // setting formData state
+
+        setFormData({
+            userName: name,
+            bookingDate: selectedDate,
+            timeSlot: selectedTimeSlots,
+            occasionInfo: occasion,
+            guests: guestNumber
+        })
+
+        // call createBooking function with form data
+        
+        createBooking(formData)
+            .then(()=>{
+                console.log('Booking created successfully');
+            })
+            .catch((error)=>{
+                console.error("Error creating Booking: ", error);
+            })
+    }
 
 
     /*Generate time slots for the next 30 days*/
@@ -34,6 +71,12 @@ export default function Booking(){
 
     const occasionInfo = ['Birthday', 'Anniversary', 'Casual Dine']
     const guests = ['2', '4', '6']
+
+    /* handle name */
+
+    const handleNameChange = (e) => {
+        setName (e);
+    }
 
     /*handle date change*/
 
@@ -71,6 +114,7 @@ export default function Booking(){
         setSelectedDate(null);
         setOccasion(null);
         setGuestNumber(null);
+        setName("");
     }
 
     /*booking form pop up*/
@@ -100,6 +144,7 @@ export default function Booking(){
                 <button className="reserve-table-btn" onClick={openPopUp}>Reserve a table</button>
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
                     <BookingForm
+                        onNameChange={handleNameChange}
                         onDateChange={handleDateChange}
                         timeSlots={availableTimeSlots[selectedDate] || []}
                         onTimeSlotSelect={handleTimeSlots}
@@ -108,11 +153,13 @@ export default function Booking(){
                         guest={guests}
                         onGuestSelect={handleGuests}
                         onClose={closePopUp}
+                        onSubmit={handleSubmit}
                     />
                 </PopUp>
             </div>
             <div className="booking-information-container">
                 <p className="booking-info-heading">Reservation Confirmed</p>
+                <p>Name: {name}</p>
                 <p>Date: {selectedDate ? dayjs(selectedDate).format('ddd DD MMMM') : 'No date selected'}</p>
                 <p>Time: {selectedTimeSlots ? selectedTimeSlots : 'No time slots selected'}</p>
                 <p>Occasion: {occasion}</p>
