@@ -8,9 +8,11 @@ export default function BookingForm({ onNameChange, onDateChange, timeSlots, onT
 
     const currentDate = dayjs();
 
+    
+
     return(
         <>
-            <form onSubmit="onSubmit" className="form-booking-form">
+            <form onSubmit={onSubmit} className="form-booking-form">
                 <formfield className="formfield-booking-form">
                     <div className="timeslot">
                         <label>Name</label>
@@ -61,7 +63,7 @@ export default function BookingForm({ onNameChange, onDateChange, timeSlots, onT
                 </formfield>
 
                 <div>
-                    <button className="reservation-btn" onClick={onClose}>Make Reservation</button>
+                    <button className="reservation-btn" type="submit">Make Reservation</button>
                 </div>
             </form>
         </>

@@ -36,7 +36,9 @@ export default function Booking(){
             timeSlot: selectedTimeSlots,
             occasionInfo: occasion,
             guests: guestNumber
-        })
+        });
+
+        console.log({formData})
 
         // call createBooking function with form data
         
@@ -47,6 +49,8 @@ export default function Booking(){
             .catch((error)=>{
                 console.error("Error creating Booking: ", error);
             })
+
+        closePopUp();
     }
 
 
@@ -152,7 +156,6 @@ export default function Booking(){
                         onOccasionSelect={handleOccasion}
                         guest={guests}
                         onGuestSelect={handleGuests}
-                        onClose={closePopUp}
                         onSubmit={handleSubmit}
                     />
                 </PopUp>
