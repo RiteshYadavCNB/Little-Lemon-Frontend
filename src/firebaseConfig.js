@@ -11,7 +11,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDM947xNinRPftzUBmNXPZ5pXqc_cW7M4Q",
   authDomain: "little-lemon-restaurant-f2778.firebaseapp.com",
   projectId: "little-lemon-restaurant-f2778",
-  databaseURL: "https://little-lemon-restaurant-f2778-default-rtdb.asia-southeast1.firebasedatabase.app.firebaseio.com",
+  databaseURL: "https://little-lemon-restaurant-f2778-default-rtdb.asia-southeast1.firebasedatabase.app",
   storageBucket: "little-lemon-restaurant-f2778.appspot.com",
   messagingSenderId: "443886824361",
   appId: "1:443886824361:web:bcde99ce0d411b3572f2b8",
