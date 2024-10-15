@@ -4,11 +4,10 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 
-export default function BookingForm({ onNameChange, onDateChange, timeSlots, onTimeSlotSelect, occasion, onOccasionSelect, guest, onGuestSelect, onClose, onSubmit}){
+export default function BookingForm({ onNameChange, onDateChange, timeSlots, onTimeSlotSelect, occasion, onOccasionSelect, guest, onGuestSelect, onSubmit}){
 
     const currentDate = dayjs();
 
-    
 
     return(
         <>

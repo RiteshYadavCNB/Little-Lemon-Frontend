@@ -24,7 +24,7 @@ export default function Booking(){
     });
 
     /* handle form submission */
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -41,14 +41,8 @@ export default function Booking(){
         console.log({formData})
 
         // call createBooking function with form data
-        
+
         createBooking(formData)
-            .then(()=>{
-                console.log('Booking created successfully');
-            })
-            .catch((error)=>{
-                console.error("Error creating Booking: ", error);
-            })
 
         closePopUp();
     }
