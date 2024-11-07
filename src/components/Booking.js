@@ -14,6 +14,12 @@ export default function Booking(){
     const [occasion, setOccasion] = useState(null);
     const [name, setName] = useState("");
 
+    /* instead of using so many states here create formdata state in the booking form itself
+       also send data to db on submit so you can submit data to db from the booking form intself
+       call the db function there only
+       instead of using the useState you can use useRef to get the form data so use that
+    */
+
     /* manage state for db data to be sent */
     const [formData, setFormData] = useState({
         userName: "",
