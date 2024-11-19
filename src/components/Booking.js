@@ -1,58 +1,17 @@
 import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import PopUp from "../utility/PopUp";
-import BookingForm from "./BookingForm";
-import  createBooking  from '../firebaseService'
+import  createBooking  from '../firebaseService';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import  MobileOTP  from "../services/otpService";
 
 export default function Booking(){
 
-    const [selectedDate, setSelectedDate] = useState(null);
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
     const [availableTimeSlots, setAvailableTimeSlots] = useState({});
-    const [selectedTimeSlots, setSelectedTimeSlots] = useState(null);
-    const [guestNumber, setGuestNumber] = useState(null);
-    const [occasion, setOccasion] = useState(null);
-    const [name, setName] = useState("");
-
-    /* instead of using so many states here create formdata state in the booking form itself
-       also send data to db on submit so you can submit data to db from the booking form intself
-       call the db function there only
-       instead of using the useState you can use useRef to get the form data so use that
-    */
-
-    /* manage state for db data to be sent */
-    const [formData, setFormData] = useState({
-        userName: "",
-        bookingDate: "",
-        timeSlot: "",
-        occasionInfo: "",
-        guests: "",
-    });
-
-    /* handle form submission */
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // setting formData state
-
-        setFormData({
-            userName: name,
-            bookingDate: selectedDate,
-            timeSlot: selectedTimeSlots,
-            occasionInfo: occasion,
-            guests: guestNumber
-        });
-
-        console.log({formData})
-
-        // call createBooking function with form data
-
-        createBooking(formData)
-
-        closePopUp();
-    }
-
+    const [bookingStatus, setBookingStatus] = useState(false);
 
     /*Generate time slots for the next 30 days*/
 
@@ -76,52 +35,65 @@ export default function Booking(){
     const occasionInfo = ['Birthday', 'Anniversary', 'Casual Dine']
     const guests = ['2', '4', '6']
 
-    /* handle name */
+    /* state for reservatian form */
 
-    const handleNameChange = (e) => {
-        setName (e);
-    }
+    const [formData, setFormData] = useState({
+        userName: "",
+        bookingDate: null,
+        timeSlot: "",
+        occasion: "",
+        guests: ""
+    });
 
-    /*handle date change*/
+    /* handle form submission */
 
-    const handleDateChange = (e) => {
-        setSelectedDate(e ? dayjs(e).format('MM-DD-YYYY') : null)
-        setSelectedTimeSlots(null);
-    };
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
 
-     /*handle available time slots*/
+    //     console.log({formData})
 
-     const handleTimeSlots = (timeSlot) => {
-        setSelectedTimeSlots(timeSlot)
+    //     // call createBooking function with form data from the OTP popup page
+
+    //     createBooking(formData)
+
+    //     closePopUp();
+
+    //     setFormData({
+    //         userName: "",
+    //         bookingDate: "",
+    //         timeSlot: "",
+    //         occasion: "",
+    //         guests: ""
+    //      });
+
+    //     console.log(formData);
+    // }
+
+
+    /*handle available time slots*/
+
+     const handleTimeSlots = (e) => {
+        setFormData((formData) => ({...formData, timeSlot : e.target.value}));
         // to update available time slots
-        const updatedSlots = availableTimeSlots[selectedDate].filter(slot => slot !== timeSlot);
-        setAvailableTimeSlots(prev => ({...prev, [selectedDate]: updatedSlots}));
+        const updatedSlots = availableTimeSlots[formData.bookingDate].filter(slot => slot !== formData.timeSlot);
+        setAvailableTimeSlots(prev => ({...prev, [formData.bookingDate]: updatedSlots}));
     }
 
-    /*handle occasion*/
-
-    const handleOccasion = (e) => {
-        setOccasion(e)
-    }
-
-    /*handle guests*/
-
-    const handleGuests = (e) => {
-        setGuestNumber(e)
-    }
 
     /*reset all time slots and states manually*/
 
     const resetAll = () => {
         setAvailableTimeSlots(generateTimeSlots());
-        setSelectedTimeSlots(null);
-        setSelectedDate(null);
-        setOccasion(null);
-        setGuestNumber(null);
-        setName("");
+        setFormData({
+            userName: "",
+            bookingDate: null,
+            timeSlot: "",
+            occasion: "",
+            guests: ""
+        })
     }
 
-    /*booking form pop up*/
+    /*OTP pop up*/
 
     const openPopUp = () => {
         setIsPopUpOpen(true)
@@ -130,6 +102,7 @@ export default function Booking(){
     const closePopUp = () => {
         setIsPopUpOpen(false)
     };
+
 
     /*component*/
 
@@ -145,32 +118,93 @@ export default function Booking(){
                     <h1 className="heading"> Book Table Now!</h1>
                     <p style={{fontSize: '18px', fontWeight:'500', color:'green'}}>Get Up to 20% Off</p>
                 </div>
+
+
+                <form className="form-booking-form">
+                    <formfield className="formfield-booking-form">
+                        <div className="timeslot">
+                            <label>Name</label>
+                            <input className="form-input-field" placeholder="your name" value={formData.userName} onChange={(e) => setFormData((formData) => ({...formData, userName : e.target.value}))}/>
+                        </div>
+
+                         <div className="timeslot">
+                            <label>Date</label>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        className="mui-date-picker"
+                                        value={formData.bookingDate != null ? dayjs(formData.bookingDate) : null}
+                                        //if we directly pass null to value first react would try to compare mui value prop
+                                        //which is by default an object with the null and it will throw error
+                                        //if we pass null to dayjs(null) and assign it to value
+                                        //dayjs will return the date format which eventhough is valid but is not a date so the mui validation will throw error
+                                        //to remedy we need to tell react that first check whether formData.bookingDate obj has the null value
+                                        //if it does not have the null assign the formData.bookingDate to value otherwise assign null
+                                        label={"Pick Date"}
+                                        disablePast
+                                        minDate={dayjs()}
+                                        maxDate={dayjs().add(30, 'day')}
+                                        onChange={(date) => {
+                                            console.log(date)
+                                            setFormData((formData) => ({...formData, bookingDate : date}))}}
+                                    />
+                                </LocalizationProvider>
+                        </div>
+
+                        <div className="timeslot">
+                            <label>Time</label>
+                            <select className="slotpicker" onChange={(e) => handleTimeSlots(e.target.value)} defaultValue="">
+                                <option value="">select a time slot</option>
+                                {availableTimeSlots.length > 0 ? (availableTimeSlots.map((slot, index) => (
+                                    <option key={index} value={slot}>{slot}</option>
+                                ))
+                                ) : (
+                                    <option disabled>Sorry! all tables booked</option>
+                                )
+                            }
+                            </select>
+                        </div>
+
+                        <div className="timeslot">
+                            <label>Occasion</label>
+                            <select className="slotpicker" onChange={(e) => setFormData((formData) => ({...formData, occasion : e.target.value}))} defaultValue="">
+                                <option>select occasion</option>
+                                {occasionInfo.map((occasion, index) => (<option key={index} value={occasion}>{occasion}</option>))}
+                            </select>
+                        </div>
+
+                        <div className="timeslot">
+                            <label>Guests</label>
+                            <select className="slotpicker" onChange={(e) => setFormData((formData) => ({...formData, guests : e.target.value}))} defaultValue="">
+                                <option>select number of guests</option>
+                                {guests.map((guest, index) => (<option key={index} value={guest}>{guest}</option>))}
+                            </select>
+                        </div>
+
+                        </formfield>
+                </form>
+
                 <button className="reserve-table-btn" onClick={openPopUp}>Reserve a table</button>
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
-                    <BookingForm
-                        onNameChange={handleNameChange}
-                        onDateChange={handleDateChange}
-                        timeSlots={availableTimeSlots[selectedDate] || []}
-                        onTimeSlotSelect={handleTimeSlots}
-                        occasion={occasionInfo}
-                        onOccasionSelect={handleOccasion}
-                        guest={guests}
-                        onGuestSelect={handleGuests}
-                        onSubmit={handleSubmit}
-                    />
+                   <MobileOTP/>
                 </PopUp>
             </div>
-            <div className="booking-information-container">
-                <p className="booking-info-heading">Reservation Confirmed</p>
-                <p>Name: {name}</p>
-                <p>Date: {selectedDate ? dayjs(selectedDate).format('ddd DD MMMM') : 'No date selected'}</p>
-                <p>Time: {selectedTimeSlots ? selectedTimeSlots : 'No time slots selected'}</p>
-                <p>Occasion: {occasion}</p>
-                <p>Guests: {guestNumber}</p>
-            </div>
+
             <div className="reset">
                 <button style={{width: '60px'}} onClick={resetAll}>Reset All</button>
             </div>
+
+            <div>
+                {bookingStatus &&
+                <div className="booking-information-container">
+                    <p className="booking-info-heading">Reservation Confirmed</p>
+                    <p>Name: {formData.userName}</p>
+                    <p>Date: {formData.bookingDate ? dayjs(formData.bookingDate).format('ddd DD MMMM') : 'No date selected'}</p>
+                    <p>Time: {formData.timeSlot ? formData.timeSlot : 'No time slots selected'}</p>
+                    <p>Occasion: {formData.occasion}</p>
+                    <p>Guests: {formData.guests}</p>
+                </div>}
+            </div>
+
         </div>
     )
 }
