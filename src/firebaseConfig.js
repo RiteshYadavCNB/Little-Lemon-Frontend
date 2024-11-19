@@ -8,15 +8,16 @@ import { getDatabase } from "firebase/database";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDM947xNinRPftzUBmNXPZ5pXqc_cW7M4Q",
-  authDomain: "little-lemon-restaurant-f2778.firebaseapp.com",
-  projectId: "little-lemon-restaurant-f2778",
-  databaseURL: "https://little-lemon-restaurant-f2778-default-rtdb.asia-southeast1.firebasedatabase.app",
-  storageBucket: "little-lemon-restaurant-f2778.appspot.com",
-  messagingSenderId: "443886824361",
-  appId: "1:443886824361:web:bcde99ce0d411b3572f2b8",
-  measurementId: "G-D9ZYBHG1W8"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEAUSREMENT_ID,
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
