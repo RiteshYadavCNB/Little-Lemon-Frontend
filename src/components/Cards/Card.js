@@ -7,11 +7,11 @@ import styled from 'styled-components';
 
     const CardContainer = styled.div`
         display: flex;
-        flex-direction: cloumn;
+        flex-direction: column;
         width: 320px;
         height: 420px;
         padding: 16px;
-        gap: 20px;
+        gap: 4px;
         font-size: 14px;
         box-sizing: border-box;
         background-color: #ffffff;
@@ -19,7 +19,7 @@ import styled from 'styled-components';
     `;
 
     const CardImage = styled.img`
-        width: auto;
+        width: 100%;
         height: 210px;
         border-radius: 4px;
         margin-bottom: 10px;
@@ -32,18 +32,26 @@ import styled from 'styled-components';
 
     const CardContent = styled.div`
         display: flex;
+        flex-direction: ${(props) => (props.direction ? props.direction : "column")};
+        justify-content: space-between;
+        gap: 4px;
+    `;
+
+    const Heading = styled.h4`
+        display: inline;
+        font-size:13px;
+        font-weight:500;
     `;
 
     const CardInfo = styled.p`
+        width: max-content;
         font-size: 13px;
-        font-weight: 500;
-        margin-right: 6px;
+        font-weight: 400;
     `;
 
     const CardDescription = styled.div`
         dispplay: flex;
         width: 100%;
-        padding: 0px 6px;
         box-sizing: border-box;
     `;
 
@@ -63,9 +71,11 @@ import styled from 'styled-components';
             {image && <CardImage src={image} alt={title}/>}
             <CardContent>
                 {title && <CardTitle>{title}</CardTitle>}
-                {rating && <CardInfo>Rated: {rating}</CardInfo>}
-                {type && <CardInfo>Meal Type: {type}</CardInfo>}
-                {serveDays && <CardInfo>Served On: {serveDays}</CardInfo>}
+                <CardContent direction="row">
+                    {rating && <CardInfo><Heading>Ratings: </Heading>{rating}</CardInfo>}
+                    {type && <CardInfo><Heading>Meal type: </Heading>{type}</CardInfo>}
+                </CardContent>
+                {serveDays && <CardInfo><Heading>Served On: </Heading>{serveDays}</CardInfo>}
             </CardContent>
 
             <CardDescription>

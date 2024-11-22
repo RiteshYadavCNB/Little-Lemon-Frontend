@@ -1,4 +1,5 @@
-
+import React from "react";
+import Card from "../Cards/Card";
 
 export default function Catalogue({cardWidth}){
 
@@ -60,44 +61,18 @@ export default function Catalogue({cardWidth}){
 
 
 
-    /* mapping card elements using a variable*/
-
-    /*const catalogueCard = catalogueList.map((meal) =>
-            <div key={meal} style={card}>
-                <div>
-                    <h2>{meal.mealName}</h2>;
-                    <span>
-                        <p>{meal.rating}</p>
-                        <p>{meal.mealType}</p>
-                    </span>
-                    <p>{meal.serveDays}</p>
-                </div>
-
-                <div>
-                    <p>{meal.mealDescription}</p>
-                </div>
-            </div>
-        );*/
-
-
-
     return (
         <>
             {catalogueList.map((meal) => (
-                <div ref={cardWidth} key={meal.mealName} className="card">
-                    <div className="card-info">
-                        <img alt={meal.mealName} src={meal.mealUrl} ></img>
-                        <h2 style={{fontSize: '18px', fontWeight: '600'}}>{meal.mealName}</h2>
-                        <div style={{display: "block"}}>
-                            <span style={{marginRight: "12px"}}><b style={{fontSize: "13.75px", fontWeight: "500", marginRight: "6px"}}>Rated:</b>{meal.rating}</span>
-                            <span><b style={{fontSize: "13.75px", fontWeight: "500", marginRight: "6px"}}>Meal Type:</b>{meal.mealType}</span>
-                        </div>
-                        <p><b style={{fontSize: "13.75px", fontWeight: "500"}}>Served On:</b> {meal.serveDays}</p>
-                    </div>
-
-                    <div style={{display: "flex", width: "100%", padding: "0px 6px", boxSizing: "border-box"}}>
-                        <p style={{textAlign: "center", fontSize: "13.75px", fontWeight: "400"}}>{meal.mealDescription}</p>
-                    </div>
+                <div ref={cardWidth} key={meal.mealName}>
+                    <Card
+                        title={meal.mealName}
+                        image={meal.mealUrl}
+                        rating={meal.rating}
+                        serveDays={meal.serveDays}
+                        type={meal.mealType}
+                        description={meal.mealDescription}
+                    />
                 </div>
             ))}
         </>
