@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../Cards/Card";
+import styled from "styled-components";
 
 export default function Catalogue({cardWidth}){
 
@@ -59,12 +60,15 @@ export default function Catalogue({cardWidth}){
         }
     ];
 
+    const CardDiv = styled.div`
+        display: flex;
+    `;
 
 
     return (
         <>
             {catalogueList.map((meal) => (
-                <div ref={cardWidth} key={meal.mealName}>
+                <CardDiv ref={cardWidth} key={meal.mealName}>
                     <Card
                         title={meal.mealName}
                         image={meal.mealUrl}
@@ -73,7 +77,7 @@ export default function Catalogue({cardWidth}){
                         type={meal.mealType}
                         description={meal.mealDescription}
                     />
-                </div>
+                </CardDiv>
             ))}
         </>
     );
