@@ -5,7 +5,11 @@ import  createBooking  from '../firebaseService';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+import InputField from "./FormComponents/InputField";
+import DropDownSelection from "./FormComponents/DropDownSelection";
 import  MobileOTP  from "../services/otpService";
+
 
 export default function Booking(){
 
@@ -73,10 +77,16 @@ export default function Booking(){
     /*handle available time slots*/
 
      const handleTimeSlots = (e) => {
-        setFormData((formData) => ({...formData, timeSlot : e.target.value}));
+        console.log(e)
+        console.log(dayjs(formData.bookingDate).format("DD-MM-YYYY"))
+
+        setFormData((formData) => ({...formData, timeSlot: e }));
+
+        console.log(availableTimeSlots[dayjs().format("DD-MM-YYYY")]);
         // to update available time slots
-        const updatedSlots = availableTimeSlots[formData.bookingDate].filter(slot => slot !== formData.timeSlot);
-        setAvailableTimeSlots(prev => ({...prev, [formData.bookingDate]: updatedSlots}));
+        const updatedSlots = availableTimeSlots[dayjs(formData.bookingDate).format("DD-MM-YYYY")].filter((slot) => slot !== e);
+
+        setAvailableTimeSlots(prev => ({...prev, [dayjs(formData.bookingDate).format("DD-MM-YYYY")]: updatedSlots}));
     }
 
 
@@ -122,10 +132,7 @@ export default function Booking(){
 
                 <form className="form-booking-form">
                     <formfield className="formfield-booking-form">
-                        <div className="timeslot">
-                            <label>Name</label>
-                            <input className="form-input-field" placeholder="your name" value={formData.userName} onChange={(e) => setFormData((formData) => ({...formData, userName : e.target.value}))}/>
-                        </div>
+                        <InputField label="Name" placeholder="your name" username={formData.userName} actions={(e) => setFormData((formData) => ({...formData, userName: e.target.value}))}/>
 
                          <div className="timeslot">
                             <label>Date</label>
@@ -133,36 +140,19 @@ export default function Booking(){
                                     <DatePicker
                                         className="mui-date-picker"
                                         value={formData.bookingDate != null ? dayjs(formData.bookingDate) : null}
-                                        //if we directly pass null to value first react would try to compare mui value prop
-                                        //which is by default an object with the null and it will throw error
-                                        //if we pass null to dayjs(null) and assign it to value
-                                        //dayjs will return the date format which eventhough is valid but is not a date so the mui validation will throw error
-                                        //to remedy we need to tell react that first check whether formData.bookingDate obj has the null value
-                                        //if it does not have the null assign the formData.bookingDate to value otherwise assign null
                                         label={"Pick Date"}
+                                        format="MM-DD-YYYY"
                                         disablePast
                                         minDate={dayjs()}
                                         maxDate={dayjs().add(30, 'day')}
-                                        onChange={(date) => {
-                                            console.log(date)
-                                            setFormData((formData) => ({...formData, bookingDate : date}))}}
+                                        onChange={(newValue) => {
+                                            setFormData((formData) => ({...formData, bookingDate : newValue}))}}
                                     />
                                 </LocalizationProvider>
                         </div>
 
-                        <div className="timeslot">
-                            <label>Time</label>
-                            <select className="slotpicker" onChange={(e) => handleTimeSlots(e.target.value)} defaultValue="">
-                                <option value="">select a time slot</option>
-                                {availableTimeSlots.length > 0 ? (availableTimeSlots.map((slot, index) => (
-                                    <option key={index} value={slot}>{slot}</option>
-                                ))
-                                ) : (
-                                    <option disabled>Sorry! all tables booked</option>
-                                )
-                            }
-                            </select>
-                        </div>
+                        <DropDownSelection label="Time" placeholder="select a time slot" mapParameter={availableTimeSlots[dayjs(formData.bookingDate).format("MM-DD-YYYY")]} actions={(e) => handleTimeSlots(e.target.value)}/>
+
 
                         <div className="timeslot">
                             <label>Occasion</label>

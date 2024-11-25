@@ -73,7 +73,7 @@ const DishCarousel = () => {
                 <ScrollButton degrees="left" />
             </CarouselButton>
 
-            <CatalogueStyle ref={carouselRef} className="card-container">
+            <CatalogueStyle ref={carouselRef} >
                 <Catalogue cardWidth={cardRef} />
             </CatalogueStyle>
 
