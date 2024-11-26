@@ -13,9 +13,9 @@ import  MobileOTP  from "../services/otpService";
 
 export default function Booking(){
 
-    const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-    const [availableTimeSlots, setAvailableTimeSlots] = useState({});
-    const [bookingStatus, setBookingStatus] = useState(false);
+    const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+    const [availableTimeSlots, setAvailableTimeSlots] = useState({})
+    const [bookingStatus, setBookingStatus] = useState(false)
 
     /*Generate time slots for the next 30 days*/
 
@@ -77,23 +77,28 @@ export default function Booking(){
     /*handle available time slots*/
 
      const handleTimeSlots = (e) => {
+
+        setFormData((formData) => ({...formData, timeSlot: e }))
         console.log(e)
-        console.log(dayjs(formData.bookingDate).format("DD-MM-YYYY"))
 
-        setFormData((formData) => ({...formData, timeSlot: e }));
-
-        console.log(availableTimeSlots[dayjs().format("DD-MM-YYYY")]);
         // to update available time slots
-        const updatedSlots = availableTimeSlots[dayjs(formData.bookingDate).format("DD-MM-YYYY")].filter((slot) => slot !== e);
+        const updatedSlots = availableTimeSlots[formData.bookingDate].filter((slot) => slot !== e )
+        console.log("updated slots: ", updatedSlots)
 
-        setAvailableTimeSlots(prev => ({...prev, [dayjs(formData.bookingDate).format("DD-MM-YYYY")]: updatedSlots}));
+        setAvailableTimeSlots(prev => ({...prev, [formData.bookingDate]:prev[formData.bookingDate].filter((slot)=> slot !== e)}))
+        //what we did here: setAvailableTimeSlots()is a function it will only take parameters so if we want to pass a computation here we need to
+        //write the arrow function --- in the arrow function we are passing the prev state as obj and inside the function we are spreading it
+        //after spreading the prev obj we are accessing the particular property in this case, date and than we are telling the fun that for
+        //this date property you need to reassign a new filtered array here ":prev[date]" to reassign and "prev[date].filter()" to tell what to assign
+        //in filter() method we are giving it an array as slot and then we are telling it that return all those value which are not equal to "e"
+        //"e" is the selected time slot
     }
 
 
     /*reset all time slots and states manually*/
 
     const resetAll = () => {
-        setAvailableTimeSlots(generateTimeSlots());
+        setAvailableTimeSlots(generateTimeSlots())
         setFormData({
             userName: "",
             bookingDate: null,
@@ -146,12 +151,13 @@ export default function Booking(){
                                         minDate={dayjs()}
                                         maxDate={dayjs().add(30, 'day')}
                                         onChange={(newValue) => {
-                                            setFormData((formData) => ({...formData, bookingDate : newValue}))}}
+                                            setFormData((formData) => ({...formData, bookingDate : dayjs(newValue).format("MM-DD-YYYY")}))}}
                                     />
                                 </LocalizationProvider>
                         </div>
 
-                        <DropDownSelection label="Time" placeholder="select a time slot" mapParameter={availableTimeSlots[dayjs(formData.bookingDate).format("MM-DD-YYYY")]} actions={(e) => handleTimeSlots(e.target.value)}/>
+                        <DropDownSelection label="Time" value={formData.timeSlot} placeholder="select a time slot" mapParameter={availableTimeSlots[formData.bookingDate]} actions={(e) => handleTimeSlots(e.target.value)}/>
+
 
 
                         <div className="timeslot">

@@ -29,14 +29,15 @@ const Selection = styled.select`
     box-sizing: border-box;
 `;
 
-const DropDownSelection = ({label, placeholder, mapParameter, actions }) => {
+const DropDownSelection = ({label, value, placeholder, mapParameter, actions }) => {
     return(
         <DropDownContainer>
             {label && <Label>{label}</Label>}
-            <Selection onChange={actions}>
-                <option>{placeholder}</option>
-                {mapParameter ? (mapParameter.map((slots, index) => (
-                    <option key={index} value={slots}>{slots}</option>
+            <Selection required selected onChange={actions}>
+                <option value="">select an option</option>
+
+                {mapParameter && mapParameter.length > 0 ? (mapParameter.map((slots) => (
+                    <option value={slots}>{slots}</option>
                      ))
                 ) : (
                     <option disabled>sorry! all tables are booked</option>
