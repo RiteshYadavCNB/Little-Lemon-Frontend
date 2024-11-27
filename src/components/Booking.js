@@ -8,38 +8,89 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import InputField from "./UtilityComponents/InputField";
 import DropDownSelection from "./UtilityComponents/DropDownSelection";
+import CTAButton from "./Buttons/CTAButton";
 import  MobileOTP  from "../services/otpService";
+
 
 import styled from "styled-components";
 
+
+
 const BookingPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 60px;
+
+    @media (max-width: 780px) {
+        margin-top: 90px;
+    }
 `;
+
+const BookingSectionContainer = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+`;
+
+const BookingSectionHead = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: -80px;
+    margin-bottom: 0px;
+`;
+
+const BookingHeadBgImage = styled.div`
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+`;
+
+const bookingBgStyle = {
+    display: 'block',
+    width: '100%',
+    height: '150px',
+    objectFit: 'cover',
+};
 
 
 const BookingSection = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 80%;
+    width: 700px;
+    justify-content: center;
     gap: 20px;
+    margin: 80px 0px 40px 0px;
+    padding: 30px 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-sizing: border-box;
 
-    @media (max-width: 480px){
-        width: 90%;
+
+    @media (max-width: 780px){
+        flex-direction: column;
+        width: max-content;
+        padding: 20px;
     }
 `;
 
 const SelectDate = styled.div`
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 300px;
     padding: 0;
     gap: 10px;
     box-sizing: border-box;
@@ -163,20 +214,26 @@ export default function Booking(){
 
     return(
         <BookingPage>
-            <div className="booking-background-img-container">
-                    <img src="/booking-background.jpg" alt="background-image"/>
-            </div>
+            <BookingHeadBgImage>
+                    <img style={bookingBgStyle} src="/booking-background.jpg" alt="background-image"/>
+            </BookingHeadBgImage>
 
-            <div className="booking-container">
+            <BookingSectionContainer>
 
-                <div className="heading-container">
+                <BookingSectionHead>
                     <h1 className="heading"> Book Table Now!</h1>
                     <p style={{fontSize: '18px', fontWeight:'500', color:'green'}}>Get Up to 20% Off</p>
-                </div>
+                </BookingSectionHead>
 
 
                 <BookingSection>
-                        <InputField label="Name" placeholder="your name" username={formData.userName} actions={(e) => setFormData((formData) => ({...formData, userName: e.target.value}))}/>
+                        <InputField
+                            width="100%"
+                            label="Name" placeholder="your name"
+                            username={formData.userName}
+                            actions={(e) => setFormData((formData) => ({...formData, userName: e.target.value}))}
+                        />
+
                         <SelectDate>
                             <label style={{fontSize: "16px"}}>Date</label>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -197,18 +254,36 @@ export default function Booking(){
                             </LocalizationProvider>
                         </SelectDate>
 
-                        <DropDownSelection label="Time" value={formData.timeSlot} placeholder="select a time slot" mapParameter={availableTimeSlots[formData.bookingDate]} actions={(e) => handleTimeSlots(e.target.value)}/>
+                        <DropDownSelection
+                            label="Time" value={formData.timeSlot}
+                            placeholder="select a time slot"
+                            mapParameter={availableTimeSlots[formData.bookingDate]}
+                            actions={(e) => handleTimeSlots(e.target.value)}
+                        />
 
-                        <DropDownSelection label="Occasion" value={formData.occasion} placeholder="select occasion" mapParameter={occasionInfo} actions={(e) => setFormData((formData)=>({...formData, occasion: e}))} />
+                        <DropDownSelection
+                            label="Occasion" value={formData.occasion}
+                            placeholder="select occasion"
+                            mapParameter={occasionInfo}
+                            actions={(e) => setFormData((formData)=>({...formData, occasion: e}))}
+                        />
 
-                        <DropDownSelection label="Guests" value={formData.guests} placeholder="select number of guests" mapParameter={guests} actions={(e) => setFormData((formData) => ({...formData, guests:e}))} />
+                        <DropDownSelection
+                            label="Guests" value={formData.guests}
+                            placeholder="select number of guests"
+                            mapParameter={guests}
+                            actions={(e) => setFormData((formData) => ({...formData, guests:e}))}
+                        />
+
                 </BookingSection>
 
-                <button className="reserve-table-btn" onClick={openPopUp}>Reserve a table</button>
+                <CTAButton buttonText="Reserve a Table" actions={openPopUp}/>
+
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
                    <MobileOTP/>
                 </PopUp>
-            </div>
+
+            </BookingSectionContainer>
 
             <div className="reset">
                 <button style={{width: '60px'}} onClick={resetAll}>Reset All</button>

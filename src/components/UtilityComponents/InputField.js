@@ -4,8 +4,7 @@ import styled from "styled-components";
 const InputContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 280px;
+    width: ${(props)=>props.width || "300px"};
     padding: 0;
     flex-grow: 0;
     flex-shrink: 0;
@@ -18,7 +17,7 @@ const Label = styled.label`
 `;
 
 const InputFieldStyle = styled.input`
-    width: 280px;
+    width: 100%;
     height: 54px;
     font-size: 16px;
     padding: 16px;
@@ -30,9 +29,9 @@ const InputFieldStyle = styled.input`
 
 
 
-const InputField = ({label, placeholder, username, actions}) => {
+const InputField = ({width, label, placeholder, username, actions}) => {
     return (
-        <InputContainer>
+        <InputContainer width={width}>
         {label && <Label>{label}</Label>}
         <InputFieldStyle placeholder={placeholder} value={username} onChange={actions}/>
     </InputContainer>

@@ -5,7 +5,7 @@ import styled from "styled-components";
 const DropDownContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 300px;
     padding: 0px;
     flex-grow: 0;
     flex-shrink: 0;
@@ -18,7 +18,7 @@ const Label = styled.label`
 `;
 
 const Selection = styled.select`
-    width: 280px;
+    width: 300px;
     height: 54px;
     font-size: 16px;
     padding: 16px;
