@@ -5,9 +5,8 @@ import styled from "styled-components";
 const DropDownContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 280px;
-    padding: 0;
+    width: 280px;
+    padding: 0px;
     flex-grow: 0;
     flex-shrink: 0;
     font-size: 16px;
@@ -33,8 +32,8 @@ const DropDownSelection = ({label, value, placeholder, mapParameter, actions }) 
     return(
         <DropDownContainer>
             {label && <Label>{label}</Label>}
-            <Selection required selected onChange={actions}>
-                <option value="">select an option</option>
+            <Selection required value={value} onChange={actions}>
+                <option value="" disabled>{placeholder}</option>
 
                 {mapParameter && mapParameter.length > 0 ? (mapParameter.map((slots) => (
                     <option value={slots}>{slots}</option>
