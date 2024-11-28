@@ -25,10 +25,18 @@ const BookingPage = styled.div`
     align-items: center;
     flex-wrap: nowrap;
     margin-top: 60px;
+    margin bottom: 40px;
 
     @media (max-width: 768px) {
-        height: 100%;
+        height: max-content;
         margin-top: 0px;
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 360px) {
+        height: max-content;
+        margin-top: 0px;
+        margin-bottom: 60px;
     }
 `;
 
@@ -41,21 +49,7 @@ const BookingSectionContainer = styled.div`
     position: relative;
 `;
 
-const BookingSectionHead = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-top: -140px;
-    margin-bottom: 0px;
-
-    @media (max-width: 768px){
-        margin-top: 0px;
-    }
-`;
-
-const BookingHeadBgImage = styled.div`
+const BookingHead = styled.div`
     display: flex;
     width: 100%;
     height: 300px;
@@ -63,24 +57,62 @@ const BookingHeadBgImage = styled.div`
     flex-shrink: 0;
 `;
 
-const bookingBgStyle = {
+const BookingHeadingContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 200px;
+    Z-index: 1;
+
+    @media (max-width: 768px){
+        top: 160px;
+    }
+`;
+
+const bookingBgImageStyle = {
     display: 'block',
     width: '100%',
     height: '300px',
     objectFit: 'cover',
 };
 
-const bookingHeading = {
-    fontSize: '60px',
-    fontWeight: '700',
-    color: 'white'
-}
+const BookingHeading = styled.h1`
+    font-size: 60px;
+    font-weight: 700;
+    color: white;
 
-const tagHeading = {
-    fontSize: '32px',
-    fontWeight: '600',
-    color: 'white'
-}
+    @media (max-width: 768px) {
+        font-size: 40px;
+    }
+`;
+
+const BookingHeadingTag = styled.h4`
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+
+    @media (max-width: 768px) {
+        font-size: 24px;
+    }
+`;
+
+// issue with this method is to apply the new style we need to refresh the page
+
+// const bookingHeading = {
+//     fontSize: window.innerWidth < 768 ? '40px' : '60px',
+//     fontWeight: '700',
+//     color: 'white'
+
+// }
+
+// const tagHeading = {
+//     fontSize: window.innerWidth < 768 ? '24px' : '32px',
+//     fontWeight: '600',
+//     color: 'white'
+// }
 
 
 const BookingSection = styled.div`
@@ -90,7 +122,7 @@ const BookingSection = styled.div`
     width: 700px;
     justify-content: center;
     gap: 20px;
-    margin: 120px 0px 40px 0px;
+    margin: 60px 0px 40px 0px;
     padding: 30px 40px;
     background-color: white;
     border-radius: 8px;
@@ -102,6 +134,14 @@ const BookingSection = styled.div`
         flex-direction: column;
         width: max-content;
         padding: 20px;
+        margin: 40px 0px 60px 0px;
+    }
+
+    @media (max-width: 360px){
+        flex-direction: column;
+        width: max-content;
+        padding: 20px;
+        margin: 40px 0px 60px 0px;
     }
 `;
 
@@ -114,6 +154,12 @@ const SelectDate = styled.div`
     box-sizing: border-box;
 `;
 
+const MuiDatePickerStyles = {
+    "& .MuiInputBase-root":{fontSize: "14px", height: "54px"},
+    "& .MuiFormLabel-root":{fontSize: "14px", color: "rgb(139, 139, 139)"},
+    "& .MuiOutlinedInput-root": {height: "54px"},
+    "& .MuiSvgIcon-root": {color: "lightgrey"},
+}
 
 export default function Booking(){
 
@@ -232,17 +278,15 @@ export default function Booking(){
 
     return(
         <BookingPage>
-            <BookingHeadBgImage>
-                    <img style={bookingBgStyle} src="/booking-background.jpg" alt="background-image"/>
-            </BookingHeadBgImage>
+            <BookingHead>
+                    <img style={bookingBgImageStyle} src="/booking-background.jpg" alt="background-image"/>
+                    <BookingHeadingContainer>
+                        <BookingHeading> Book Table Now!</BookingHeading>
+                        <BookingHeadingTag>Get Up to 20% Off</BookingHeadingTag>
+                    </BookingHeadingContainer>
+            </BookingHead>
 
             <BookingSectionContainer>
-
-                <BookingSectionHead>
-                    <h1 style={bookingHeading}> Book Table Now!</h1>
-                    <p style={tagHeading}>Get Up to 20% Off</p>
-                </BookingSectionHead>
-
 
                 <BookingSection>
                         <InputField
@@ -256,10 +300,7 @@ export default function Booking(){
                             <label style={{fontSize: "16px"}}>Date</label>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    sx={{
-                                        "& .MuiInputBase-root":{fontSize: "14px", height: "54px"},
-                                        "& .MuiOutlinedInput-root": {height: "54px"},
-                                    }}
+                                    sx={MuiDatePickerStyles}
                                     value={formData.bookingDate != null ? dayjs(formData.bookingDate) : null}
                                     label={"Pick Date"}
                                     format="MM-DD-YYYY"

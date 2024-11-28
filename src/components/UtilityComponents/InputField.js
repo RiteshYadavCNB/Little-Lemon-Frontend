@@ -25,6 +25,15 @@ const InputFieldStyle = styled.input`
     border: 1px solid rgb(206, 206, 206);
     border-radius: 4px;
     box-sizing: border-box;
+    outline: none;
+
+    &::placeholder {
+        color: rgb(139, 139, 139);
+    }
+
+    &:hover {
+        border: 1px solid rgb(0, 0, 0);
+    }
 `;
 
 
