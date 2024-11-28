@@ -20,18 +20,19 @@ const BookingPage = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
     margin-top: 60px;
 
-    @media (max-width: 780px) {
-        margin-top: 90px;
+    @media (max-width: 768px) {
+        height: 100%;
+        margin-top: 0px;
     }
 `;
 
 const BookingSectionContainer = styled.div`
-    flex: 1;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -46,24 +47,40 @@ const BookingSectionHead = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin-top: -80px;
+    margin-top: -140px;
     margin-bottom: 0px;
+
+    @media (max-width: 768px){
+        margin-top: 0px;
+    }
 `;
 
 const BookingHeadBgImage = styled.div`
     display: flex;
-    flex: 1;
     width: 100%;
-    height: 150px;
+    height: 300px;
     overflow: hidden;
+    flex-shrink: 0;
 `;
 
 const bookingBgStyle = {
     display: 'block',
     width: '100%',
-    height: '150px',
+    height: '300px',
     objectFit: 'cover',
 };
+
+const bookingHeading = {
+    fontSize: '60px',
+    fontWeight: '700',
+    color: 'white'
+}
+
+const tagHeading = {
+    fontSize: '32px',
+    fontWeight: '600',
+    color: 'white'
+}
 
 
 const BookingSection = styled.div`
@@ -73,14 +90,15 @@ const BookingSection = styled.div`
     width: 700px;
     justify-content: center;
     gap: 20px;
-    margin: 80px 0px 40px 0px;
+    margin: 120px 0px 40px 0px;
     padding: 30px 40px;
     background-color: white;
     border-radius: 8px;
     box-sizing: border-box;
+    box-shadow: 0px 0px 6px 2px hsl(0, 0%, 90%);
 
 
-    @media (max-width: 780px){
+    @media (max-width: 768px){
         flex-direction: column;
         width: max-content;
         padding: 20px;
@@ -221,8 +239,8 @@ export default function Booking(){
             <BookingSectionContainer>
 
                 <BookingSectionHead>
-                    <h1 className="heading"> Book Table Now!</h1>
-                    <p style={{fontSize: '18px', fontWeight:'500', color:'green'}}>Get Up to 20% Off</p>
+                    <h1 style={bookingHeading}> Book Table Now!</h1>
+                    <p style={tagHeading}>Get Up to 20% Off</p>
                 </BookingSectionHead>
 
 
