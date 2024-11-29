@@ -54,7 +54,7 @@ const DropDownSelection = ({label, value, placeholder, mapParameter, actions }) 
             <Selection required value={value} onChange={actions}>
                 <option value="" disabled>{placeholder}</option>
                 {mapParameter && mapParameter.length > 0 ? (mapParameter.map((slots) => (
-                    <option value={slots}>{slots}</option>
+                    <option key={slots} value={slots}>{slots}</option>
                      ))
                 ) : (
                     <option disabled>sorry! all tables are booked</option>

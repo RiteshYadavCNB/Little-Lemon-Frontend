@@ -28,6 +28,10 @@ const ContentContainer = styled.div`
     flex-wrap: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
+
+    @media (max-width: 480px){
+        padding: 20px;
+    }
 `;
 
 const CloseButton = styled.button`

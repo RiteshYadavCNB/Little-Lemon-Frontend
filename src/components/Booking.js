@@ -9,10 +9,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import InputField from "./UtilityComponents/InputField";
 import DropDownSelection from "./UtilityComponents/DropDownSelection";
 import CTAButton from "./Buttons/CTAButton";
-import  MobileOTP  from "../services/otpService";
+import MobileOTP  from "../services/otpService";
 
 
 import styled from "styled-components";
+
 
 
 
@@ -339,7 +340,7 @@ export default function Booking(){
                 <CTAButton buttonText="Reserve a Table" actions={openPopUp}/>
 
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
-                   <MobileOTP/>
+                   <MobileOTP validationType="tel"/>
                 </PopUp>
 
             </BookingSectionContainer>
