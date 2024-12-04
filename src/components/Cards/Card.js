@@ -66,7 +66,7 @@ import styled from 'styled-components';
 
 
 
-    const Card = ({image, title, rating, type, serveDays, description}) => {
+const Card = ({image, title, rating, type, serveDays, description}) => {
 
     return(
         <CardContainer>

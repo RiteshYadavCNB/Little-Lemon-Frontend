@@ -3,13 +3,164 @@ import { useState, useEffect } from "react";
 import PopUp from "../utility/PopUp";
 import  createBooking  from '../firebaseService';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-import InputField from "./FormComponents/InputField";
-import DropDownSelection from "./FormComponents/DropDownSelection";
-import  MobileOTP  from "../services/otpService";
+import InputField from "./UtilityComponents/InputField";
+import DropDownSelection from "./UtilityComponents/DropDownSelection";
+import CTAButton from "./Buttons/CTAButton";
+import MobileOTP  from "../services/otpService";
 
+
+import styled from "styled-components";
+
+
+
+
+const BookingPage = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 60px;
+    margin bottom: 40px;
+
+    @media (max-width: 768px) {
+        height: max-content;
+        margin-top: 0px;
+        margin-bottom: 40px;
+    }
+
+    @media (max-width: 360px) {
+        height: max-content;
+        margin-top: 0px;
+        margin-bottom: 60px;
+    }
+`;
+
+const BookingSectionContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+`;
+
+const BookingHead = styled.div`
+    display: flex;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    flex-shrink: 0;
+`;
+
+const BookingHeadingContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 200px;
+    Z-index: 1;
+
+    @media (max-width: 768px){
+        top: 160px;
+    }
+`;
+
+const bookingBgImageStyle = {
+    display: 'block',
+    width: '100%',
+    height: '300px',
+    objectFit: 'cover',
+};
+
+const BookingHeading = styled.h1`
+    font-size: 60px;
+    font-weight: 700;
+    color: white;
+
+    @media (max-width: 768px) {
+        font-size: 40px;
+    }
+`;
+
+const BookingHeadingTag = styled.h4`
+    font-size: 32px;
+    font-weight: 600;
+    color: white;
+
+    @media (max-width: 768px) {
+        font-size: 24px;
+    }
+`;
+
+// issue with this method is to apply the new style we need to refresh the page
+
+// const bookingHeading = {
+//     fontSize: window.innerWidth < 768 ? '40px' : '60px',
+//     fontWeight: '700',
+//     color: 'white'
+
+// }
+
+// const tagHeading = {
+//     fontSize: window.innerWidth < 768 ? '24px' : '32px',
+//     fontWeight: '600',
+//     color: 'white'
+// }
+
+
+const BookingSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 700px;
+    justify-content: center;
+    gap: 20px;
+    margin: 60px 0px 40px 0px;
+    padding: 30px 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 6px 2px hsl(0, 0%, 90%);
+
+
+    @media (max-width: 768px){
+        flex-direction: column;
+        width: max-content;
+        padding: 20px;
+        margin: 40px 0px 60px 0px;
+    }
+
+    @media (max-width: 360px){
+        flex-direction: column;
+        width: max-content;
+        padding: 20px;
+        margin: 40px 0px 60px 0px;
+    }
+`;
+
+const SelectDate = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 0;
+    gap: 10px;
+    box-sizing: border-box;
+`;
+
+const MuiDatePickerStyles = {
+    "& .MuiInputBase-root":{fontSize: "14px", height: "54px"},
+    "& .MuiFormLabel-root":{fontSize: "14px", color: "rgb(139, 139, 139)"},
+    "& .MuiOutlinedInput-root": {height: "54px"},
+    "& .MuiSvgIcon-root": {color: "lightgrey"},
+}
 
 export default function Booking(){
 
@@ -79,19 +230,23 @@ export default function Booking(){
      const handleTimeSlots = (e) => {
 
         setFormData((formData) => ({...formData, timeSlot: e }))
-        console.log(e)
+
 
         // to update available time slots
-        const updatedSlots = availableTimeSlots[formData.bookingDate].filter((slot) => slot !== e )
-        console.log("updated slots: ", updatedSlots)
+        //const updatedSlots = availableTimeSlots[formData.bookingDate].filter((slot) => slot !== e )
+        //console.log("updated slots: ", updatedSlots)
 
-        setAvailableTimeSlots(prev => ({...prev, [formData.bookingDate]:prev[formData.bookingDate].filter((slot)=> slot !== e)}))
+        //setAvailableTimeSlots(prev => ({...prev, [formData.bookingDate]:prev[formData.bookingDate].filter((slot)=> slot !== e)}))
         //what we did here: setAvailableTimeSlots()is a function it will only take parameters so if we want to pass a computation here we need to
         //write the arrow function --- in the arrow function we are passing the prev state as obj and inside the function we are spreading it
         //after spreading the prev obj we are accessing the particular property in this case, date and than we are telling the fun that for
         //this date property you need to reassign a new filtered array here ":prev[date]" to reassign and "prev[date].filter()" to tell what to assign
         //in filter() method we are giving it an array as slot and then we are telling it that return all those value which are not equal to "e"
         //"e" is the selected time slot
+
+        //we are getting an issue here slotpicker was not showing the selected value because we are using the state to map the options so when we change
+        //the state the slotpicker component gets re-rendered and by default select element shows the first option instead of the selection we made
+        //how we cured this bug --- we are not updating the availabletimeslots state for now.
     }
 
 
@@ -119,71 +274,76 @@ export default function Booking(){
     };
 
 
+
     /*component*/
 
     return(
-        <div className="booking-main">
-            <div className="booking-background-img-container">
-                    <img src="/booking-background.jpg" alt="background-image"/>
-            </div>
+        <BookingPage>
+            <BookingHead>
+                    <img style={bookingBgImageStyle} src="/booking-background.jpg" alt="background-image"/>
+                    <BookingHeadingContainer>
+                        <BookingHeading> Book Table Now!</BookingHeading>
+                        <BookingHeadingTag>Get Up to 20% Off</BookingHeadingTag>
+                    </BookingHeadingContainer>
+            </BookingHead>
 
-            <div className="booking-container">
+            <BookingSectionContainer>
 
-                <div className="heading-container">
-                    <h1 className="heading"> Book Table Now!</h1>
-                    <p style={{fontSize: '18px', fontWeight:'500', color:'green'}}>Get Up to 20% Off</p>
-                </div>
+                <BookingSection>
+                        <InputField
+                            width="100%"
+                            label="Name" placeholder="your name"
+                            username={formData.userName}
+                            actions={(e) => setFormData((formData) => ({...formData, userName: e.target.value}))}
+                        />
 
+                        <SelectDate>
+                            <label style={{fontSize: "16px"}}>Date</label>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    sx={MuiDatePickerStyles}
+                                    value={formData.bookingDate != null ? dayjs(formData.bookingDate) : null}
+                                    label={"Pick Date"}
+                                    format="MM-DD-YYYY"
+                                    disablePast
+                                    minDate={dayjs()}
+                                    maxDate={dayjs().add(30, 'day')}
+                                    onChange={(newValue) => {
+                                        setFormData((formData) => ({...formData, bookingDate : dayjs(newValue).format("MM-DD-YYYY")}))}}
+                                />
+                            </LocalizationProvider>
+                        </SelectDate>
 
-                <form className="form-booking-form">
-                    <formfield className="formfield-booking-form">
-                        <InputField label="Name" placeholder="your name" username={formData.userName} actions={(e) => setFormData((formData) => ({...formData, userName: e.target.value}))}/>
+                        <DropDownSelection
+                            label="Time" value={formData.timeSlot}
+                            placeholder="select a time slot"
+                            mapParameter={availableTimeSlots[formData.bookingDate]}
+                            actions={(e) => handleTimeSlots(e.target.value)}
+                        />
 
-                         <div className="timeslot">
-                            <label>Date</label>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        className="mui-date-picker"
-                                        value={formData.bookingDate != null ? dayjs(formData.bookingDate) : null}
-                                        label={"Pick Date"}
-                                        format="MM-DD-YYYY"
-                                        disablePast
-                                        minDate={dayjs()}
-                                        maxDate={dayjs().add(30, 'day')}
-                                        onChange={(newValue) => {
-                                            setFormData((formData) => ({...formData, bookingDate : dayjs(newValue).format("MM-DD-YYYY")}))}}
-                                    />
-                                </LocalizationProvider>
-                        </div>
+                        <DropDownSelection
+                            label="Occasion" value={formData.occasion}
+                            placeholder="select occasion"
+                            mapParameter={occasionInfo}
+                            actions={(e) => setFormData((formData)=>({...formData, occasion: e}))}
+                        />
 
-                        <DropDownSelection label="Time" value={formData.timeSlot} placeholder="select a time slot" mapParameter={availableTimeSlots[formData.bookingDate]} actions={(e) => handleTimeSlots(e.target.value)}/>
+                        <DropDownSelection
+                            label="Guests" value={formData.guests}
+                            placeholder="select number of guests"
+                            mapParameter={guests}
+                            actions={(e) => setFormData((formData) => ({...formData, guests:e}))}
+                        />
 
+                </BookingSection>
 
+                <CTAButton buttonText="Reserve a Table" actions={openPopUp}/>
 
-                        <div className="timeslot">
-                            <label>Occasion</label>
-                            <select className="slotpicker" onChange={(e) => setFormData((formData) => ({...formData, occasion : e.target.value}))} defaultValue="">
-                                <option>select occasion</option>
-                                {occasionInfo.map((occasion, index) => (<option key={index} value={occasion}>{occasion}</option>))}
-                            </select>
-                        </div>
-
-                        <div className="timeslot">
-                            <label>Guests</label>
-                            <select className="slotpicker" onChange={(e) => setFormData((formData) => ({...formData, guests : e.target.value}))} defaultValue="">
-                                <option>select number of guests</option>
-                                {guests.map((guest, index) => (<option key={index} value={guest}>{guest}</option>))}
-                            </select>
-                        </div>
-
-                        </formfield>
-                </form>
-
-                <button className="reserve-table-btn" onClick={openPopUp}>Reserve a table</button>
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
-                   <MobileOTP/>
+                   <MobileOTP validationType="tel"/>
                 </PopUp>
-            </div>
+
+            </BookingSectionContainer>
 
             <div className="reset">
                 <button style={{width: '60px'}} onClick={resetAll}>Reset All</button>
@@ -201,6 +361,6 @@ export default function Booking(){
                 </div>}
             </div>
 
-        </div>
+        </BookingPage>
     )
 }

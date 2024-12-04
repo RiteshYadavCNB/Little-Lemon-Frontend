@@ -2,8 +2,16 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
   padding: 0;
-  width: 100%;
 }
+
+
+@media screen and (max-width: 768px) {
+  body{
+    border: none;
+  }
+}
+
+/*when you give styles globally *{} what will happen each parent and child element even the nested ones will take the style references*/
 
 
 /* header */
@@ -72,7 +80,7 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    position: fixed;
+    position: sticky;
   }
   .logo-container{
     width: 100%;
@@ -104,7 +112,6 @@
   position: relative;
   bottom: 0px;
   align-items: center;
-  justify-content: flex-start;
   color: #FBF9C2;
   gap: 10px;
   box-sizing: border-box;
@@ -216,91 +223,6 @@
 
 /*Booking Page*/
 
-.booking-main{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 60px;
-  margin-top: 90px;
-}
-
-@media screen and (max-width: 768px) {
-  .booking-main{
-    margin-top: 74px;
-  }
-}
-
-.booking-background-img-container{
-  display: flex;
-  flex: 1;
-  width: 100%;
-  height: 150px;
-  overflow: hidden;
-}
-
-.booking-background-img-container img{
-  display: block;
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.booking-container{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 80%;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  position: relative;
-  top: -40px;
-}
-
-.heading-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.heading{
-  font-size: 32px;
-  font-weight: 600;
-}
-
-.reserve-table-btn{
-  width: 200px;
-  height: 40px;
-  font-size: 15px;
-  font-weight: 500;
-  border-radius: 10px;
-  border: none;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  box-shadow: -3px 3px 0px 1px rgb(100, 100, 100);
-}
-
-.booking-information-container{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 80%;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.booking-info-heading{
-  font-size: 18px;
-  font-weight: 500;
-}
-
 .reset{
   flex: 1;
   display: flex;
@@ -311,139 +233,5 @@
   align-items: flex-end;
 }
 
-
-/*Booking Form*/
-
-.form-booking-form{
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.formfield-booking-form{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 350px;
-  gap: 20px;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.form-input-field{
-  width: 280px;
-  height: 54px;
-  font-size: 16px;
-  padding: 16px;
-  color: rgb(139, 139, 139);
-  border: 1px solid rgb(206, 206, 206);
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.timeslot{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 280px;
-  padding: 0;
-  flex-grow: 0;
-  flex-shrink: 0;
-  font-size: 16px;
-  gap: 10px;
-}
-
-
-.mui-date-picker{
-  width: 100%;
-  max-width: 93.5%;
-  font-size: 16px;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.css-lxfshk-MuiInputBase-root-MuiOutlinedInput-root {
-  padding-right: 0;
-}
-
-.css-1i2hsuj-MuiInputAdornment-root{
-  justify-content: flex-end;
-}
-
-/*date-picker calender button icon*/
-.css-1a7z5rc-MuiButtonBase-root-MuiIconButton-root {
-  width: auto;
-}
-
-/*date picker calender*/
-.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root{
-  width: max-content;
-}
-
-/*calender header*/
-
-.css-cyfsxc-MuiPickersCalendarHeader-labelContainer{
-  width: inline-block;
-
-}
-
-.css-dplwbx-MuiPickersCalendarHeader-label{
-  width: inline-block;
-}
-
-.css-9reuh9-MuiPickersArrowSwitcher-root{
-  width: auto;
-}
-
-.css-5ivcmv-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
-  width: auto;
-}
-
-.css-1aqny2q-MuiPickersCalendarHeader-root{
-  width: fit-content;
-}
-
-.css-cyfsxc-MuiPickersCalendarHeader-labelContainer{
-  width: fit-content;
-}
-
-.MuiPickersArrowSwitcher-previousIconButton{
- width: auto;
-}
-
-.css-l4cmsg-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button{
- width: auto;
-}
-
-.css-9pafu0-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button{
-  width: auto;
-}
-
-.css-103k21f-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
-  width: auto;
-}
-
-.slotpicker{
-  height: 54px;
-  padding: 10px;
-  width: 280px;
-  font-size: 16px;
-  color: rgb(139, 139, 139);
-  border: 1px solid rgb(206, 206, 206);
-  border-radius: 4px;
-}
-
-.reservation-btn{
-  width: 100%;
-  height: 40px;
-  font-size: 15px;
-  font-weight: 500;
-  border-radius: 10px;
-  border: none;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-  box-shadow: -3px 3px 0px 1px rgb(100, 100, 100);
-}
 
 
