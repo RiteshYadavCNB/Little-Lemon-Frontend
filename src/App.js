@@ -16,7 +16,7 @@ function App() {
       <LocalizationProvider>
         <Routes>
           <Route path='/' element={<Homepage />}/>
-          <Route path='/booking' element={<Booking />}/>
+          <Route path='/table-booking' element={<Booking />}/>
         </Routes>
       </LocalizationProvider>
 

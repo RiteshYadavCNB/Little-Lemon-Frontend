@@ -41,49 +41,39 @@ const BookingPage = styled.div`
     }
 `;
 
-const BookingSectionContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
+const BookingHead = styled.div`
     position: relative;
+    display: flex;
+    width: 90%;
+    height: 300px;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 24px;
+    margin-top: 40px;
 `;
 
-const BookingHead = styled.div`
-    display: flex;
+const BookingBgImageStyle = styled.img`
+    display: block;
     width: 100%;
-    height: 300px;
-    overflow: hidden;
-    flex-shrink: 0;
+    height: 100%;
+    object-fit: cover;
 `;
 
 const BookingHeadingContainer = styled.div`
+    position: absolute;
     display: flex;
     flex-direction: column;
     width: 100%;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 200px;
     Z-index: 1;
-
-    @media (max-width: 768px){
-        top: 160px;
-    }
 `;
-
-const bookingBgImageStyle = {
-    display: 'block',
-    width: '100%',
-    height: '300px',
-    objectFit: 'cover',
-};
 
 const BookingHeading = styled.h1`
     font-size: 60px;
     font-weight: 700;
     color: white;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
 
     @media (max-width: 768px) {
         font-size: 40px;
@@ -94,6 +84,7 @@ const BookingHeadingTag = styled.h4`
     font-size: 32px;
     font-weight: 600;
     color: white;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
 
     @media (max-width: 768px) {
         font-size: 24px;
@@ -115,6 +106,14 @@ const BookingHeadingTag = styled.h4`
 //     color: 'white'
 // }
 
+const BookingSectionContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+`;
 
 const BookingSection = styled.div`
     display: flex;
@@ -162,7 +161,7 @@ const MuiDatePickerStyles = {
     "& .MuiSvgIcon-root": {color: "lightgrey"},
 }
 
-export default function Booking(){
+const Booking = () => {
 
     const [isPopUpOpen, setIsPopUpOpen] = useState(false)
     const [availableTimeSlots, setAvailableTimeSlots] = useState({})
@@ -280,7 +279,7 @@ export default function Booking(){
     return(
         <BookingPage>
             <BookingHead>
-                    <img style={bookingBgImageStyle} src="/booking-background.jpg" alt="background-image"/>
+                    <BookingBgImageStyle src="/booking-background.jpg" alt="background-image"/>
                     <BookingHeadingContainer>
                         <BookingHeading> Book Table Now!</BookingHeading>
                         <BookingHeadingTag>Get Up to 20% Off</BookingHeadingTag>
@@ -364,3 +363,5 @@ export default function Booking(){
         </BookingPage>
     )
 }
+
+export default Booking;

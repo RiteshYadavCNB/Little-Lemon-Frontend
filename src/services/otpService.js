@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import countryDialCodes from "../data/countryDialCodes.json";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+//import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+//import { auth } from "../firebaseConfig";
 
 const OTPContainer = styled.div`
   display: flex;
@@ -119,7 +119,7 @@ const MobileOTP = ({ label, placeholder, actions }) => {
   const [otpAddress, setOTPAddress] = useState({countryCode: '+91', phoneNumber:''});
   const [phoneNumbererror, setPhoneNumberError] = useState(false);
   const [otpRequestError, setOTPRequestError] = useState(false);
-  const [confirmationResult, setConfirmationResult] = useState(null);
+  const [confirmationResult, setConfirmationResult] = useState(false);
   const [inputOTP, setInputOTP] = useState(["", "", "", "", "", ""]);
   const [isOtpSent, setIsOtpSent] = useState(false);
 
@@ -136,6 +136,8 @@ const MobileOTP = ({ label, placeholder, actions }) => {
     }
   };
 
+  //mapping OTP Fields to display
+
   const mapOTPFields = (inputOTP) => {
     if (inputOTP.length !== 6) return false;
     return inputOTP.map((item, index) => {
@@ -149,6 +151,8 @@ const MobileOTP = ({ label, placeholder, actions }) => {
       );
     });
   };
+
+  // updating otpAddress state
 
   const updateOtpAddress = (obj) =>{
     setOTPAddress((prev) => (
@@ -190,7 +194,7 @@ const MobileOTP = ({ label, placeholder, actions }) => {
 
 
   //send firebase OTP
-
+/*
   const sendOTP = () => {
     const phoneNumber = "+919452730213";
     console.log(phoneNumber);
@@ -211,10 +215,10 @@ const MobileOTP = ({ label, placeholder, actions }) => {
         console.log("OTP not sent: ", error);
       });
     };
-
+*/
 
   //verify firebase OTP
-
+/*
   const verifyOTP = () => {
     const otp = inputOTP.join("");
 
@@ -234,11 +238,21 @@ const MobileOTP = ({ label, placeholder, actions }) => {
         alert("Invalid OTP!");
       });
   };
+*/
 
+  // Temp OTP Verification
 
+  const tempVerifyOTP = () => {
+    const sentOTP = "123456";
+    const intOTP = inputOTP.join();
+    if (sentOTP === intOTP){
+      setConfirmationResult(true);
+    };
+  };
 
 
   //handle OTP request
+
   const handleOTPRequest = () => {
     if ((phoneNumbererror === false) &&
       (otpAddress.phoneNumber !== "") &&
@@ -246,9 +260,10 @@ const MobileOTP = ({ label, placeholder, actions }) => {
       (otpRequest === false)
     ){
       setOtpRequest(true);
-      sendOTP();
+      setIsOtpSent(true);
+      //sendOTP();
     } if ((otpRequest === true) && (isOtpSent === true)) {
-      verifyOTP();
+      tempVerifyOTP();
     } else {
       setOTPRequestError(true);
     }
