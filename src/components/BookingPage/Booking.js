@@ -1,165 +1,17 @@
 import dayjs from "dayjs";
 import { useState, useEffect } from "react";
-import PopUp from "../utility/PopUp";
-import  createBooking  from '../firebaseService';
+import PopUp from "../../utility/PopUp";
+import  createBooking  from '../../firebaseService';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-import InputField from "./UtilityComponents/InputField";
-import DropDownSelection from "./UtilityComponents/DropDownSelection";
-import CTAButton from "./Buttons/CTAButton";
-import MobileOTP  from "../services/otpService";
+import InputField from "../UtilityComponents/InputField";
+import DropDownSelection from "../UtilityComponents/DropDownSelection";
+import CTAButton from "../UtilityComponents/Buttons/CTAButton";
+import MobileOTP  from "../../services/otpService";
+import { BookingBgImageStyle, BookingHead, BookingHeading, BookingHeadingContainer, BookingHeadingTag, BookingPage, BookingSection, BookingSectionContainer, MuiDatePickerStyles, SelectDate } from "./BookingStyle";
 
-
-import styled from "styled-components";
-
-
-
-
-const BookingPage = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-top: 60px;
-    margin bottom: 40px;
-
-    @media (max-width: 768px) {
-        height: max-content;
-        margin-top: 0px;
-        margin-bottom: 40px;
-    }
-
-    @media (max-width: 360px) {
-        height: max-content;
-        margin-top: 0px;
-        margin-bottom: 60px;
-    }
-`;
-
-const BookingHead = styled.div`
-    position: relative;
-    display: flex;
-    width: 90%;
-    height: 300px;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 24px;
-    margin-top: 40px;
-`;
-
-const BookingBgImageStyle = styled.img`
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`;
-
-const BookingHeadingContainer = styled.div`
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    Z-index: 1;
-`;
-
-const BookingHeading = styled.h1`
-    font-size: 60px;
-    font-weight: 700;
-    color: white;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-
-    @media (max-width: 768px) {
-        font-size: 40px;
-    }
-`;
-
-const BookingHeadingTag = styled.h4`
-    font-size: 32px;
-    font-weight: 600;
-    color: white;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-
-    @media (max-width: 768px) {
-        font-size: 24px;
-    }
-`;
-
-// issue with this method is to apply the new style we need to refresh the page
-
-// const bookingHeading = {
-//     fontSize: window.innerWidth < 768 ? '40px' : '60px',
-//     fontWeight: '700',
-//     color: 'white'
-
-// }
-
-// const tagHeading = {
-//     fontSize: window.innerWidth < 768 ? '24px' : '32px',
-//     fontWeight: '600',
-//     color: 'white'
-// }
-
-const BookingSectionContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-`;
-
-const BookingSection = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 700px;
-    justify-content: center;
-    gap: 20px;
-    margin: 60px 0px 40px 0px;
-    padding: 30px 40px;
-    background-color: white;
-    border-radius: 8px;
-    box-sizing: border-box;
-    box-shadow: 0px 0px 6px 2px hsl(0, 0%, 90%);
-
-
-    @media (max-width: 768px){
-        flex-direction: column;
-        width: max-content;
-        padding: 20px;
-        margin: 40px 0px 60px 0px;
-    }
-
-    @media (max-width: 360px){
-        flex-direction: column;
-        width: max-content;
-        padding: 20px;
-        margin: 40px 0px 60px 0px;
-    }
-`;
-
-const SelectDate = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    padding: 0;
-    gap: 10px;
-    box-sizing: border-box;
-`;
-
-const MuiDatePickerStyles = {
-    "& .MuiInputBase-root":{fontSize: "14px", height: "54px"},
-    "& .MuiFormLabel-root":{fontSize: "14px", color: "rgb(139, 139, 139)"},
-    "& .MuiOutlinedInput-root": {height: "54px"},
-    "& .MuiSvgIcon-root": {color: "lightgrey"},
-}
 
 const Booking = () => {
 
@@ -339,7 +191,7 @@ const Booking = () => {
                 <CTAButton buttonText="Reserve a Table" actions={openPopUp}/>
 
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
-                   <MobileOTP validationType="tel"/>
+                   <MobileOTP/>
                 </PopUp>
 
             </BookingSectionContainer>

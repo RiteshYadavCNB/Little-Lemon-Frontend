@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: 'Monsieur La Doulaise Static';
+  src: url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Monsieur+La+Doulaise&display=swap');
+}
+
 
 @media screen and (max-width: 768px) {
   body{
@@ -12,174 +17,6 @@
 }
 
 /*when you give styles globally *{} what will happen each parent and child element even the nested ones will take the style references*/
-
-
-/* header */
-
-.header{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 60px;
-  padding: 0px;
-  margin: 0px;
-  background: #FBEC52;
-  position: fixed;
-  top: 0;
-  align-items: center;
-  z-index: 1000;
-  box-sizing: border-box;
-}
-
-.logo-container{
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-  padding-left: 2vw;
-  box-sizing: border-box;
-}
-
-
-.logo{
-  height: 40px;
-  width: auto;
-}
-
-.nav-container{
-  display: flex;
-  width: auto;
-  flex-shrink: 0;
-  flex-grow: 0;
-  padding-right: 2vw;
-}
-
-.nav-list{
-  display: flex;
-  white-space: nowrap;
-  gap: 20px;
-  list-style-type: none;
-}
-
-.nav-link{
-  display: flex;
-  width: auto;
-  text-decoration: none;
-  color: #79650b;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-@media screen and (max-width: 768px){
-  .header{
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    height: 90px;
-    padding: 10px;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    position: sticky;
-  }
-  .logo-container{
-    width: 100%;
-    height: 40px;
-    padding-left: 0;
-  }
-  .logo{
-    display: block;
-    align-self: center;
-    justify-self: center;
-    height: 40px;
-  }
-  .nav-list{
-    padding: none;
-  }
-  .nav-link{
-    font-size: 14px;
-  }
-}
-
-/* footer */
-
-.footer{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 40px;
-  background-color: #d6b315;
-  position: relative;
-  bottom: 0px;
-  align-items: center;
-  color: #FBF9C2;
-  gap: 10px;
-  box-sizing: border-box;
-  padding-left: 10px;
-}
-
-.footer h3{
-  display: flex;
-  width: auto;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.line{
-  width: 2px;
-  height: 40%;
-  background-color: #FBF9C2;
-}
-
-.footer p{
-  flex: 1;
-  display: flex;
-  width: 100%;
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: 400px;
-}
-
-@media screen and (max-width: 768px){
-
-  .footer{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 60px;
-    padding: 10px;
-    bottom: 0;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    color: #FBF9C2;
-    box-sizing: border-box;
-  }
-
-  .footer h3{
-    flex: 1;
-    display: flex;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .footer p{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 400;
-  }
-
-  .line{
-    width: 0px;
-    height: 0px;
-    background-color: none;
-  }
-}
-
-
 
 /*Booking Page*/
 

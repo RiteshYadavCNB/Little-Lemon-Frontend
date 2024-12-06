@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+// @ts-ignore
 import countryDialCodes from "../data/countryDialCodes.json";
 //import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 //import { auth } from "../firebaseConfig";
@@ -114,7 +115,7 @@ const OTPInputField = styled.input`
 
 //component
 
-const MobileOTP = ({ label, placeholder, actions }) => {
+const MobileOTP = () => {
   const [otpRequest, setOtpRequest] = useState(false);
   const [otpAddress, setOTPAddress] = useState({countryCode: '+91', phoneNumber:''});
   const [phoneNumbererror, setPhoneNumberError] = useState(false);
@@ -275,7 +276,7 @@ const MobileOTP = ({ label, placeholder, actions }) => {
     <OTPContainer>
       <InputContainer>
 
-        <Label>{label ? label : "Enter OTP Address"}</Label>
+        <Label>Verify Mobile Number</Label>
 
         <MobileNumberContainer>
 

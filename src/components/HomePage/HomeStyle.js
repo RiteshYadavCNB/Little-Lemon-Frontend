@@ -1,22 +1,21 @@
-import DishCarousel from "./DishCatalogue/DishCarousel";
 import styled from "styled-components";
 
-const HomeMain = styled.div`
+export const HomeMain = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     height: max-content;
-    margin-top: 60px;
+    margin: 60px 0px;
     align-items: center;
 
     @media screen and (max-width: 768px) {
         .home-main{
-        margin-top: 70px;
+        margin-top: 70px 0px;
     }
   }
 `;
 
-const HeroSection = styled.div`
+export const HeroSection = styled.div`
     display: flex;
     flex-direction: row;
     width: 80%;
@@ -29,14 +28,14 @@ const HeroSection = styled.div`
     }
 `;
 
-const HeroCol1 = styled.div`
+export const HeroCol1 = styled.div`
     display: flex;
     flex-direction: column;
     width: 60%;
     height: 100%;
 `;
 
-const HeroCol2 = styled.div`
+export const HeroCol2 = styled.div`
     display: flex;
     flex-direction: column;
     width: 40%;
@@ -44,14 +43,14 @@ const HeroCol2 = styled.div`
     gap: 30px;
 `;
 
-const HeroColSubCol = styled.div`
+export const HeroColSubCol = styled.div`
     display: flex;
     flex: 1;
     width: 100%;
     height: 0;
 `;
 
-const HeroImg = styled.img`
+export const HeroImg = styled.img`
     display: block;
     width: 100%;
     height: 100%;
@@ -61,7 +60,7 @@ const HeroImg = styled.img`
     box-shadow: -6px 6px 0px #d6b315;
 `;
 
-const MenuContainer = styled.div`
+export const MenuContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -78,38 +77,38 @@ const MenuContainer = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    .heading-div h1{
+    .h1{
       font-size: 32px;
     }
   }
 `;
 
+export const Banner = styled.div`
+  position: relative;
+  display: flex;
+  width: 80%;
+  max-width: 1200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 24px;
 
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+`;
 
-const Homepage = () => {
+export const BannerImg = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
-    return (
-        <HomeMain>
-            <HeroSection>
-
-                <HeroCol1>
-                    <HeroColSubCol><HeroImg src="/HeroDish-1.jpg" alt="hero"/></HeroColSubCol>
-                </HeroCol1>
-
-                <HeroCol2>
-                    <HeroColSubCol><HeroImg src="/HeroSubDish-1.jpg" alt="hero"/></HeroColSubCol>
-                    <HeroColSubCol><HeroImg src="/HeroSubDish-2.jpg" alt="hero"/></HeroColSubCol>
-                </HeroCol2>
-
-            </HeroSection>
-
-            <MenuContainer className="heading-div">
-                <h1>Little Lemon menu</h1>
-                <DishCarousel/>
-            </MenuContainer>
-
-        </HomeMain>
-    )
-}
-
-export default Homepage;
+export const BannerContact = styled.div`
+  position: absolute;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+`;

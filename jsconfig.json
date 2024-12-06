@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "module": "ES6", // Use ES6 for JavaScript modules
+      "moduleResolution": "Node", // Resolve Node.js modules correctly
+      "jsx": "react-jsx", // Enable JSX for React
+      "allowSyntheticDefaultImports": true, // Allow default imports even if modules don't have one
+      "baseUrl": ".", // Set base URL for absolute imports
+      "checkJs": true,
+      "paths": {
+        "@mui/": ["node_modules/@mui/"] // Optional: Shorthand for MUI imports
+      }
+    },
+    "exclude": ["node_modules", "**/node_modules/*", "dist"],
+    "include": ["src/**/*"]
+  }
+  
