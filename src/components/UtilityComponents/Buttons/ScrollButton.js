@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 
@@ -7,12 +6,16 @@ const ButtonDiv = styled.button`
     border: none;
     width: 30px;
     height: 30px;
-    background: white;
-    paddign: 4px;
+    background: #edd04a;
+    padding: 4px;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     cursor: pointer;
+
+    &:hover{
+        box-shadow: ${(props) => props.shadow ? props.shadow : 'none'};
+    }
 `;
 
 const ButtonImg = styled.img`
@@ -22,10 +25,10 @@ const ButtonImg = styled.img`
 `;
 
 
-const ScrollButton = ({alt, degrees}) => {
+const ScrollButton = ({alt, degrees, shadow}) => {
     return (
         <>
-            <ButtonDiv>
+            <ButtonDiv shadow={shadow}>
                 <ButtonImg src="./next.png" alt={alt} degrees={degrees}/>
             </ButtonDiv>
         </>

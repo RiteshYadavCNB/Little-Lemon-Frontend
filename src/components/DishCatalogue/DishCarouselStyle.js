@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const Carousel = styled.div`
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 80%;
+    max-width: 1200px;
     height: max-content;
     align-items: center;
     gap: 16px;
@@ -32,9 +34,17 @@ export const CatalogueStyle = styled.div`
     }
 `;
 
+
+
 export const CarouselButton = styled.div`
+    position: absolute;
     display: block;
     width: max-content;
+    right: ${(props) => props.right !== undefined && typeof props.right === 'number'
+        ? `${props.right - 40}px` : 'auto'};
+    left: ${(props) => props.left !== undefined && typeof props.left === 'number'
+        ? `${props.left - 40}px` : 'auto'};
+    z-index: 1;
 
     @media (max-width: 480px) {
         display: none;

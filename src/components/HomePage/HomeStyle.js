@@ -8,11 +8,9 @@ export const HomeMain = styled.div`
     margin: 60px 0px;
     align-items: center;
 
-    @media screen and (max-width: 768px) {
-        .home-main{
-        margin-top: 70px 0px;
+    @media (max-width: 768px) {
+      margin: 90px 0px 60px 0px;
     }
-  }
 `;
 
 export const HeroSection = styled.div`
@@ -23,8 +21,11 @@ export const HeroSection = styled.div`
     gap: 30px;
     margin: 40px 0px;
 
-    @media (max-width: 7680px) {
-        height: 400px;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      width: 90%;
+      height: max-content;
+      margin: 40px 0px;
     }
 `;
 
@@ -33,6 +34,11 @@ export const HeroCol1 = styled.div`
     flex-direction: column;
     width: 60%;
     height: 100%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 220px;
+    }
 `;
 
 export const HeroCol2 = styled.div`
@@ -41,6 +47,13 @@ export const HeroCol2 = styled.div`
     width: 40%;
     height: 100%;
     gap: 30px;
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      width: 100%;
+      height: 180px;
+      gap: 20px;
+    }
 `;
 
 export const HeroColSubCol = styled.div`
@@ -48,6 +61,10 @@ export const HeroColSubCol = styled.div`
     flex: 1;
     width: 100%;
     height: 0;
+
+    @media (max-width: 768px) {
+      height: 100%;
+    }
 `;
 
 export const HeroImg = styled.img`
@@ -65,20 +82,21 @@ export const MenuContainer = styled.div`
     flex-direction: column;
     width: 100%;
     align-items: center;
-    padding: 40px 0px;
+    padding: 40px 0px 40px 0px;
     gap: 40px;
   }
 
-  &.h1{
-    font-size: 38px;
-    font-weight: 800;
+  h1{
+    font-size: 32px;
+    font-weight: 700;
     letter-spacing: 0.5px;
     color: rgb(3, 41, 44);
   }
 
-  @media screen and (max-width: 600px) {
-    .h1{
-      font-size: 32px;
+  @media (max-width: 768px) {
+    h1{
+      font-size: 24px;
+      font-weight: 700px;
     }
   }
 `;
@@ -88,12 +106,15 @@ export const Banner = styled.div`
   display: flex;
   width: 80%;
   max-width: 1200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 24px;
+  height: 300px;
+  padding-top: 40px;
+  align-items: center;
 
   @media (max-width: 768px) {
+    flex-direction: column;
     width: 90%;
+    height: max-content;
+    padding: 20px 0px;
   }
 `;
 
@@ -102,13 +123,24 @@ export const BannerImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 24px;
+
+  @media (max-width: 768px){
+    display: none;
+  }
+
 `;
 
 export const BannerContact = styled.div`
   position: absolute;
   display: flex;
-  width: 100%;
+  width: max-content;
   align-items: center;
   justify-content: center;
   z-index: 1;
+  left: -40px;
+
+  @media (max-width: 768px){
+    position: static;
+  }
 `;

@@ -20,8 +20,8 @@ const Homepage = () => {
 
             </HeroSection>
 
-            <MenuContainer className="heading-div">
-                <h1>Little Lemon menu</h1>
+            <MenuContainer>
+                <h1>What we Serve!</h1>
                 <DishCarousel/>
             </MenuContainer>
 

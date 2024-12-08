@@ -31,17 +31,18 @@ const DishCarousel = () => {
 
     return (
         <Carousel>
-            <CarouselButton onClick={scrollLeft}>
-                <ScrollButton degrees="left" alt={undefined} />
+            <CarouselButton left={0} onClick={scrollLeft}>
+                    <ScrollButton degrees="left" alt="scroll left" shadow="3px 0px inset #493e07" />
             </CarouselButton>
 
             <CatalogueStyle ref={carouselRef} >
                 <Catalogue cardWidth={cardRef} />
             </CatalogueStyle>
 
-            <CarouselButton onClick={scrollRight}>
-                <ScrollButton alt={undefined} degrees={undefined}/>
+            <CarouselButton right={0} onClick={scrollRight}>
+                <ScrollButton alt="scroll right" shadow="-3px 0px inset #493e07" />
             </CarouselButton>
+
         </Carousel>
     )
 };

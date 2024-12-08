@@ -7,7 +7,6 @@ import styled from 'styled-components';
         display: flex;
         flex-direction: column;
         width: 320px;
-        padding: 16px;
         gap: 16px;
         font-size: 14px;
         box-sizing: border-box;

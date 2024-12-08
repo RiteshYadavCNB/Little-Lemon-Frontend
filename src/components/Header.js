@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import { useState } from 'react';
 
 
 const HeaderContainer = styled.header`
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -16,15 +19,10 @@ const HeaderContainer = styled.header`
 
     @media (max-width: 768px){
         display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 90px;
         padding: 10px;
         gap: 10px;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
         box-sizing: border-box;
-        position: sticky;
     }
 `;
 
@@ -36,20 +34,50 @@ const LogoContainer = styled.div`
     box-sizing: border-box;
 
     @media (max-width: 768px){
-        width: 100%;
+        width: max-content;
         align-items: center;
         justify-content: center;
         height: 40px;
-        padding-left: 0;
     }
 `;
 
 const NavContainer = styled.nav`
+    position: absolute;
     display: flex;
-    width: auto;
+    width: max-content;
+    right: 0px;
     flex-shrink: 0;
     flex-grow: 0;
     padding-right: 2vw;
+
+    @media (max-width: 768px){
+        display: none;
+    }
+`;
+
+const Hamburger = styled.button`
+    position: absolute;
+    display: none;
+
+    @media (max-width: 768px){
+        display: flex;
+        right: 16px;
+        z-index: 10;
+        background: #475e17;
+        border: none;
+        border-radius: 4px;
+        padding: 4px;
+    }
+`;
+
+const HamburgerMenu = styled.div`
+    position: absolute;
+    display: ${(props) => props.burgermenu ? 'flex' : 'none'};
+    top: 60px;
+    right: 0px;
+    padding: 20px;
+    background: #fcf286;
+    border-radius: 0px 0px 0px 8px;
 `;
 
 const NavList = styled.ul`
@@ -59,7 +87,7 @@ const NavList = styled.ul`
     list-style-type: none;
 
     @media (max-width: 768px){
-        padding: none;
+        flex-direction: column;
     }
 `;
 
@@ -87,8 +115,10 @@ const LinkStyle = {
 
 const Header = () => {
 
+    const [hamburgerMenuState, sethamburgerMenuState] = useState(false);
+
     return (
-        <HeaderContainer className="header">
+        <HeaderContainer>
             <LogoContainer>
                 <Link style={{textDecoration: "none"}} to='/'><LogoText>Little Lemon</LogoText></Link>
             </LogoContainer>
@@ -98,6 +128,18 @@ const Header = () => {
                     <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
                 </NavList>
             </NavContainer>
+
+            <Hamburger onClick={() => sethamburgerMenuState(prevState => !prevState)}>
+                <MenuRoundedIcon sx={{color: 'wheat'}}/>
+            </Hamburger>
+
+            <HamburgerMenu burgermenu={hamburgerMenuState}>
+                <NavList>
+                    <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
+                    <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
+                </NavList>
+            </HamburgerMenu>
+
         </HeaderContainer>
     );
 }
