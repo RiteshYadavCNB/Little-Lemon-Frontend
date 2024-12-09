@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const HeaderContainer = styled.header`
@@ -116,6 +116,14 @@ const LinkStyle = {
 const Header = () => {
 
     const [hamburgerMenuState, sethamburgerMenuState] = useState(false);
+
+    // eslint-disable-next-line no-undef
+    const { pathname } = useLocation();
+
+    useEffect(()=> {
+        sethamburgerMenuState(false)
+    },[pathname])
+
 
     return (
         <HeaderContainer>
