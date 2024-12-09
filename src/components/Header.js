@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
     flex-direction: row;
     width: 100%;
     height: 60px;
-    background: #FBEC52;
+    background: #fcf075;
     position: fixed;
     top: 0;
     align-items: center;

@@ -9,72 +9,64 @@ export const HomeMain = styled.div`
     align-items: center;
 
     @media (max-width: 768px) {
-      margin: 90px 0px 60px 0px;
+      margin: 60px 0px 60px 0px;
     }
 `;
 
 export const HeroSection = styled.div`
     display: flex;
-    flex-direction: row;
-    width: 80%;
+    flex-direction: column;
+    width: 100%;
     height: 600px;
-    gap: 30px;
-    margin: 40px 0px;
+    gap: 50px;
+    align-items: center;
+    padding: 80px 0px 20px 0px;
+    background: #fcf075;
 
     @media (max-width: 768px) {
-      flex-direction: column;
-      width: 90%;
+      width: 100%;
       height: max-content;
-      margin: 40px 0px;
     }
 `;
 
-export const HeroCol1 = styled.div`
+export const HeroAnimation = styled.div`
     display: flex;
-    flex-direction: column;
-    width: 60%;
-    height: 100%;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    border-radius: 100%;
+    background: #fef9cb;
+    overflow: hidden;
+`;
 
-    @media (max-width: 768px) {
+export const HeroTitle = styled.h1`
+    font-family: "Monsieur La Doulaise", cursive;
+    font-size: 40px;
+    font-weight: 800px;
+    color: #645e21;
+
+    @media (max-width: 768px){
+      font-size: 22px;
+    }
+`;
+
+export const DisplayCardContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap:  wrap;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 768px){
       width: 100%;
-      height: 220px;
+      justify-content: center;
+      gap: 16px;
+
+      & > * {
+        margin-bottom: 20px;
+      }
     }
-`;
-
-export const HeroCol2 = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    height: 100%;
-    gap: 30px;
-
-    @media (max-width: 768px) {
-      flex-direction: row;
-      width: 100%;
-      height: 180px;
-      gap: 20px;
-    }
-`;
-
-export const HeroColSubCol = styled.div`
-    display: flex;
-    flex: 1;
-    width: 100%;
-    height: 0;
-
-    @media (max-width: 768px) {
-      height: 100%;
-    }
-`;
-
-export const HeroImg = styled.img`
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 24px;
-    border: 2px solid #79650b;
-    box-shadow: -6px 6px 0px #d6b315;
 `;
 
 export const MenuContainer = styled.div`

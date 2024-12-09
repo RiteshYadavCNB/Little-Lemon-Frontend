@@ -1,6 +1,7 @@
 import DishCarousel from "../DishCatalogue/DishCarousel";
 import { ContactCard } from "../UtilityComponents/Cards/ContactCard";
-import { Banner, BannerContact, BannerImg, HeroCol1, HeroCol2, HeroColSubCol, HeroImg, HeroSection, HomeMain, MenuContainer } from "./HomeStyle";
+import { DisplayCard } from "../UtilityComponents/Cards/DisplayCards";
+import { Banner, BannerContact, BannerImg, DisplayCardContainer, HeroAnimation, HeroSection, HeroTitle, HomeMain, MenuContainer } from "./HomeStyle";
 
 
 const Homepage = () => {
@@ -8,15 +9,19 @@ const Homepage = () => {
     return (
         <HomeMain>
             <HeroSection>
+                <div style={{display: 'flex', flexDirection: 'row', width: '100%', gap: '20px', justifyContent: 'center', alignItems: 'center'}}>
+                    <HeroAnimation>
+                        <img style={{height: '60px'}} src="./Animation.gif" alt="animation"/>
+                    </HeroAnimation>
+                    <HeroTitle>Order food or Dine out<br/>Let the Taste... Lemon!</HeroTitle>
+                </div>
 
-                <HeroCol1>
-                    <HeroColSubCol><HeroImg src="/HeroDish-1.jpg" alt="hero"/></HeroColSubCol>
-                </HeroCol1>
-
-                <HeroCol2>
-                    <HeroColSubCol><HeroImg src="/HeroSubDish-1.jpg" alt="hero"/></HeroColSubCol>
-                    <HeroColSubCol><HeroImg src="/HeroSubDish-2.jpg" alt="hero"/></HeroColSubCol>
-                </HeroCol2>
+                <DisplayCardContainer>
+                    <DisplayCard title="Dine Out" subHead="Experience Dining" value="20%" imgSource="./DineOut.png" />
+                    <DisplayCard title="Order Online" subHead="Lemon Cravings" value="40%" imgSource="./Order.png" />
+                    <DisplayCard title="Gift a Lemon" subHead="Taste, that Joys!" last="true" imgSource="./Gift.png" value="30%"
+                        customStyle={{width: '180px', height: '180px', right: '20px'}} />
+                </DisplayCardContainer>
 
             </HeroSection>
 
