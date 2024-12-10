@@ -8,15 +8,14 @@ const ContactContainer = styled.div`
     width: 100%;
     padding: 20px 20px 10px 20px;
     background: white;
-    border-radius: 16px;
-    border: 2px solid #493e07;
-    box-radius: 0px 0px 4px inset rgb(199, 196, 191);
     gap: 8px;
+    border-radius: 16px;
     box-sizing: border-box;
 
     @media (max-width: 768px){
-        width: 358px;
+        min-width: 358px;
         padding: 12px 20px;
+        flex-shrink: 1;
     }
 `;
 

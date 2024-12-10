@@ -6,7 +6,7 @@ const ButtonDiv = styled.button`
     border: none;
     width: 30px;
     height: 30px;
-    background: #edd04a;
+    background: #fcf075;
     padding: 4px;
     align-items: center;
     justify-content: center;

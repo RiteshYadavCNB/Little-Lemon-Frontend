@@ -1,0 +1,183 @@
+[
+    {
+      "id": 1,
+      "name": "Greek Salad",
+      "description": "A refreshing mix of crisp lettuce, ripe tomatoes, cucumbers, olives, and feta cheese, tossed in olive oil and oregano.",
+      "price": 350,
+      "image": "./greek-salad.avif",
+      "category": "Salads",
+      "availability": true
+    },
+    {
+      "id": 2,
+      "name": "Hummus with Pita",
+      "description": "Creamy chickpea hummus served with warm, fluffy pita bread.",
+      "price": 250,
+      "image": "./hummus.jpg",
+      "category": "Appetizers",
+      "availability": true
+    },
+    {
+      "id": 3,
+      "name": "Falafel Platter",
+      "description": "Crispy falafel balls served with tahini sauce, pickles, and pita bread.",
+      "price": 400,
+      "image": "./falafel.jpg",
+      "category": "Main Course",
+      "availability": true
+    },
+    {
+      "id": 4,
+      "name": "Chicken Souvlaki",
+      "description": "Grilled chicken skewers marinated with Mediterranean spices, served with rice and tzatziki sauce.",
+      "price": 500,
+      "image": "./chicken-souvlaki.jpg",
+      "category": "Main Course",
+      "availability": true
+    },
+    {
+      "id": 5,
+      "name": "Spanakopita",
+      "description": "Flaky phyllo pastry filled with spinach, feta cheese, and herbs.",
+      "price": 300,
+      "image": "https://via.placeholder.com/150",
+      "category": "Appetizers",
+      "availability": true
+    },
+    {
+      "id": 6,
+      "name": "Moussaka",
+      "description": "Layers of eggplant, minced meat, and creamy béchamel sauce, baked to perfection.",
+      "price": 550,
+      "image": "https://via.placeholder.com/150",
+      "category": "Main Course",
+      "availability": true
+    },
+    {
+      "id": 7,
+      "name": "Baklava",
+      "description": "A rich, sweet dessert made with layers of phyllo dough, nuts, and honey syrup.",
+      "price": 200,
+      "image": "https://via.placeholder.com/150",
+      "category": "Desserts",
+      "availability": true
+    },
+    {
+      "id": 8,
+      "name": "Tzatziki Dip",
+      "description": "A creamy yogurt and cucumber dip with a hint of garlic and dill.",
+      "price": 150,
+      "image": "https://via.placeholder.com/150",
+      "category": "Sides",
+      "availability": true
+    },
+    {
+      "id": 9,
+      "name": "Dolma",
+      "description": "Vine leaves stuffed with rice, pine nuts, and herbs.",
+      "price": 300,
+      "image": "https://via.placeholder.com/150",
+      "category": "Appetizers",
+      "availability": true
+    },
+    {
+      "id": 10,
+      "name": "Lamb Gyro Wrap",
+      "description": "Juicy lamb slices wrapped in pita bread with lettuce, tomatoes, and tzatziki.",
+      "price": 450,
+      "image": "https://via.placeholder.com/150",
+      "category": "Main Course",
+      "availability": true
+    },
+    {
+      "id": 11,
+      "name": "Shawarma Plate",
+      "description": "Marinated chicken shawarma served with rice, hummus, and salad.",
+      "price": 500,
+      "image": "https://via.placeholder.com/150",
+      "category": "Main Course",
+      "availability": true
+    },
+    {
+      "id": 12,
+      "name": "Fattoush Salad",
+      "description": "A crunchy salad with fresh vegetables, fried pita chips, and a tangy sumac dressing.",
+      "price": 350,
+      "image": "https://via.placeholder.com/150",
+      "category": "Salads",
+      "availability": true
+    },
+    {
+      "id": 13,
+      "name": "Kebab Platter",
+      "description": "An assortment of chicken, lamb, and beef kebabs served with rice and grilled vegetables.",
+      "price": 700,
+      "image": "https://via.placeholder.com/150",
+      "category": "Main Course",
+      "availability": true
+    },
+    {
+      "id": 14,
+      "name": "Tabbouleh",
+      "description": "A fresh parsley salad with bulgur, tomatoes, onions, and a lemony dressing.",
+      "price": 300,
+      "image": "https://via.placeholder.com/150",
+      "category": "Salads",
+      "availability": true
+    },
+    {
+      "id": 15,
+      "name": "Grilled Halloumi",
+      "description": "Slices of halloumi cheese grilled to perfection, served with a side of salad.",
+      "price": 400,
+      "image": "https://via.placeholder.com/150",
+      "category": "Appetizers",
+      "availability": true
+    },
+    {
+      "id": 16,
+      "name": "Stuffed Peppers",
+      "description": "Bell peppers stuffed with rice, vegetables, and Mediterranean spices.",
+      "price": 450,
+      "image": "https://via.placeholder.com/150",
+      "category": "Main Course",
+      "availability": true
+    },
+    {
+      "id": 17,
+      "name": "Lentil Soup",
+      "description": "A hearty soup made with red lentils, vegetables, and Mediterranean spices.",
+      "price": 250,
+      "image": "https://via.placeholder.com/150",
+      "category": "Soups",
+      "availability": true
+    },
+    {
+      "id": 18,
+      "name": "Za'atar Bread",
+      "description": "Freshly baked bread topped with a blend of za'atar spices and olive oil.",
+      "price": 200,
+      "image": "https://via.placeholder.com/150",
+      "category": "Sides",
+      "availability": true
+    },
+    {
+      "id": 19,
+      "name": "Baba Ganoush",
+      "description": "Smoky eggplant dip served with warm pita bread.",
+      "price": 250,
+      "image": "https://via.placeholder.com/150",
+      "category": "Appetizers",
+      "availability": true
+    },
+    {
+      "id": 20,
+      "name": "Rose Milk Pudding",
+      "description": "A creamy dessert infused with rose water and topped with pistachios.",
+      "price": 300,
+      "image": "https://via.placeholder.com/150",
+      "category": "Desserts",
+      "availability": true
+    }
+  ]
+  

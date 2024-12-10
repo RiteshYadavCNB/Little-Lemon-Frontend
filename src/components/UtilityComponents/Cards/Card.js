@@ -10,14 +10,16 @@ import styled from 'styled-components';
         gap: 16px;
         font-size: 14px;
         box-sizing: border-box;
-        background-color: #ffffff;
+        background-color: #fffdee;
         border-radius: 16px;
+        box-shadow: inset 0px 0px 12px 2px #4b471916;
+        overflow: hidden;
     `;
 
     const CardImage = styled.img`
         width: 100%;
         height: 210px;
-        border-radius: 12px;
+        background: linear-gradient(0deg, #000000, #ffffff );
     `;
 
     const CardTitle = styled.h2`
@@ -29,11 +31,9 @@ import styled from 'styled-components';
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 8px 12px;
-        background-color: #edd04a;
+        padding: 8px 16px;
         gap: 8px;
-        border-radius: 8px;
-        box-shadow: 0px 4px #493e07;
+        border-bottom: 1px solid #4b4719;
     `;
 
     const CardSubContent = styled.div`
@@ -58,6 +58,7 @@ import styled from 'styled-components';
     const CardDescription = styled.div`
         dispplay: flex;
         width: 100%;
+        padding: 0px 16px 16px 16px;
         box-sizing: border-box;
     `;
 

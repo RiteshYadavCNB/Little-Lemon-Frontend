@@ -83,7 +83,7 @@ export const MenuContainer = styled.div`
     font-size: 32px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: rgb(3, 41, 44);
+    color: #645e21;
   }
 
   @media (max-width: 768px) {
@@ -102,6 +102,7 @@ export const Banner = styled.div`
   height: 300px;
   padding-top: 40px;
   align-items: center;
+  
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -117,6 +118,7 @@ export const BannerImg = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 24px;
+  box-shadow: inset 0px 0px 12px 4px #000000;
 
   @media (max-width: 768px){
     display: none;
@@ -127,11 +129,17 @@ export const BannerImg = styled.img`
 export const BannerContact = styled.div`
   position: absolute;
   display: flex;
-  width: max-content;
+  width: 100%;
+  max-width: 520px;
   align-items: center;
   justify-content: center;
   z-index: 1;
   left: -40px;
+  background: linear-gradient(rgb(255, 255, 255, 0.5) -6.71%,
+    rgb(235, 235, 242, 0.5) 56.19%,
+    rgb(223, 223, 231, 0.5) 106.56%);
+  padding: 16px 16px;
+  border-radius: 32px;
 
   @media (max-width: 768px){
     position: static;

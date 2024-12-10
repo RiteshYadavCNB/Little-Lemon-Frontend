@@ -41,7 +41,7 @@
         "rating": "4.5",
         "mealType": "Vegeterian",
         "serveDays": "Mon, Wed, Fri",
-        "mealDescription": "Crunchy homemade pita chips, buttery pine nuts, and a creamy feta spread, this fattoush-inspired salad features the earthy, anchoring flavor of crisp celery."
+        "mealDescription": "Homemade pita chips, buttery pine nuts, and a creamy feta spread, features the earthy, anchoring flavor of crisp celery."
     },
 
     {
@@ -50,6 +50,6 @@
         "rating": "4.7",
         "mealType": "Vegeterian",
         "serveDays": "Mon, Wed, Fri",
-        "mealDescription": "Inspired by Greek ingredients like fresh tomatoes, briny olives, salty feta cheese, and capers."
+        "mealDescription": "Inspired by Greek ingredients like fresh tomatoes, briny punch of olives, salty feta cheese, and capers."
     }
 ]
