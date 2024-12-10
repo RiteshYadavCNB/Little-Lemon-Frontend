@@ -9,7 +9,8 @@ const Homepage = () => {
     return (
         <HomeMain>
             <HeroSection>
-                <div style={{display: 'flex', flexDirection: 'row', width: '100%', gap: '20px', justifyContent: 'center', alignItems: 'center'}}>
+                <div style={{display: 'flex', flexDirection: 'row', width: '100%',
+                        gap: '20px', justifyContent: 'center', alignItems: 'center'}}>
                     <HeroAnimation>
                         <img style={{height: '60px'}} src="./Animation.gif" alt="animation"/>
                     </HeroAnimation>

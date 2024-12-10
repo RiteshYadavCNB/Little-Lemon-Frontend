@@ -53,13 +53,14 @@ export const HeroTitle = styled.h1`
 export const DisplayCardContainer = styled.div`
     display: flex;
     flex-direction: row;
-    flex-wrap:  wrap;
     width: 80%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 80px;
 
     @media (max-width: 768px){
       width: 100%;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 16px;
 

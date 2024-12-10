@@ -7,10 +7,14 @@ const CardContainer = styled.div`
     width: 210px;
     height: 280px;
     padding: 20px;
+    flex-shrink: 0;
     gap: 20px;
+    backdrop-filter: blur(8px);
     background: #fef9cb;
     border-radius: 24px;
     box-sizing: border-box;
+    box-shadow: inset 0px 0px 12px 4px #7e762924;
+    z-index: 1;
 
     @media(max-width: 768px) {
         width: ${(props) => props.last ? '356px' : '170px' };
@@ -79,7 +83,11 @@ const Icon = styled.img`
     bottom: 20px;
     background: #fdf497;
     border-radius: 100%;
-    transform: rotate(-20deg);
+    cursor: url("./hand-cursor-hover-click.svg") 16 16, pointer;
+
+    &:hover{
+        transform: rotate(-20deg);
+    }
 `;
 
 const CardImage = styled.img`
