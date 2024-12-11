@@ -133,6 +133,7 @@ const Header = () => {
             <NavContainer>
                 <NavList>
                     <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
+                    <Link style={LinkStyle} to='/order-online'><NavLink>Order Online</NavLink></Link>
                     <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
                 </NavList>
             </NavContainer>
@@ -144,6 +145,7 @@ const Header = () => {
             <HamburgerMenu burgermenu={hamburgerMenuState}>
                 <NavList>
                     <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
+                    <Link style={LinkStyle} to='/order-online'><NavLink>Order Online</NavLink></Link>
                     <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
                 </NavList>
             </HamburgerMenu>

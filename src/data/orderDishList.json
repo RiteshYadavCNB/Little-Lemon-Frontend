@@ -4,7 +4,7 @@
       "name": "Greek Salad",
       "description": "A refreshing mix of crisp lettuce, ripe tomatoes, cucumbers, olives, and feta cheese, tossed in olive oil and oregano.",
       "price": 350,
-      "image": "./greek-salad.avif",
+      "image": "https://img.freepik.com/free-photo/classic-greek-salad-fresh-vegetables-cucumber-tomato-sweet-pepper-lettuce-red-onion-feta-cheese-olives-with-olive-oil-healthy-food-top-view_1150-44879.jpg?t=st=1733935883~exp=1733939483~hmac=e9a05de35fdf0e3e98fbae981027a0525c347d312d65d318c309e0162751c09d&w=996",
       "category": "Salads",
       "availability": true
     },
@@ -13,7 +13,7 @@
       "name": "Hummus with Pita",
       "description": "Creamy chickpea hummus served with warm, fluffy pita bread.",
       "price": 250,
-      "image": "./hummus.jpg",
+      "image": "https://img.freepik.com/free-photo/healthy-homemade-hummus-with-olive-oil-pita-chips_2829-16350.jpg?t=st=1733935802~exp=1733939402~hmac=302c3eee6f6623de123df8f6f4de1435008564e8efa1639cd00aef301f071b2a&w=996",
       "category": "Appetizers",
       "availability": true
     },
@@ -22,7 +22,7 @@
       "name": "Falafel Platter",
       "description": "Crispy falafel balls served with tahini sauce, pickles, and pita bread.",
       "price": 400,
-      "image": "./falafel.jpg",
+      "image": "https://img.freepik.com/free-photo/top-view-delicious-meat-cutlets-with-fresh-salad_140725-57433.jpg?t=st=1733935697~exp=1733939297~hmac=cd16b0505b0705de67ce3b8952e691696444e765db6bdd9281cba35a5d01c806&w=996",
       "category": "Main Course",
       "availability": true
     },
@@ -31,7 +31,7 @@
       "name": "Chicken Souvlaki",
       "description": "Grilled chicken skewers marinated with Mediterranean spices, served with rice and tzatziki sauce.",
       "price": 500,
-      "image": "./chicken-souvlaki.jpg",
+      "image": "https://img.freepik.com/free-photo/minced-lula-kebab-grilled-turkey-chicken-with-fresh-tomato-bulgur_2829-20007.jpg?t=st=1733901318~exp=1733904918~hmac=bcc01dced68a4b8ef5a2b439792f2d2c4ebdf4c67c547a765c02b81c204767c5",
       "category": "Main Course",
       "availability": true
     },
@@ -40,7 +40,7 @@
       "name": "Spanakopita",
       "description": "Flaky phyllo pastry filled with spinach, feta cheese, and herbs.",
       "price": 300,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/top-view-cooked-greens-pastry-round-inside-brown-background-desk-meal-food-pastry-lunch-greens_140725-22345.jpg?t=st=1733936285~exp=1733939885~hmac=6d82425ba221c9b3655e7e3d15179869440a5200d358aa0a00477fa671cec6d4&w=996",
       "category": "Appetizers",
       "availability": true
     },
@@ -49,7 +49,7 @@
       "name": "Moussaka",
       "description": "Layers of eggplant, minced meat, and creamy béchamel sauce, baked to perfection.",
       "price": 550,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/prepared-gratin-dish-raw-eggplant-with-mozzarella-tomatoes_2829-19710.jpg?t=st=1733936347~exp=1733939947~hmac=27da438952404c4a7239c2eb1786b36c42ea2c71bdaccc6a8748ad5219454188&w=996",
       "category": "Main Course",
       "availability": true
     },
@@ -58,7 +58,7 @@
       "name": "Baklava",
       "description": "A rich, sweet dessert made with layers of phyllo dough, nuts, and honey syrup.",
       "price": 200,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/turkish-baklava-plate-top-view_140725-1427.jpg?t=st=1733936542~exp=1733940142~hmac=9a229ecdc1b8823fb56218e4c191459840d6328168d56335fc69b240813d1cc1&w=740",
       "category": "Desserts",
       "availability": true
     },
@@ -67,7 +67,7 @@
       "name": "Tzatziki Dip",
       "description": "A creamy yogurt and cucumber dip with a hint of garlic and dill.",
       "price": 150,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/top-view-sandwich-with-cucumbers-plate-with-fork_23-2148749132.jpg?t=st=1733936978~exp=1733940578~hmac=5cbe09a579152011e51eafc1f3cf346536a12234dc55b5dfaba466a764bede94&w=826",
       "category": "Sides",
       "availability": true
     },
@@ -76,7 +76,7 @@
       "name": "Dolma",
       "description": "Vine leaves stuffed with rice, pine nuts, and herbs.",
       "price": 300,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/top-view-green-leaf-dolma-with-yogurt-dark-surface_140725-75435.jpg?t=st=1733937165~exp=1733940765~hmac=7ee9e3888b7352a43ac54ddc1188f62b7d24b16be9d980e494f8ddf03b3fe97a&w=996",
       "category": "Appetizers",
       "availability": true
     },
@@ -85,7 +85,7 @@
       "name": "Lamb Gyro Wrap",
       "description": "Juicy lamb slices wrapped in pita bread with lettuce, tomatoes, and tzatziki.",
       "price": 450,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/tortilla-wraps-with-meat-fresh-vegetables_2829-9553.jpg?t=st=1733937625~exp=1733941225~hmac=8d5499651908cd0eb60f9424c7b61932452907cc8a80e198f96a111e29497dae&w=996",
       "category": "Main Course",
       "availability": true
     },
@@ -94,7 +94,7 @@
       "name": "Shawarma Plate",
       "description": "Marinated chicken shawarma served with rice, hummus, and salad.",
       "price": 500,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/side-view-shawarma-with-fried-potatoes-board-cookware_176474-3215.jpg?t=st=1733937516~exp=1733941116~hmac=105523bf0c99732d7f6663397b91e69efcb440b74d5900e872957169acd36d5d&w=826",
       "category": "Main Course",
       "availability": true
     },
@@ -103,7 +103,7 @@
       "name": "Fattoush Salad",
       "description": "A crunchy salad with fresh vegetables, fried pita chips, and a tangy sumac dressing.",
       "price": 350,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/vegetarian-salad-with-cherry-tomato-brie-cheese-cucumber-cilantro-red-onion-american-cuisine-top-view-flat-lay_2829-17004.jpg?t=st=1733938131~exp=1733941731~hmac=aa3f06e7422b7dfe02526744f98c0115a2028b10616682c5d4c8fe8dd265d5b2&w=996",
       "category": "Salads",
       "availability": true
     },
@@ -112,7 +112,7 @@
       "name": "Kebab Platter",
       "description": "An assortment of chicken, lamb, and beef kebabs served with rice and grilled vegetables.",
       "price": 700,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/minced-lula-kebab-grilled-turkey-chicken-with-fresh-vegetables_2829-19988.jpg?t=st=1733938215~exp=1733941815~hmac=47e9e679f824eb2be72545433b267cafa3503b0e58a8daafd993a19b5fa323a9&w=996",
       "category": "Main Course",
       "availability": true
     },
@@ -121,7 +121,7 @@
       "name": "Tabbouleh",
       "description": "A fresh parsley salad with bulgur, tomatoes, onions, and a lemony dressing.",
       "price": 300,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/tabbouleh-salad_2829-10886.jpg?t=st=1733938270~exp=1733941870~hmac=3b823041754dc61f41958f08af5e827c7b15d6476dd8969ff88056fec23a158a&w=996",
       "category": "Salads",
       "availability": true
     },
@@ -130,7 +130,7 @@
       "name": "Grilled Halloumi",
       "description": "Slices of halloumi cheese grilled to perfection, served with a side of salad.",
       "price": 400,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/lavash-rolls-top-view-table_140725-7368.jpg?t=st=1733938333~exp=1733941933~hmac=1776b21bd5ce4e872327fa6790140d7f49a2bb26ebd588bfd864c734b717d228&w=996",
       "category": "Appetizers",
       "availability": true
     },
@@ -139,7 +139,7 @@
       "name": "Stuffed Peppers",
       "description": "Bell peppers stuffed with rice, vegetables, and Mediterranean spices.",
       "price": 450,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/top-view-cooked-bell-peppers-with-ground-meat-grey-surface-food-beef-dolma-vegetables-meal_140725-74595.jpg?t=st=1733938402~exp=1733942002~hmac=0ebccae8aeb55adc19c47bd6fe5bb2840617084e9faf037b5f8363599cd6a563&w=996",
       "category": "Main Course",
       "availability": true
     },
@@ -148,7 +148,7 @@
       "name": "Lentil Soup",
       "description": "A hearty soup made with red lentils, vegetables, and Mediterranean spices.",
       "price": 250,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/top-view-lentil-soup-traditional-azerbaijani-soup-with-lemon-dry-mint_140725-11544.jpg?t=st=1733938475~exp=1733942075~hmac=86a6f7dedd7d8cfe0025172168ea9f43d5f20103939e7c94e39ef787e0677144&w=740",
       "category": "Soups",
       "availability": true
     },
@@ -157,7 +157,7 @@
       "name": "Za'atar Bread",
       "description": "Freshly baked bread topped with a blend of za'atar spices and olive oil.",
       "price": 200,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://img.freepik.com/free-photo/high-angle-pakistani-dish-assortment_23-2148825103.jpg?t=st=1733938643~exp=1733942243~hmac=b7383ef949631dc4f1bdf1c825e305ab352620132364fc1921448b9a95718940&w=740",
       "category": "Sides",
       "availability": true
     },
@@ -166,18 +166,17 @@
       "name": "Baba Ganoush",
       "description": "Smoky eggplant dip served with warm pita bread.",
       "price": 250,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://cookieandkate.com/images/2017/10/best-baba-ganoush-recipe.jpg",
       "category": "Appetizers",
       "availability": true
     },
     {
       "id": 20,
-      "name": "Rose Milk Pudding",
-      "description": "A creamy dessert infused with rose water and topped with pistachios.",
+      "name": "Saganaki Halloumi",
+      "description": "Halloumi cheese is fried in clarified butter, then brushed in a spiced honey and served with lemon yogurt, brandy-basted nectarines, and fresh tomatoes.",
       "price": 300,
-      "image": "https://via.placeholder.com/150",
+      "image": "https://www.foodandwine.com/thmb/OPdJ87hr9FZeZx9sS07NVG0RZiI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Saganaki-Halloumi-FT-RECIPE0922-2000-0dda32adc3eb463bbe4511b3b488e5f3.jpg",
       "category": "Desserts",
       "availability": true
     }
   ]
-  
