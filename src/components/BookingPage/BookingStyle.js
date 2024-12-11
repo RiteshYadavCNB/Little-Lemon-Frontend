@@ -33,7 +33,7 @@ export const BookingHead = styled.div`
     align-items: center;
     overflow: hidden;
     border-radius: 24px;
-    margin-top: 40px;
+    
 
     @media(max-width: 768px){
         width: 90%;

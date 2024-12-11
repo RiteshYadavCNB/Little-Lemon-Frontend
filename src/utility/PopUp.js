@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const PopUpOverlay = styled.div`
@@ -54,7 +53,7 @@ const PopUp = ({isOpen, onClose, children}) => {
     return (
         <PopUpOverlay>
             <ContentContainer>
-                <CloseButton className="close-button" onClick={onClose}>Close</CloseButton>
+                <CloseButton onClick={onClose}>Close</CloseButton>
                 {children}
             </ContentContainer>
         </PopUpOverlay>

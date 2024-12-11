@@ -75,7 +75,7 @@ export const MenuContainer = styled.div`
     flex-direction: column;
     width: 100%;
     align-items: center;
-    padding: 40px 0px 40px 0px;
+    margin: 60px 0px 60px 0px;
     gap: 40px;
   }
 
@@ -100,9 +100,9 @@ export const Banner = styled.div`
   width: 80%;
   max-width: 1200px;
   height: 300px;
-  padding-top: 40px;
+  margin: 60px 0px 60px 0px;
   align-items: center;
-  
+
 
   @media (max-width: 768px) {
     flex-direction: column;

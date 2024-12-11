@@ -1,8 +1,7 @@
-import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-// @ts-ignore
 import countryDialCodes from "../data/countryDialCodes.json";
+
 //import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 //import { auth } from "../firebaseConfig";
 
@@ -12,10 +11,12 @@ const OTPContainer = styled.div`
   width: 400px;
   min-width: 280px;
   align-items: center;
+  justify-content: center;
   gap: 20px;
+  margin: 20px 0px;
 
   @media (max-width: 768px) {
-    width: 80%;
+    width: 100%;
   }
 `;
 
@@ -23,18 +24,29 @@ const InputContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: Column;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
 `;
 
-const Label = styled.label`
-  display: block;
-  font-size: 16px;
+const HeadLine = styled.h1`
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const Label = styled.p`
+  width: 100%;
+  font-size: 15px;
+  font-weight: 500;
 `;
 
 const MobileNumberContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
 `;
 
@@ -115,7 +127,7 @@ const OTPInputField = styled.input`
 
 //component
 
-const MobileOTP = () => {
+const MobileOTP = ({actionCall}) => {
   const [otpRequest, setOtpRequest] = useState(false);
   const [otpAddress, setOTPAddress] = useState({countryCode: '+91', phoneNumber:''});
   const [phoneNumbererror, setPhoneNumberError] = useState(false);
@@ -243,30 +255,41 @@ const MobileOTP = () => {
 
   // Temp OTP Verification
 
-  const tempVerifyOTP = () => {
+  const tempVerifyOTP = (inputOTP, actionCall) => {
     const sentOTP = "123456";
-    const intOTP = inputOTP.join();
+    const intOTP = inputOTP.join("");
+    console.log(sentOTP);
+    console.log(intOTP);
+    console.log('verification call');
     if (sentOTP === intOTP){
       setConfirmationResult(true);
+      console.log('OTP verified Successfully');
+      if(actionCall){
+        console.log(actionCall);
+        actionCall();
+      }
     };
   };
 
 
   //handle OTP request
 
-  const handleOTPRequest = () => {
-    if ((phoneNumbererror === false) &&
-      (otpAddress.phoneNumber !== "") &&
-      (otpAddress.phoneNumber.length === 10) &&
-      (otpRequest === false)
+  const handleOTPRequest = (actionCall) => {
+    if (!phoneNumbererror &&
+      otpAddress.phoneNumber !== "" &&
+      otpAddress.phoneNumber.length === 10 &&
+      !confirmationResult
     ){
       setOtpRequest(true);
       setIsOtpSent(true);
-      //sendOTP();
-    } if ((otpRequest === true) && (isOtpSent === true)) {
-      tempVerifyOTP();
+      console.log('condtn 1 check', otpAddress);
+      if (otpRequest && isOtpSent && !confirmationResult) {
+        tempVerifyOTP(inputOTP, actionCall);
+        console.log('condtn 2 check');
+      }
     } else {
       setOTPRequestError(true);
+      console.log('condtn 3 check');
     }
   };
 
@@ -276,7 +299,7 @@ const MobileOTP = () => {
     <OTPContainer>
       <InputContainer>
 
-        <Label>Verify Mobile Number</Label>
+        <HeadLine>We are Ready to Serve You!</HeadLine>
 
         <MobileNumberContainer>
 
@@ -293,20 +316,17 @@ const MobileOTP = () => {
 
         </MobileNumberContainer>
 
-        {phoneNumbererror && <InputError>incorrect mobile number</InputError>}
-        {otpRequestError && <InputError>input mobile number</InputError>}
+        {phoneNumbererror && otpRequestError && <InputError>incorrect mobile number</InputError>}
 
       </InputContainer>
 
-      <div>we are into it together 😁</div>
+      <Label>Verify Mobile Number</Label>
 
-      <OTPInputContainer>
-        {otpRequest && mapOTPFields(inputOTP)}
-      </OTPInputContainer>
+      {otpRequest && <OTPInputContainer>{mapOTPFields(inputOTP)}</OTPInputContainer>}
 
-      <div id="recaptcha-container"></div>
+      {isOtpSent && confirmationResult === 'false' && otpRequestError === 'false' && <InputError>Wrong OTP</InputError>}
 
-      <RequestOTPButton onClick={handleOTPRequest}>
+      <RequestOTPButton onClick={()=>handleOTPRequest(actionCall)}>
         {otpRequest ? "Verify OTP" : "Request OTP"}
       </RequestOTPButton>
 

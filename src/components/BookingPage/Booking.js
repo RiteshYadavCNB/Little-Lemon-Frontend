@@ -15,9 +15,21 @@ import { BookingBgImageStyle, BookingHead, BookingHeading, BookingHeadingContain
 
 const Booking = () => {
 
+    // state variables
+
     const [isPopUpOpen, setIsPopUpOpen] = useState(false)
     const [availableTimeSlots, setAvailableTimeSlots] = useState({})
     const [bookingStatus, setBookingStatus] = useState(false)
+
+    /* state table reservatian form */
+
+    const [formData, setFormData] = useState({
+        userName: "",
+        bookingDate: null,
+        timeSlot: "",
+        occasion: "",
+        guests: ""
+    });
 
     /*Generate time slots for the next 30 days*/
 
@@ -38,42 +50,29 @@ const Booking = () => {
 
     /*occasion & guests*/
 
-    const occasionInfo = ['Birthday', 'Anniversary', 'Casual Dine']
-    const guests = ['2', '4', '6']
+    const occasionInfo = ['Birthday', 'Anniversary', 'Casual Dine'];
+    const guests = ['2', '4', '6'];
 
-    /* state for reservatian form */
-
-    const [formData, setFormData] = useState({
-        userName: "",
-        bookingDate: null,
-        timeSlot: "",
-        occasion: "",
-        guests: ""
-    });
 
     /* handle form submission */
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
+    const handleSubmit = (e) => {
+        console.log({formData});
 
-    //     console.log({formData})
+        // call createBooking function with form data from the OTP popup page
 
-    //     // call createBooking function with form data from the OTP popup page
-
-    //     createBooking(formData)
-
-    //     closePopUp();
-
-    //     setFormData({
-    //         userName: "",
-    //         bookingDate: "",
-    //         timeSlot: "",
-    //         occasion: "",
-    //         guests: ""
-    //      });
-
-    //     console.log(formData);
-    // }
+        createBooking(formData);
+        console.log("called createBooking");
+        closePopUp();
+        setBookingStatus(true);
+        setFormData({
+            userName: "",
+            bookingDate: "",
+            timeSlot: "",
+            occasion: "",
+            guests: ""
+         });
+    };
 
 
     /*handle available time slots*/
@@ -101,27 +100,14 @@ const Booking = () => {
     }
 
 
-    /*reset all time slots and states manually*/
-
-    const resetAll = () => {
-        setAvailableTimeSlots(generateTimeSlots())
-        setFormData({
-            userName: "",
-            bookingDate: null,
-            timeSlot: "",
-            occasion: "",
-            guests: ""
-        })
-    }
-
     /*OTP pop up*/
 
     const openPopUp = () => {
-        setIsPopUpOpen(true)
+        setIsPopUpOpen(true);
     };
 
     const closePopUp = () => {
-        setIsPopUpOpen(false)
+        setIsPopUpOpen(false);
     };
 
 
@@ -176,41 +162,37 @@ const Booking = () => {
                             label="Occasion" value={formData.occasion}
                             placeholder="select occasion"
                             mapParameter={occasionInfo}
-                            actions={(e) => setFormData((formData)=>({...formData, occasion: e}))}
+                            actions={(e) => setFormData((formData)=>({...formData, occasion: e.target.value}))}
                         />
 
                         <DropDownSelection
                             label="Guests" value={formData.guests}
                             placeholder="select number of guests"
                             mapParameter={guests}
-                            actions={(e) => setFormData((formData) => ({...formData, guests:e}))}
+                            actions={(e) => setFormData((formData) => ({...formData, guests:e.target.value}))}
                         />
 
                 </BookingSection>
 
                 <CTAButton buttonText="Reserve a Table" actions={openPopUp}/>
 
+                {/* <PopUp isOpen={isPopUpOpen} onClose={closePopUp} children={<MobileOTP actionCall={TempHandleSubmit}/>} /> */}
                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp}>
-                   <MobileOTP/>
+                    <MobileOTP actionCall={handleSubmit}/>
                 </PopUp>
 
             </BookingSectionContainer>
 
-            <div className="reset">
-                <button style={{width: '60px'}} onClick={resetAll}>Reset All</button>
-            </div>
 
+            {bookingStatus && console.log(formData) &&
             <div>
-                {bookingStatus &&
-                <div className="booking-information-container">
-                    <p className="booking-info-heading">Reservation Confirmed</p>
-                    <p>Name: {formData.userName}</p>
-                    <p>Date: {formData.bookingDate ? dayjs(formData.bookingDate).format('ddd DD MMMM') : 'No date selected'}</p>
-                    <p>Time: {formData.timeSlot ? formData.timeSlot : 'No time slots selected'}</p>
-                    <p>Occasion: {formData.occasion}</p>
-                    <p>Guests: {formData.guests}</p>
-                </div>}
-            </div>
+                {/* <p>Reservation Confirmed</p>
+                <p>Name: {formData.userName}</p>
+                <p>Date: {formData.bookingDate ? dayjs(formData.bookingDate).format('ddd DD MMMM') : 'No date selected'}</p>
+                <p>Time: {formData.timeSlot ? formData.timeSlot : 'No time slots selected'}</p>
+                <p>Occasion: {formData.occasion}</p>
+                <p>Guests: {formData.guests}</p> */}
+            </div>}
 
         </BookingPage>
     )
