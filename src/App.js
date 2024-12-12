@@ -6,13 +6,13 @@ import Booking from './Pages/BookingPage/Booking'
 import { Routes, Route} from 'react-router-dom'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider';
 import OrderOnline from './Pages/OrderOnlinePage/OrderOnline';
-import { CartProvider } from './Context/CartContext';
+import { CartItemProvider } from './Context/CartItemsContext';
 
 
 function App() {
   return (
     <>
-    <CartProvider>
+    <CartItemProvider>
       <Header />
 
       <LocalizationProvider>
@@ -24,7 +24,7 @@ function App() {
       </LocalizationProvider>
 
       <Footer />
-    </CartProvider>
+    </CartItemProvider>
     </>
   );
 }

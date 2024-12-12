@@ -150,7 +150,7 @@ const OrderQuantity = styled.div`
 
 
 
-export const ProductCard = ({product, updateCart, updateCartCount}) => {
+export const ProductCard = ({product, updateCart, removeItemFromCart}) => {
 
     const [quantity, setQuantity] = useState(1);
     const [addOrderClick, setAddOrderClick] = useState(false);
@@ -158,24 +158,27 @@ export const ProductCard = ({product, updateCart, updateCartCount}) => {
     const {id, mealType, category, name, price, description, image, availability} = product;
 
     const handleOrder = (e) => {
-        // const currentQuantity = quantity;
-        // let newQuantity = 0;
         console.log(e);
         if (e === "Add"){
             setQuantity(quantity + 1);
         };
         if (e === "Deduct"){
-            if (quantity > 0){
-                setQuantity(quantity - 1)
+            if ((quantity > 0) && (quantity !== 0)){
+                const prevquantity = quantity;
+                const newquantity = prevquantity - 1;
+                setQuantity(newquantity);
+                if (newquantity === 0){
+                    removeItemFromCart(id);
+                    setAddOrderClick(false);
+                }
             };
         };
-        // updateCart(index, {product,quantity});
     };
 
-    const handleAddOrder = () => {
-        updateCart(id, name, price, quantity);
+    const handleAddOrder = (id, name, price, quantity) => {
         setAddOrderClick(true);
-        updateCartCount();
+        updateCart(id, name, price, quantity);
+        console.log(id, name, price, quantity);
     }
 
     return(
@@ -208,7 +211,7 @@ export const ProductCard = ({product, updateCart, updateCartCount}) => {
                                 <AddRoundedIcon sx={{color: '#7e7629'}}/>
                             </ChangeQuantity>
                         </>
-                        : <AddOrderButton onClick={()=>handleAddOrder()}>ADD</AddOrderButton>}
+                        : <AddOrderButton onClick={()=>handleAddOrder(id, name, price, quantity)}>ADD</AddOrderButton>}
                 </AddOrder>
             </ProductImgContainer>
 

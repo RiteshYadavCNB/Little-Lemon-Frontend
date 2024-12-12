@@ -1,42 +1,38 @@
 import { ProductCard } from "../../components/UtilityComponents/Cards/ProductCard";
 import { CartContainer, CartValue, OrderOnlinePage, ProductContainer, ProductDivider } from "./OrderOnlineStyle";
 import orderDishList from "../../data/orderDishList";
-import { useState } from "react";
 import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded';
-import { useContext } from "react";
-import { CartContext } from "src/Context/CartContext";
+import { useCartItemContext } from "src/Context/CartItemsContext";
 
 
 
 const OrderOnline = () => {
-    const [cart, setCart] = useState([]);
-    // const [cartCount, setCartCount] = useState(0);
 
-    const { productCount, setProductCount } = useContext(CartContext);
+    const { cartItems, updateCart, removeFromCart } = useCartItemContext();
 
-    const handleCartCount = () => {
-        // setCartCount(cartCount + 1);
-        setProductCount(productCount + 1);
-        console.log(productCount);
+    const handleCart = (id, name, price, quantity) => {
+        updateCart(id, name, price, quantity);
+        console.log("works fine");
     };
 
-    const updateCart = (id, index)=>{
-        setCart({});
+    const removeItemFromCart = (id) => {
+        removeFromCart(id);
+        console.log("removed item");
     }
 
     return(
         <OrderOnlinePage>
             <CartContainer>
                 <LocalMallRoundedIcon sx={{fontSize: 40, color: '#756300'}}/>
-                <CartValue>{productCount}</CartValue>
+                <CartValue>{cartItems.length}</CartValue>
             </CartContainer>
 
             <ProductContainer>
                 {orderDishList.map((product) => <>
                     <ProductCard
                         product={product}
-                        updateCart={updateCart}
-                        updateCartCount={handleCartCount} />
+                        updateCart={handleCart}
+                        removeItemFromCart={removeItemFromCart}/>
                     <ProductDivider/>
                 </>)}
             </ProductContainer>
