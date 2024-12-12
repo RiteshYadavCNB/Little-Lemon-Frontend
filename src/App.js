@@ -1,17 +1,18 @@
 import './App.css';
 import Header from './components/Header'
 import Footer from './components/Footer';
-import Homepage from './components/HomePage/Home'
-import Booking from './components/BookingPage/Booking'
+import Homepage from './Pages/HomePage/Home'
+import Booking from './Pages/BookingPage/Booking'
 import { Routes, Route} from 'react-router-dom'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider';
-import OrderOnline from './components/OrderOnlinePage/OrderOnline';
-
+import OrderOnline from './Pages/OrderOnlinePage/OrderOnline';
+import { CartProvider } from './Context/CartContext';
 
 
 function App() {
   return (
     <>
+    <CartProvider>
       <Header />
 
       <LocalizationProvider>
@@ -23,6 +24,7 @@ function App() {
       </LocalizationProvider>
 
       <Footer />
+    </CartProvider>
     </>
   );
 }

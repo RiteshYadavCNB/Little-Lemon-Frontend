@@ -8,9 +8,12 @@ const ProductCardContainer = styled.div`
     flex-direction: row;
     flex-wrap: no-wrap;
     width: 100%;
-    gap: 16px;
+    gap: 30px;
     padding: 16px;
-    border: 1px solid grey;
+
+    @media(max-width: 768px){
+        gap: 16px;
+    }
 `;
 
 const ProductInfo = styled.div`
@@ -19,7 +22,7 @@ const ProductInfo = styled.div`
     flex-direction: column;
 `;
 
-const ProductCategory = styled.img`
+const ProductType = styled.img`
     width: 16px;
     height: 16px;
     object-fit: cover;
@@ -27,36 +30,72 @@ const ProductCategory = styled.img`
 
 const ProductTitle = styled.h1`
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
     color: #322f10;
 `;
 
 const ProductPrice = styled.p`
     font-size: 20px;
+    font-weight: 700;
+    color:rgb(60, 87, 3);
+`;
+
+const GeneralDiv = styled.div`
+    display: flex;
+    width: 100%;
+    gap: 12px;
+    align-items: center;
+    margin: 8px 0px;
+    color:rgb(51, 51, 51);
+`;
+
+const ProductCategory = styled.p`
+    font-size: 14px;
     font-weight: 500;
-    color: darkgrey;
+    color: #645e21;
+    padding: 2px 8px;
+    border: 1px solid #645e21;
+    border-radius: 8px;
+`;
+
+const ProductStatus = styled.p`
+    width: max-content;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 4px 12px;
+    color: ${(props) => props.color};
+    background: ${(props)=> props.bgColor};
+    border-radius: 8px;
 `;
 
 const ProductDescription = styled.p`
     font-size: 15px;
-    font-weight: 400;
-    color: #c3c3c3;
+    font-weight: 500;
+    color: #4E4E4E;
 `;
 
 const ProductImgContainer = styled.div`
     position: relative;
-    width: 100px;
-    height: 100px;
+    display: flex;
+    width: 160px;
+    height: 140px;
+    padding: 6px;
+    border-radius: 20px;
+    background: linear-gradient(rgb(255, 255, 255, 0.1) -8%,
+                    rgb(223, 223, 224, 0.5) 40%,
+                    rgb(0, 0, 0, 0.5) 100%);
 
     @media (max-width: 600px){
-        width: 60px;
-        height: 60px;
+        width: 140px;
+        height: 120px;
     }
 `;
 
 const ProductImg = styled.img`
     width: 100%;
+    height: 100%;
     object-fit: cover;
+    border-radius: 16px;
 `;
 
 const AddOrder = styled.div`
@@ -65,12 +104,16 @@ const AddOrder = styled.div`
     width: 120px;
     height: 40px;
     bottom: -20px;
-    align-item: center;
-    justify-content: center;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 12px;
     background: #ffffff;
-    border: 1px solid #151c07;
+    border: 1px solid #645e2130;
     border-radius: 8px;
-    drop-shadow: 0px 2px 12px 2px #151c0720;
+    box-shadow: inset 0px 0px 8px 1px #645e2120;
+    filter: drop-shadow(0px 8px 12px #00000012);
     z-index: 10;
 `;
 
@@ -80,93 +123,92 @@ const AddOrderButton = styled.button`
     font-size: 18px;
     font-weight: 700;
     color: #475e17;
-    text-align: center;
-`;
-
-const AddQuantity = styled.button`
-    position: absolute;
-    display: flex;
-    width: 24px;
-    height: 24px;
-    align-items: center;
-    justify-content: center;
-    left: 4px;
-    top: 16%;
     background: none;
     border: none;
-    cusror: pointer;
+    cursor: pointer;
 `;
 
-const DeductQuantity = styled.button`
-    position: absolute;
-    display: flex;
+const ChangeQuantity = styled.button`
     width: 24px;
     height: 24px;
-    align-items: center;
-    justify-content: center;
-    right: 4px;
-    top: 16%;
-    background: none;
+    background: #ffffff;
     border: none;
     cursor: pointer;
 `;
 
 const OrderQuantity = styled.div`
     display: flex;
-    height: 100%;
+    width: 30px;
+    height: 80%;
     font-size: 16px;
     font-weight: 600;
     align-items: center;
-    jsutify-content: center;
+    justify-content: center;
+    background: #fdf7ba70;
+    border-radius: 50%;
 `;
 
 
 
-export const ProductCard = ({category, dishName, price, description, imgsrc}) => {
+export const ProductCard = ({product, updateCart, updateCartCount}) => {
 
     const [quantity, setQuantity] = useState(1);
     const [addOrderClick, setAddOrderClick] = useState(false);
 
+    const {id, mealType, category, name, price, description, image, availability} = product;
+
     const handleOrder = (e) => {
-        const currentQuantity = quantity;
-        let newQuantity = 0;
-        console.log("called handle");
+        // const currentQuantity = quantity;
+        // let newQuantity = 0;
+        console.log(e);
         if (e === "Add"){
-            newQuantity = currentQuantity + 1;
-            setQuantity(newQuantity);
-            console.log("called cndtn 1");
+            setQuantity(quantity + 1);
         };
         if (e === "Deduct"){
-            newQuantity = currentQuantity - 1;
-            setQuantity(newQuantity);
-            console.log("called cndtn 2");
+            if (quantity > 0){
+                setQuantity(quantity - 1)
+            };
         };
+        // updateCart(index, {product,quantity});
     };
+
+    const handleAddOrder = () => {
+        updateCart(id, name, price, quantity);
+        setAddOrderClick(true);
+        updateCartCount();
+    }
 
     return(
         <ProductCardContainer>
             <ProductInfo>
-                {category === "veg" && <ProductCategory src="./veg.png" alt="veg"/>}
-                {category === "non-veg" && <ProductCategory src="./non-veg.png" alt="non-veg"/>}
-                <ProductTitle>{dishName ? dishName : "Dish Name"}</ProductTitle>
-                <ProductPrice>{price ? price : "price"}</ProductPrice>
+                {mealType === "veg" && <ProductType src="./veg.png" alt="veg"/>}
+                {mealType === "non-veg" && <ProductType src="./non-veg.png" alt="non-veg"/>}
+                <ProductTitle>{name ? name : "Dish Name"}</ProductTitle>
+                <ProductPrice>{price ? `₹ ${price}` : "price"}</ProductPrice>
+                <GeneralDiv>
+                    {category && <ProductCategory>{category}</ProductCategory>}
+                    {availability === true ? <ProductStatus color="#008000" bgColor="#D0F0C0">Pan on Stove</ProductStatus> :
+                        <ProductStatus color="#800000" bgColor="#fd5c6340">Out of Stock</ProductStatus>}
+                </GeneralDiv>
                 <ProductDescription>{description ? description : "Product Description"}</ProductDescription>
             </ProductInfo>
 
             <ProductImgContainer>
-                <ProductImg src={imgsrc} alt="product-image"/>
+                <ProductImg src={image} alt="product-image"/>
                 <AddOrder>
-                    { !addOrderClick ?
+                    { addOrderClick ?
                         <>
-                        <AddQuantity id="Add" onclick={(e)=>handleOrder(e.target.id)}>
-                            <AddRoundedIcon />
-                        </AddQuantity>
-                        <OrderQuantity>{quantity}</OrderQuantity>
-                        <DeductQuantity id="Deduct" onclick={(e)=>handleOrder(e.target.id)}>
-                            <RemoveRoundedIcon />
-                        </DeductQuantity>
+                            <ChangeQuantity id="Deduct" onClick={(e)=>handleOrder(e.currentTarget.id)}>
+                                <RemoveRoundedIcon sx={{color: '#7e7629'}} />
+                            </ChangeQuantity>
+
+                            <OrderQuantity>{quantity}</OrderQuantity>
+
+                            <ChangeQuantity id="Add" onClick={(e)=>handleOrder(e.currentTarget.id)}>
+                                <AddRoundedIcon sx={{color: '#7e7629'}}/>
+                            </ChangeQuantity>
                         </>
-                        : <AddOrderButton onClick={()=>setAddOrderClick(true)}>ADD</AddOrderButton> }
+                        : <AddOrderButton onClick={()=>handleAddOrder()}>ADD</AddOrderButton>}
                 </AddOrder>
             </ProductImgContainer>
 

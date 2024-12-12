@@ -5,12 +5,9 @@ export const HomeMain = styled.div`
     flex-direction: column;
     width: 100%;
     height: max-content;
-    margin: 60px 0px;
+    margin-top: 60px;
     align-items: center;
-
-    @media (max-width: 768px) {
-      margin: 60px 0px 60px 0px;
-    }
+    background: #fefbdc;
 `;
 
 export const HeroSection = styled.div`
@@ -22,6 +19,8 @@ export const HeroSection = styled.div`
     align-items: center;
     padding: 80px 0px 20px 0px;
     background: #fcf075;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 
     @media (max-width: 768px) {
       width: 100%;
@@ -135,7 +134,7 @@ export const BannerContact = styled.div`
   justify-content: center;
   z-index: 1;
   left: -40px;
-  background: linear-gradient(rgb(255, 255, 255, 0.5) -6.71%,
+  background: linear-gradient( #fefbdc -6.71%,
     rgb(235, 235, 242, 0.5) 56.19%,
     rgb(223, 223, 231, 0.5) 106.56%);
   padding: 16px 16px;

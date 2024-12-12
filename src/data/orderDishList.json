@@ -1,6 +1,7 @@
 [
     {
       "id": 1,
+      "mealType": "veg",
       "name": "Greek Salad",
       "description": "A refreshing mix of crisp lettuce, ripe tomatoes, cucumbers, olives, and feta cheese, tossed in olive oil and oregano.",
       "price": 350,
@@ -33,7 +34,7 @@
       "price": 500,
       "image": "https://img.freepik.com/free-photo/minced-lula-kebab-grilled-turkey-chicken-with-fresh-tomato-bulgur_2829-20007.jpg?t=st=1733901318~exp=1733904918~hmac=bcc01dced68a4b8ef5a2b439792f2d2c4ebdf4c67c547a765c02b81c204767c5",
       "category": "Main Course",
-      "availability": true
+      "availability": false
     },
     {
       "id": 5,

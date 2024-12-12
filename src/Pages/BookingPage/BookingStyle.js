@@ -4,24 +4,12 @@ export const BookingPage = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: max-content;
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
-    margin-top: 60px;
-    margin bottom: 40px;
-
-    @media (max-width: 768px) {
-        height: max-content;
-        margin-top: 0px;
-        margin-bottom: 40px;
-    }
-
-    @media (max-width: 360px) {
-        height: max-content;
-        margin-top: 0px;
-        margin-bottom: 60px;
-    }
+    padding-bottom: 60px;
+    background: #fefbdc;
 `;
 
 export const BookingHead = styled.div`
@@ -78,21 +66,6 @@ export const BookingHeadingTag = styled.h4`
         font-size: 24px;
     }
 `;
-
-// issue with this method is to apply the new style we need to refresh the page
-
-// export const bookingHeading = {
-//     fontSize: window.innerWidth < 768 ? '40px' : '60px',
-//     fontWeight: '700',
-//     color: 'white'
-
-// }
-
-// export const tagHeading = {
-//     fontSize: window.innerWidth < 768 ? '24px' : '32px',
-//     fontWeight: '600',
-//     color: 'white'
-// }
 
 export const BookingSectionContainer = styled.div`
     display: flex;

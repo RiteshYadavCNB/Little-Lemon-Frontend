@@ -1,6 +1,6 @@
-import DishCarousel from "../DishCatalogue/DishCarousel";
-import { ContactCard } from "../UtilityComponents/Cards/ContactCard";
-import { DisplayCard } from "../UtilityComponents/Cards/DisplayCards";
+import DishCarousel from "../../components/DishCatalogue/DishCarousel";
+import { ContactCard } from "../../components/UtilityComponents/Cards/ContactCard";
+import { DisplayCard } from "../../components/UtilityComponents/Cards/DisplayCards";
 import { Banner, BannerContact, BannerImg, DisplayCardContainer, HeroAnimation, HeroSection, HeroTitle, HomeMain, MenuContainer } from "./HomeStyle";
 
 

@@ -6,9 +6,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-import InputField from "../UtilityComponents/InputField";
-import DropDownSelection from "../UtilityComponents/DropDownSelection";
-import CTAButton from "../UtilityComponents/Buttons/CTAButton";
+import InputField from "../../components/UtilityComponents/InputField";
+import DropDownSelection from "../../components/UtilityComponents/DropDownSelection";
+import CTAButton from "../../components/UtilityComponents/Buttons/CTAButton";
 import MobileOTP  from "../../services/otpService";
 import { BookingBgImageStyle, BookingHead, BookingHeading, BookingHeadingContainer, BookingHeadingTag, BookingPage, BookingSection, BookingSectionContainer, MuiDatePickerStyles, SelectDate } from "./BookingStyle";
 

@@ -9,8 +9,8 @@ const CardContainer = styled.div`
     padding: 20px;
     flex-shrink: 0;
     gap: 20px;
-    backdrop-filter: blur(8px);
-    background: #fef9cb;
+    background: #fef9cb80;
+    backdrop-filter: blur(10px);
     border-radius: 24px;
     box-sizing: border-box;
     box-shadow: inset 0px 0px 12px 4px #7e762924;
