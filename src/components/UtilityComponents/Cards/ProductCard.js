@@ -160,16 +160,21 @@ export const ProductCard = ({product, updateCart, removeItemFromCart}) => {
     const handleOrder = (e) => {
         console.log(e);
         if (e === "Add"){
+            console.log("prev quan", quantity);
             setQuantity(quantity + 1);
         };
         if (e === "Deduct"){
             if ((quantity > 0) && (quantity !== 0)){
+                console.log("prev quan", quantity);
                 const prevquantity = quantity;
                 const newquantity = prevquantity - 1;
-                setQuantity(newquantity);
+                console.log(newquantity);
                 if (newquantity === 0){
                     removeItemFromCart(id);
                     setAddOrderClick(false);
+                    setQuantity(1);
+                } else {
+                    setQuantity(newquantity);
                 }
             };
         };

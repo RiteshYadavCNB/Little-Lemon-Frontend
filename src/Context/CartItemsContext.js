@@ -6,7 +6,7 @@ export const CartItemProvider = ({children}) => {
     const [cartItems, setCartItems] = useState([]);
 
     //update cart
-    const updateCart = (id, productName, price, quantity) => {
+    const updateCart = (id, name, price, quantity) => {
         setCartItems((prevCartItem) => {
             //checking if the item already exists
             const existingItemIndex = prevCartItem.findIndex(item => item.id === id);
@@ -18,7 +18,7 @@ export const CartItemProvider = ({children}) => {
                 return updatedCartitems;
             } else {
                 //if item does not exist, add it to the cart
-                return [...prevCartItem, {id, productName, price, quantity}];
+                return [...prevCartItem, {id, name, price, quantity}];
             };
         });
     };

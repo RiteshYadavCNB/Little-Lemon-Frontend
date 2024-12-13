@@ -2,6 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from 'react';
+import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded';
+import { useCartItemContext } from 'src/Context/CartItemsContext';
 
 
 const HeaderContainer = styled.header`
@@ -56,8 +58,6 @@ const NavContainer = styled.nav`
 `;
 
 const Hamburger = styled.button`
-    position: absolute;
-    display: none;
 
     @media (max-width: 768px){
         display: flex;
@@ -83,6 +83,7 @@ const HamburgerMenu = styled.div`
 const NavList = styled.ul`
     display: flex;
     white-space: nowrap;
+    align-items: center;
     gap: 20px;
     list-style-type: none;
 
@@ -107,9 +108,46 @@ const LogoText = styled.h1`
     color: #475E17;
 `;
 
+const CartContainer = styled.div`
+    position: relative;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+`;
+
+const CartValue = styled.p`
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    verticle-align: middle;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #edefe8;
+    background: #475e17;
+    border-radius: 50%;
+    top: -12px;
+    right: -12px;
+`;
+
 const LinkStyle = {
     textDecoration: "none",
 };
+
+const MediaNavContainer = styled.div`
+    position: absolute;
+    display: none;
+    right: 0px;
+    padding-right: 2vw;
+    gap: 20px;
+
+    @media(max-width: 768px){
+        display: flex;
+    }
+`;
 
 
 
@@ -124,6 +162,8 @@ const Header = () => {
         sethamburgerMenuState(false)
     },[pathname])
 
+    const { cartItems } = useCartItemContext();
+
 
     return (
         <HeaderContainer>
@@ -132,15 +172,30 @@ const Header = () => {
             </LogoContainer>
             <NavContainer>
                 <NavList>
-                    <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
+                    <Link style={LinkStyle} to='/cart'>
+                        <CartContainer>
+                        <LocalMallRoundedIcon sx={{fontSize: 30, color: '#756300'}}/>
+                        {cartItems.length !== 0 && <CartValue>{cartItems.length}</CartValue>}
+                        </CartContainer>
+                    </Link>
                     <Link style={LinkStyle} to='/order-online'><NavLink>Order Online</NavLink></Link>
+                    <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
                     <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
                 </NavList>
             </NavContainer>
 
-            <Hamburger onClick={() => sethamburgerMenuState(prevState => !prevState)}>
-                <MenuRoundedIcon sx={{color: 'wheat'}}/>
-            </Hamburger>
+            <MediaNavContainer>
+                <Link style={LinkStyle} to='/cart'>
+                        <CartContainer>
+                        <LocalMallRoundedIcon sx={{fontSize: 30, color: '#756300'}}/>
+                        {cartItems.length !== 0 && <CartValue>{cartItems.length}</CartValue>}
+                        </CartContainer>
+                </Link>
+
+                <Hamburger onClick={() => sethamburgerMenuState(prevState => !prevState)}>
+                    <MenuRoundedIcon sx={{color: 'wheat'}}/>
+                </Hamburger>
+            </MediaNavContainer>
 
             <HamburgerMenu burgermenu={hamburgerMenuState}>
                 <NavList>
