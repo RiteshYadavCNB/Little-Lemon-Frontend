@@ -6,32 +6,31 @@ export const CartItemProvider = ({children}) => {
     const [cartItems, setCartItems] = useState([]);
 
     //update cart
-    const updateCart = (id, name, price, quantity) => {
-        setCartItems((prevCartItem) => {
+    const updateCart = (product, quantity) => {
+        setCartItems((prevCartItems) => {
             //checking if the item already exists
-            const existingItemIndex = prevCartItem.findIndex(item => item.id === id);
+            const existingItemIndex = prevCartItems.findIndex(cartItem => cartItem.id === product.id);
 
             if (existingItemIndex !== -1){
-                //if item exists, update its quantity
-                const updatedCartitems = [...prevCartItem];
-                updatedCartitems[existingItemIndex].quantity += quantity;
+                //if item exists, update its quantity or remove if quantity is 0
+                const updatedCartitems = [...prevCartItems];
+                if (quantity > 0){
+                    updatedCartitems[existingItemIndex].quantity = quantity;
+                } else {
+                    updatedCartitems.splice(existingItemIndex, 1); //remove item
+                }
                 return updatedCartitems;
-            } else {
+            } else if (quantity > 0) {
                 //if item does not exist, add it to the cart
-                return [...prevCartItem, {id, name, price, quantity}];
-            };
+                return [...prevCartItems, { ...product, quantity }];
+            }
+            return prevCartItems; //no changes for invalid case
         });
     };
 
-    // function to remove an item from the cart
-    const removeFromCart = (id) => {
-        setCartItems((prevCartItems) => prevCartItems.filter(item => item.id !== id));
-    };
-
-
 
     return (
-        <CartItemContext.Provider value={{cartItems, updateCart, removeFromCart}}>
+        <CartItemContext.Provider value={{cartItems, updateCart}}>
             {children}
         </CartItemContext.Provider>
     )

@@ -1,6 +1,6 @@
 import { ProductCard } from "../../components/UtilityComponents/Cards/ProductCard";
-import orderDishList from "../../data/orderDishList";
-import { useState, useEffect } from "react";
+
+
 import {
   BillingContainer,
   CartItemContainer,
@@ -9,21 +9,14 @@ import {
   CheckoutProgressDiv,
   ProgressBar,
 } from "./CartCheckoutStyle";
+
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
 import { useCartItemContext } from "src/Context/CartItemsContext";
 
 const CartCheckout = () => {
-  const { cartItems, updateCart, removeFromCart } = useCartItemContext();
-  const [cartItemsList, setCart] = useState(cartItems);
 
-  useEffect(() => {
-    setCart((prev) => [
-      ...prev,
-      orderDishList.filter((item) => cartItems.some((e) => e.id === item.id)),
-    //   try this method -- you can use for loop but try to do it with some 
-    ]);
-  }, []);
+  const { cartItems } = useCartItemContext();
 
   return (
     <CartPageContainer>
@@ -37,15 +30,13 @@ const CartCheckout = () => {
 
       <CartItemContainer>
         <CartitemsDiv>
-          {cartItemsList.map((product) => (
+          {cartItems.length > 0 ? cartItems.map((item) => (
             <>
-              <ProductCard product={product} />
+              <ProductCard key={item.id}
+                product={item}
+              />
             </>
-          ))}
-          {cartItems.map((product) => (
-            <>{console.log(product)}</>
-          ))}
-          items here
+          )) : `No Items in the Bag`}
         </CartitemsDiv>
         <BillingContainer>bill here</BillingContainer>
       </CartItemContainer>

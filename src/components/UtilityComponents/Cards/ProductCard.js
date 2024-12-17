@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import { useCartItemContext } from "src/Context/CartItemsContext";
 
 const ProductCardContainer = styled.div`
     display: flex;
@@ -150,41 +151,20 @@ const OrderQuantity = styled.div`
 
 
 
-export const ProductCard = ({product, updateCart, removeItemFromCart}) => {
+export const ProductCard = ({ product }) => {
 
-    const [quantity, setQuantity] = useState(1);
-    const [addOrderClick, setAddOrderClick] = useState(false);
 
     const {id, mealType, category, name, price, description, image, availability} = product;
 
-    const handleOrder = (e) => {
-        console.log(e);
-        if (e === "Add"){
-            console.log("prev quan", quantity);
-            setQuantity(quantity + 1);
-        };
-        if (e === "Deduct"){
-            if ((quantity > 0) && (quantity !== 0)){
-                console.log("prev quan", quantity);
-                const prevquantity = quantity;
-                const newquantity = prevquantity - 1;
-                console.log(newquantity);
-                if (newquantity === 0){
-                    removeItemFromCart(id);
-                    setAddOrderClick(false);
-                    setQuantity(1);
-                } else {
-                    setQuantity(newquantity);
-                }
-            };
-        };
-    };
+    const { cartItems, updateCart } = useCartItemContext();
+    const existingProduct = cartItems.find((item) => item.id === id);
+    const quantity = existingProduct?.quantity || 0;
 
-    const handleAddOrder = (id, name, price, quantity) => {
-        setAddOrderClick(true);
-        updateCart(id, name, price, quantity);
-        console.log(id, name, price, quantity);
-    }
+
+    const handleAdd = () => updateCart(product, quantity + 1);
+    const handleRemove = () => updateCart(product, quantity - 1);
+
+
 
     return(
         <ProductCardContainer>
@@ -195,28 +175,28 @@ export const ProductCard = ({product, updateCart, removeItemFromCart}) => {
                 <ProductPrice>{price ? `₹ ${price}` : "price"}</ProductPrice>
                 <GeneralDiv>
                     {category && <ProductCategory>{category}</ProductCategory>}
-                    {availability === true ? <ProductStatus color="#008000" bgColor="#D0F0C0">Pan on Stove</ProductStatus> :
+                    {availability ? <ProductStatus color="#008000" bgColor="#D0F0C0">Pan on Stove</ProductStatus> :
                         <ProductStatus color="#800000" bgColor="#fd5c6340">Out of Stock</ProductStatus>}
                 </GeneralDiv>
-                <ProductDescription>{description ? description : "Product Description"}</ProductDescription>
+                <ProductDescription>{description || "Product Description"}</ProductDescription>
             </ProductInfo>
 
             <ProductImgContainer>
                 <ProductImg src={image} alt="product-image"/>
                 <AddOrder>
-                    { addOrderClick ?
+                    { quantity > 0 ?
                         <>
-                            <ChangeQuantity id="Deduct" onClick={(e)=>handleOrder(e.currentTarget.id)}>
+                            <ChangeQuantity id="Deduct" onClick={handleRemove}>
                                 <RemoveRoundedIcon sx={{color: '#7e7629'}} />
                             </ChangeQuantity>
 
-                            <OrderQuantity>{quantity}</OrderQuantity>
+                            <OrderQuantity>{ quantity }</OrderQuantity>
 
-                            <ChangeQuantity id="Add" onClick={(e)=>handleOrder(e.currentTarget.id)}>
+                            <ChangeQuantity id="Add" onClick={handleAdd}>
                                 <AddRoundedIcon sx={{color: '#7e7629'}}/>
                             </ChangeQuantity>
-                        </>
-                        : <AddOrderButton onClick={()=>handleAddOrder(id, name, price, quantity)}>ADD</AddOrderButton>}
+                        </> :
+                        <AddOrderButton id="AddProduct" onClick={handleAdd}>ADD</AddOrderButton>}
                 </AddOrder>
             </ProductImgContainer>
 
