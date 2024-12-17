@@ -8,7 +8,6 @@ export const OrderOnlinePage = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 60px;
-    margin bottom: 40px;
     background: #fefbdc;
 `;
 
@@ -22,6 +21,7 @@ export const ProductContainer = styled.div`
     align-items: center;
     margin: 60px 0px;
     gap: 20px;
+
 
     & > :last-child{
         display: none;
