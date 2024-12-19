@@ -17,14 +17,13 @@ const HeaderContainer = styled.header`
     top: 0;
     align-items: center;
     z-index: 100;
-    box-sizing: border-box;
 
     @media (max-width: 768px){
         display: flex;
+        width: 100%;
         padding: 10px;
         gap: 10px;
         justify-content: flex-start;
-        box-sizing: border-box;
     }
 `;
 
@@ -33,12 +32,11 @@ const LogoContainer = styled.div`
     width: 100%;
     align-items: flex-start;
     padding-left: 2vw;
-    box-sizing: border-box;
 
     @media (max-width: 768px){
-        width: max-content;
+        width: 100%;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         height: 40px;
     }
 `;
