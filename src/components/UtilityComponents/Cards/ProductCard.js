@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
@@ -199,6 +198,8 @@ export const ProductCard = ({ product }) => {
 
             <ProductImgContainer>
                 <ProductImg src={image} alt="product-image"/>
+
+                { availability ? 
                 <AddOrder>
                     { quantity > 0 ?
                         <>
@@ -213,7 +214,10 @@ export const ProductCard = ({ product }) => {
                             </ChangeQuantity>
                         </> :
                         <AddOrderButton id="AddProduct" onClick={handleAdd}>ADD</AddOrderButton>}
-                </AddOrder>
+                </AddOrder> :
+
+                <AddOrder>Out of Stock</AddOrder>
+                }
             </ProductImgContainer>
 
         </ProductCardContainer>

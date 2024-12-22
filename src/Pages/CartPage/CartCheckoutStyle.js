@@ -4,10 +4,11 @@ export const CartPageContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 100%;
+    min-height: calc(100vh - 100px);
     align-items: center;
     margin-top: 60px;
     background: #fefbdc;
+    padding-bottom: 40px;
 
 `;
 
@@ -21,6 +22,10 @@ export const CheckoutProgressDiv = styled.div`
 
     @media(max-width: 1080px){
         width: 60%;
+    }
+
+    @media(max-width: 768px){
+        width: 80%;
     }
 `;
 
@@ -76,6 +81,10 @@ export const CartItemsContainer = styled.div`
         width: 100%;
         align-items: center;
         margin: 40px 0px;
+    }
+
+    @media(max-width: 768px){
+        margin: 0px;
     }
 `;
 
@@ -287,7 +296,7 @@ export const BillBreakUp = styled.div`
     font-weight: 400;
     color: #2b380e;
 
-    div{
+    dl{
         display: flex;
         width: 100%;
         justify-content: space-between;
@@ -299,15 +308,15 @@ export const BillBreakUp = styled.div`
         font-weight: 600;
     }
 
-    div > span:first-child {
+    dl > first-child {
         align-self: flex-start;
     }
 
-    div > span:last-child {
+    dl > last-child {
         align-self: flex-end;
     }
 
-    > div:last-child > span{
+    > dl:last-child > dt{
         font-weight: 600;
         align-self: center;
     }
