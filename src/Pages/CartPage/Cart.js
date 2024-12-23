@@ -1,36 +1,48 @@
 
 import {
   CartPageContainer,
+  CheckoutContainer,
   CheckoutProgressDiv,
   CheckoutProgressStatus,
   CheckoutProgressText,
   ProgressBar,
-} from "./CartCheckoutStyle";
+} from "./CartStyle";
 
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
 import { useCartItemContext } from "src/Context/CartItemsContext";
 import { useEffect, useState } from "react";
-import  BillingComponent  from "./BillingComponent";
+import { BillingComponent }  from "./BillingComponent";
+import { CartItemsComponent } from "./CartItemsContainer";
+import { AddressComponent } from "./AddressComponent";
+import { PaymentComponent } from "./PaymentComponent";
 
 
-const CartCheckout = () => {
+const Cart = () => {
 
   const { cartItems } = useCartItemContext();
   const [ totalPrice, setTotalPrice ] = useState(0);
   const [ totalDiscount, setTotalDiscount ] = useState(0);
   const [ discountedPrice, setDiscountedPrice ] = useState(0);
   const [ deliveryFee, setDeliveryFee ] = useState(0);
-  const [ checkOutStatus, setCheckOutStatus ] = useState(0);
+  const [ checkOutStage, setCheckOutStage ] = useState(0);
 
-  //Checkout Stage
-  // we have discussed it with GPT follow on that 
-  // we are trying to make step and conditionally rendered page
-  // using array of stages refer GPT chat
+  //Checkout Stage array
 
-  // const steps = [
-  //   { key; "billing", component: }
-  // ]
+  const steps = [
+    { key: "cartreview", component: <CartItemsComponent/>},
+    { key: "address", component: <AddressComponent/>},
+    { key: "payment", component: <PaymentComponent/>}
+  ];
+
+
+  //manage checkoutstage
+
+  const handleCheckoutStage = () => {
+    if (checkOutStage < steps.length -1) {
+      setCheckOutStage((prev) => prev + 1);
+    }
+  }
 
   //Total Price
 
@@ -64,6 +76,8 @@ const CartCheckout = () => {
     }
   },[totalPrice]);
 
+
+
   return (
     <CartPageContainer>
 
@@ -90,11 +104,14 @@ const CartCheckout = () => {
 
       </CheckoutProgressDiv>
 
-      <BillingComponent totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice}/>
+      <CheckoutContainer>
+        {steps[checkOutStage].component}
+        <BillingComponent checkOutStage={checkOutStage} totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice} handleCheckoutStage={handleCheckoutStage} />
+      </CheckoutContainer>
 
 
     </CartPageContainer>
   );
 };
 
-export default CartCheckout;
+export default Cart;

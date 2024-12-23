@@ -255,11 +255,15 @@ export const CouponCodeInput = styled.input`
     border: 1px solid #7e762940;
     height: 40px;
     padding: 0px 16px;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 400;
     background: #ffffff80;
     border-radius: 8px;
     color: #7e7629;
+
+    input:focus{
+        outline: 1px solid #7e7629;
+    }
 `;
 
 export const CouponCodeButton = styled.button`
@@ -340,4 +344,75 @@ export const CheckoutButton = styled.button`
     font-weight: 600;
     color: #ffffff;
     cursor: pointer;
+`;
+
+export const CheckoutAddressContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+
+    @media(max-width: 1080px){
+        width: 100%;
+        max-width: none;
+        margin-bottom: 40px;
+    }
+`;
+
+export const AddressField = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    align-items: flex-start;
+    padding: 20px;
+    border: 2px solid #7e762980;
+    border-radius: 12px;
+    gap: 30px;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+    }
+
+    label{
+        font-size: 16px;
+        font-weight: 600;
+        color: #2b380e;
+    }
+
+    input{
+        width: 100%;
+        border: 1px solid #7e762940;
+        height: 40px;
+        padding: 0px 16px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        background: #ffffff80;
+        border-radius: 8px;
+        color: #7e7629;
+        appearance: none;
+        box-sizing: border-box;
+    }
+
+    input::placeholder{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    input:focus{
+        outline: 1px solid #7e7629;
+    }
+
+
+    @media(max-width: 1080px){
+        width: 100%;
+        max-width: 800px;
+    }
 `;

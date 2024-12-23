@@ -7,7 +7,7 @@ import { Routes, Route} from 'react-router-dom'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider';
 import OrderOnline from './Pages/OrderOnlinePage/OrderOnline';
 import { CartItemProvider } from './Context/CartItemsContext';
-import  CartCheckout from './Pages/CartPage/CartCheckout';
+import  Cart from './Pages/CartPage/Cart';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
       <LocalizationProvider>
         <Routes>
           <Route path='/' element={<Homepage />}/>
-          <Route path='/cart' element={<CartCheckout/>} />
+          <Route path='/cart' element={<Cart/>} />
           <Route path='/table-booking' element={<Booking />}/>
           <Route path='/order-online' element={<OrderOnline />}/>
         </Routes>
