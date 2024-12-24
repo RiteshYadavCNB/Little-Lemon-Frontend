@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// Page main Container
+
 export const CartPageContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -11,6 +13,8 @@ export const CartPageContainer = styled.div`
     padding-bottom: 40px;
 
 `;
+
+// Progress Container
 
 export const CheckoutProgressDiv = styled.div`
     display: flex;
@@ -55,19 +59,23 @@ export const ProgressBar = styled.div`
     background: #596e2e;
 `;
 
+// All Dynamics Component Container
+
 export const CheckoutContainer = styled.div`
     display: flex;
     width: max-content;
     gap: 40px;
-    padding: 0 130px;
+    padding: 40px 130px;
 
     @media(max-width: 1080px){
         width: 100%;
         flex-direction: column;
         align-items: center;
-        padding: 0 16px;
+        padding: 40px 16px;
     }
 `;
+
+// Cart Items Container
 
 export const CartItemsContainer = styled.div`
     display: flex;
@@ -194,6 +202,8 @@ export const LinkStyle = {
     borderRadius: "8px",
 };
 
+// Billing Container
+
 export const BillingContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -288,8 +298,7 @@ export const CouponCodeButton = styled.button`
 export const BillBreakUp = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 600px;
+    width: 600px;
     align-items: flex-start;
     padding: 20px;
     border: 2px solid #7e762980;
@@ -346,11 +355,12 @@ export const CheckoutButton = styled.button`
     cursor: pointer;
 `;
 
+// Address Component
+
 export const CheckoutAddressContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 600px;
+    width: 500px;
     gap: 20px;
     align-items: center;
     justify-content: flex-start;
@@ -362,11 +372,63 @@ export const CheckoutAddressContainer = styled.div`
     }
 `;
 
+export const ContactField = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    padding: 20px;
+    border: 2px solid #7e762980;
+    border-radius: 12px;
+    gap: 16px;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px;
+    }
+
+    label{
+        font-size: 16px;
+        font-weight: 600;
+        color: #2b380e;
+    }
+
+    input{
+        width: 100%;
+        border: 1px solid #7e762940;
+        height: 40px;
+        padding: 0px 16px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        background: #ffffff80;
+        border-radius: 8px;
+        color: #7e7629;
+        appearance: none;
+    }
+
+    input::placeholder{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    input:focus{
+        outline: 1px solid #7e7629;
+    }
+
+    @media(max-width: 1080px){
+        width: 100%;
+        max-width: 800px;
+    }
+
+`;
+
 export const AddressField = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 600px;
     align-items: flex-start;
     padding: 20px;
     border: 2px solid #7e762980;
@@ -398,7 +460,6 @@ export const AddressField = styled.div`
         border-radius: 8px;
         color: #7e7629;
         appearance: none;
-        box-sizing: border-box;
     }
 
     input::placeholder{
@@ -410,9 +471,137 @@ export const AddressField = styled.div`
         outline: 1px solid #7e7629;
     }
 
+    @media(max-width: 1080px){
+        width: 100%;
+        max-width: 800px;
+    }
+`;
+
+export const AddressTag = styled.button`
+    width: 60px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b4719;
+    border-radius: 30px;
+    background-color: #fefbdc;
+    border: 1px solid #4b4719;
+    cursor: pointer;
+
+    &:focus{
+        background-color: #fcf286;
+    }
+`;
+
+// Payment Component
+
+export const PaymentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+
+    @media(max-width: 1080px){
+        width: 100%;
+        max-width: none;
+        margin-bottom: 40px;
+    }
+`;
+
+export const PaymentMode = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+    border: 2px solid #7e762980;
+    border-radius: 12px;
+    overflow: hidden;
 
     @media(max-width: 1080px){
         width: 100%;
         max-width: 800px;
+    }
+`;
+
+export const ModeSelection = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    gap: 16px;
+
+    ul > li{
+        list-style: none;
+    }
+
+    li > div{
+        display: flex;
+        width: 200px;
+        height: 60px;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: 500;
+        color: #4b4719;
+        background: #4b471910;
+        border-bottom: 1px solid #7e762980;
+        cursor: pointer;
+    }
+
+    li:last-child > div{
+        border-bottom: none;
+    }
+
+    li > div:focus{
+        background: #fefbdc;
+    }
+`;
+
+export const ModeDescription = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
+export const PaymentModeSubSelection = styled.div`
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    gap: 20px;
+
+    div{
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 600;
+        color: color: #4b4719;
+    }
+`;
+
+export const PaymentModeDescription = styled.div`
+    display: flex;
+    width: 100%;
+
+    input{
+        width: 100%;
+        border: 1px solid #7e762940;
+        height: 40px;
+        padding: 0px 16px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        background: #ffffff80;
+        border-radius: 8px;
+        color: #7e7629;
+        appearance: none;
+    }
+
+    input::placeholder{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    input:focus{
+        outline: 1px solid #7e7629;
     }
 `;

@@ -1,4 +1,4 @@
-import { AddressField, CheckoutAddressContainer } from "./CartStyle";
+import { AddressField, AddressTag, CheckoutAddressContainer, ContactField } from "./CartStyle";
 
 
 export const AddressComponent = () => {
@@ -6,19 +6,23 @@ export const AddressComponent = () => {
     return(
         <CheckoutAddressContainer>
 
-            <div>
-                Contact Details
-            </div>
+            <ContactField>
+                    <label>Contact Details</label>
+                    <input placeholder="Name"/>
+                    <input placeholder="Mobile Number"/>
+            </ContactField>
             <AddressField>
                 <div>
-                    <label>House/ Building/ Flat Number</label>
+                    <label>Address Details</label>
                     <input placeholder="House No/ Building/ Street/ Area"/>
                     <input placeholder="Locality"/>
                     <input placeholder="Pin Code"/>
                 </div>
 
-                <div>Home</div>
-                <div>Work</div>
+                <div style={{flexDirection: "row"}}>
+                    <AddressTag>Home</AddressTag>
+                    <AddressTag>Work</AddressTag>
+                </div>
             </AddressField>
         </CheckoutAddressContainer>
     );

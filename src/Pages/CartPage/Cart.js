@@ -10,6 +10,8 @@ import {
 
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import RadioButtonUncheckedRoundedIcon from "@mui/icons-material/RadioButtonUncheckedRounded";
+import AdjustRoundedIcon from '@mui/icons-material/AdjustRounded';
+
 import { useCartItemContext } from "src/Context/CartItemsContext";
 import { useEffect, useState } from "react";
 import { BillingComponent }  from "./BillingComponent";
@@ -27,14 +29,28 @@ const Cart = () => {
   const [ deliveryFee, setDeliveryFee ] = useState(0);
   const [ checkOutStage, setCheckOutStage ] = useState(0);
 
+
   //Checkout Stage array
 
   const steps = [
-    { key: "cartreview", component: <CartItemsComponent/>},
-    { key: "address", component: <AddressComponent/>},
-    { key: "payment", component: <PaymentComponent/>}
+    { key: "Cart", component: <CartItemsComponent/>},
+    { key: "Address", component: <AddressComponent/>},
+    { key: "Payment", component: <PaymentComponent/>}
   ];
 
+  // get progress icon
+
+  const getProgressIcon = (index) => {
+    if (index < checkOutStage){
+      return <CheckCircleRoundedIcon sx={{ color: "#596e2e" }} />;
+    } else if (index === checkOutStage) {
+      return <AdjustRoundedIcon sx={{ color: "#596e2e" }} />;
+    }
+    return <RadioButtonUncheckedRoundedIcon sx={{ color: "#596e2e" }} />;
+  };
+
+  // in the above function we are mapping steps array and for each index we are checking whether the
+  // checkoutStage is equal to it more than it or less than it and based on that we are returning an icon
 
   //manage checkoutstage
 
@@ -81,31 +97,23 @@ const Cart = () => {
   return (
     <CartPageContainer>
 
-      <CheckoutProgressDiv>
-
-        <CheckoutProgressStatus>
-          <CheckCircleRoundedIcon sx={{ color: "#596e2e" }} />
-          <CheckoutProgressText>Billing</CheckoutProgressText>
-        </CheckoutProgressStatus>
-
-        <ProgressBar />
-
-        <CheckoutProgressStatus>
-          <RadioButtonUncheckedRoundedIcon sx={{ color: "#596e2e" }} />
-          <CheckoutProgressText>Address</CheckoutProgressText>
-        </CheckoutProgressStatus>
-
-        <ProgressBar />
-
-        <CheckoutProgressStatus>
-          <RadioButtonUncheckedRoundedIcon sx={{ color: "#596e2e" }} />
-          <CheckoutProgressText>Payment</CheckoutProgressText>
-        </CheckoutProgressStatus>
-
-      </CheckoutProgressDiv>
+      {
+        cartItems.length > 0 &&
+        <CheckoutProgressDiv>
+          {steps.map((step, index) => (
+            <>
+              <CheckoutProgressStatus key={step.key}>
+                {getProgressIcon(index)}
+                <CheckoutProgressText>{step.key}</CheckoutProgressText>
+              </CheckoutProgressStatus>
+              {index < steps.length - 1 && <ProgressBar />}
+            </>
+        ))}
+        </CheckoutProgressDiv>
+      }
 
       <CheckoutContainer>
-        {steps[checkOutStage].component}
+        {cartItems.length > 0 && steps[checkOutStage].component}
         <BillingComponent checkOutStage={checkOutStage} totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice} handleCheckoutStage={handleCheckoutStage} />
       </CheckoutContainer>
 
