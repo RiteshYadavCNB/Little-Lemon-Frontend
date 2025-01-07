@@ -65,7 +65,7 @@ return (
 
             <dl>
                 <dt>Total Amount</dt>
-                <CheckoutButton onClick={() => handleCheckoutStage()}>{`Place Order ₹ ${discountedPrice}`}</CheckoutButton>
+                <CheckoutButton onClick={() => handleCheckoutStage()}>{`Continue ₹ ${discountedPrice}`}</CheckoutButton>
             </dl>
 
             </BillBreakUp>

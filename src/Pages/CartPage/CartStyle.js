@@ -512,9 +512,11 @@ export const PaymentContainer = styled.div`
 
 export const PaymentMode = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     align-items: flex-start;
+    padding: 10px 20px;
+    gap: 10px;
     border: 2px solid #7e762980;
     border-radius: 12px;
     overflow: hidden;
@@ -525,18 +527,24 @@ export const PaymentMode = styled.div`
     }
 `;
 
-export const ModeSelection = styled.div`
+export const PaymentModeSelection = styled.div`
     display: flex;
-    flex-direction: column;
-    width: 200px;
+    flex-direction: row;
+    width: 100%;
     gap: 16px;
 
-    ul > li{
-        list-style: none;
+    ul{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
     }
 
-    li > div{
+    li{
+        list-style: none;
         display: flex;
+        flex-direction: row;
         width: 200px;
         height: 60px;
         align-items: center;
@@ -544,43 +552,16 @@ export const ModeSelection = styled.div`
         font-size: 15px;
         font-weight: 500;
         color: #4b4719;
-        background: #4b471910;
-        border-bottom: 1px solid #7e762980;
         cursor: pointer;
     }
 
-    li:last-child > div{
-        border-bottom: none;
-    }
-
-    li > div:focus{
-        background: #fefbdc;
-    }
 `;
 
-export const ModeDescription = styled.div`
-    display: flex;
-    width: 100%;
-`;
-
-export const PaymentModeSubSelection = styled.div`
-    display: flex;
-    width: 100%;
-    padding: 20px;
-    gap: 20px;
-
-    div{
-        display: flex;
-        align-items: center;
-        font-size: 15px;
-        font-weight: 600;
-        color: color: #4b4719;
-    }
-`;
 
 export const PaymentModeDescription = styled.div`
     display: flex;
     width: 100%;
+    padding: 20px;
 
     input{
         width: 100%;
