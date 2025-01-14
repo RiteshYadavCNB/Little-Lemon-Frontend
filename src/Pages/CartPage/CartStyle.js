@@ -586,3 +586,97 @@ export const PaymentModeDescription = styled.div`
         outline: 1px solid #7e7629;
     }
 `;
+
+
+// Confirmation Component
+
+export const ConfirmationContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    @media(max-width: 1080px){
+        width: 100%;
+        max-width: none;
+        margin-bottom: 40px;
+    }
+`;
+
+export const OrderStatus = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+    p{
+        font-Size: 18px;
+        font-weight: 600;
+    }
+
+    img{
+        width: 80px;
+        height: 80px;
+    }
+
+    div{
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .preparation{
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.25px;
+        padding: 8px 12px;
+        text-align: center;
+        color: #ffffff;
+        background-color: #756300;
+        border-radius: 6px;
+    }
+
+    .refresh{
+        width: max-content;
+        padding: 8px 8px;
+        color: #ffffff;
+        background-color: #756300;
+        border-radius: 6px;
+    }
+`;
+
+export const DeliveryPartner = styled.div`
+    display: flex;
+    width: 100%;
+    border: 1px solid #7e762980;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #4b4719;
+    gap: 8px;
+
+    div{
+        display: flex;
+        width: 40px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+        background: #7e762980;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    span:last-child{
+        font-weight: 500;
+    }
+
+    div{
+
+    }
+`;

@@ -17,9 +17,14 @@ import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
 
 
 
-export const BillingComponent = ({checkoutStage, totalDiscount, deliveryFee, discountedPrice, handleCheckoutStage}) => {
+export const BillingComponent = ({steps, checkOutStage, totalDiscount, deliveryFee, discountedPrice, handleCheckoutStage}) => {
 
 const { cartItems } = useCartItemContext();
+
+const handleCheckoutButton = () => {
+    handleCheckoutStage();
+    console.log(steps[checkOutStage].key);
+}
 
 return (
         <>
@@ -27,7 +32,7 @@ return (
 
         <BillingContainer>
 
-            {checkoutStage === 0 && <CouponDiv>
+            {checkOutStage === 0 && <CouponDiv>
             <div>
                 <LocalOfferRoundedIcon sx={{fontSize: '20px', color: '#2b380e'}} />
                 <h2>Apply Coupon Code</h2>
@@ -65,7 +70,7 @@ return (
 
             <dl>
                 <dt>Total Amount</dt>
-                <CheckoutButton onClick={() => handleCheckoutStage()}>{`Continue ₹ ${discountedPrice}`}</CheckoutButton>
+                {steps[checkOutStage]?.key === "confirmation" ? <dt>{discountedPrice}</dt> : <CheckoutButton onClick={() => handleCheckoutButton()}>{`Continue ₹ ${discountedPrice}`}</CheckoutButton>}
             </dl>
 
             </BillBreakUp>

@@ -18,6 +18,7 @@ import { BillingComponent }  from "./BillingComponent";
 import { CartItemsComponent } from "./CartItemsContainer";
 import { AddressComponent } from "./AddressComponent";
 import { PaymentComponent } from "./PaymentComponent";
+import { OrderConfirmation } from "./ConfirmationComponent";
 
 
 const Cart = () => {
@@ -35,7 +36,8 @@ const Cart = () => {
   const steps = [
     { key: "Cart", component: <CartItemsComponent/>},
     { key: "Address", component: <AddressComponent/>},
-    { key: "Payment", component: <PaymentComponent/>}
+    { key: "Payment", component: <PaymentComponent/>},
+    { key: "confirmation", component: <OrderConfirmation/>}
   ];
 
   // get progress icon
@@ -98,15 +100,16 @@ const Cart = () => {
     <CartPageContainer>
 
       {
-        cartItems.length > 0 &&
+        cartItems.length > 0 && checkOutStage < 3 &&
         <CheckoutProgressDiv>
           {steps.map((step, index) => (
             <>
+              {index < steps.length - 1 &&
               <CheckoutProgressStatus key={step.key}>
                 {getProgressIcon(index)}
                 <CheckoutProgressText>{step.key}</CheckoutProgressText>
-              </CheckoutProgressStatus>
-              {index < steps.length - 1 && <ProgressBar />}
+              </CheckoutProgressStatus>}
+              {index < steps.length - 2 && <ProgressBar />}
             </>
         ))}
         </CheckoutProgressDiv>
@@ -114,7 +117,7 @@ const Cart = () => {
 
       <CheckoutContainer>
         {cartItems.length > 0 && steps[checkOutStage].component}
-        <BillingComponent checkOutStage={checkOutStage} totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice} handleCheckoutStage={handleCheckoutStage} />
+        <BillingComponent steps={steps} checkOutStage={checkOutStage} totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice} handleCheckoutStage={handleCheckoutStage} />
       </CheckoutContainer>
 
 
