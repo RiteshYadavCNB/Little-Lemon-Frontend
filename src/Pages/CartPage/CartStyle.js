@@ -593,14 +593,15 @@ export const PaymentModeDescription = styled.div`
 export const ConfirmationContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 500px;
-    gap: 20px;
+    width: 600px;
+    gap: 30px;
+    margin-bottom: 10px;
     align-items: center;
     justify-content: center;
 
     @media(max-width: 1080px){
         width: 100%;
-        max-width: none;
+        max-width: 800px;
         margin-bottom: 40px;
     }
 `;
@@ -674,9 +675,5 @@ export const DeliveryPartner = styled.div`
 
     span:last-child{
         font-weight: 500;
-    }
-
-    div{
-
     }
 `;

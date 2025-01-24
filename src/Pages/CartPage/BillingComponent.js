@@ -14,6 +14,7 @@ import {
 
 import { useCartItemContext } from "src/Context/CartItemsContext";
 import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
+import { OrderConfirmation } from "./ConfirmationComponent";
 
 
 
@@ -31,6 +32,8 @@ return (
         { cartItems.length > 0 ?
 
         <BillingContainer>
+
+            {checkOutStage === 2 && <OrderConfirmation/>}
 
             {checkOutStage === 0 && <CouponDiv>
             <div>

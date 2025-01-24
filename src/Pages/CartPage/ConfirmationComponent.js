@@ -5,7 +5,7 @@ import Person2RoundedIcon from '@mui/icons-material/Person2Rounded';
 export const  OrderConfirmation = () => {
     return(
         <ConfirmationContainer>
-            
+
             <OrderStatus>
                 <img src="./confirmation.png" alt="confirmation"/>
                 <p>Preparing Your Order</p>

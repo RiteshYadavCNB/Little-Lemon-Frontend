@@ -180,7 +180,6 @@ export const ProductCard = ({ product }) => {
     const handleRemove = () => updateCart(product, quantity - 1);
 
 
-
     return(
         <ProductCardContainer>
             <ProductInfo>
@@ -199,7 +198,7 @@ export const ProductCard = ({ product }) => {
             <ProductImgContainer>
                 <ProductImg src={image} alt="product-image"/>
 
-                { availability ? 
+                { availability ?
                 <AddOrder>
                     { quantity > 0 ?
                         <>
