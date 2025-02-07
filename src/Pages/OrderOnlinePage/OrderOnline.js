@@ -1,29 +1,48 @@
 import { ProductCard } from "../../components/UtilityComponents/Cards/ProductCard";
 import { OrderOnlinePage, ProductContainer, ProductDivider } from "./OrderOnlineStyle";
-import orderDishList from "../../data/orderDishList";
-
-
+import { useEffect, useState } from "react";
 
 
 const OrderOnline = () => {
 
-    return(
-        <OrderOnlinePage>
+const [products, setProducts] = useState([]);
 
-            <ProductContainer>
-                {orderDishList.map(product => {
-                    return (
-                        <>  <ProductCard key={product.id}
-                                product={product}
-                            />
-                            <ProductDivider/>
-                        </>
-                    );
-                })}
-            </ProductContainer>
+useEffect(() => {
+    async function getProducts() {
+        try{
+            const response = await fetch("https://little-lemon-backend-3y4f.onrender.com/api/products");
 
-        </OrderOnlinePage>
-    );
+            if(!response.ok){
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setProducts(data);
+        } catch (error) {
+            console.error("Error fetching products: ", error);
+        }
+    };
+    getProducts();
+},[]);
+
+
+return(
+    <OrderOnlinePage>
+
+        <ProductContainer>
+            {products.map(product => {
+                return (
+                    <>  <ProductCard key={product.id}
+                            product={product}
+                        />
+                        <ProductDivider/>
+                    </>
+                );
+            })}
+        </ProductContainer>
+
+    </OrderOnlinePage>
+);
 };
 
 export default OrderOnline;

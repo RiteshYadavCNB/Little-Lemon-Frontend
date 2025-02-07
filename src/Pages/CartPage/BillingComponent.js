@@ -33,7 +33,7 @@ return (
 
         <BillingContainer>
 
-            {checkOutStage === 2 && <OrderConfirmation/>}
+            {checkOutStage >2 && <OrderConfirmation/>}
 
             {checkOutStage === 0 && <CouponDiv>
             <div>
@@ -73,7 +73,9 @@ return (
 
             <dl>
                 <dt>Total Amount</dt>
-                {steps[checkOutStage]?.key === "confirmation" ? <dt>{discountedPrice}</dt> : <CheckoutButton onClick={() => handleCheckoutButton()}>{`Continue ₹ ${discountedPrice}`}</CheckoutButton>}
+                { checkOutStage >2 ?
+                    <dt style={{display: 'flex', flexDirection: 'row', gap: '16px'}}><p style={{fontSize:'12px', letterSpacing: '0.5px', padding: '4px 12px', color: '#ffffff', backgroundColor: 'green', borderRadius: '30px'}}>Paid</p>₹ {discountedPrice}</dt> :
+                    <CheckoutButton onClick={() => handleCheckoutButton()}>{`Continue ₹ ${discountedPrice}`}</CheckoutButton>}
             </dl>
 
             </BillBreakUp>

@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore/lite";
 import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -30,14 +30,6 @@ const db = getFirestore(app);
 
 // Initialize Realtime Database
 const rtdb = getDatabase(app);
-
-//App Check
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6Lfcr5MqAAAAAA5aitzyp4VuS1EKa7x5jTvM6gKa'),
-
-  isTokenAutoRefreshEnabled: true
-});
-
 
 
 export {db, rtdb, auth};

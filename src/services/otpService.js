@@ -2,9 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import countryDialCodes from "../data/countryDialCodes.json";
 
-//import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-//import { auth } from "../firebaseConfig";
-
 const OTPContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -138,8 +135,6 @@ const MobileOTP = ({actionCall}) => {
 
 
   const handleOTPInput = (e, key) => {
-    //let updateOtpValue = inputOTP;
-    //updateOtpValue[key] = e;
     const updatedOTP = [...inputOTP];
     updatedOTP[key] = e;
     setInputOTP(updatedOTP);
@@ -188,70 +183,6 @@ const MobileOTP = ({actionCall}) => {
     };
   };
 
-
-  //firebase SMS OTP authentication
-
-
-  // const setupRecaptcha = () => {
-  //   window.recaptchaVerifier = new RecaptchaVerifier(
-  //     "recaptcha-container",
-  //     {
-  //       size: 'invisible',
-  //       callback: (response) => {
-  //         console.log("reCAPTCHA solved!");
-  //       },
-  //     },
-  //     auth
-  //   );
-  // };
-
-
-  //send firebase OTP
-/*
-  const sendOTP = () => {
-    const phoneNumber = "+919452730213";
-    console.log(phoneNumber);
-
-    // setupRecaptcha();
-    auth.settings.appVerificationDisabledForTesting = true;
-    const appVerifier = window.recaptchaVerifier;
-
-    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-      .then((confirmationResult) => {
-        const verificationCode = "123456";
-        setIsOtpSent(true);
-        return confirmationResult.confirm(verificationCode);
-        //setConfirmationResult(confirmationResult);
-        //console.log("OTP sent successfully!")
-      })
-      .catch((error) => {
-        console.log("OTP not sent: ", error);
-      });
-    };
-*/
-
-  //verify firebase OTP
-/*
-  const verifyOTP = () => {
-    const otp = inputOTP.join("");
-
-    if (!otp || !confirmationResult){
-      alert('Enter OTP');
-      return;
-    }
-
-    confirmationResult
-      .confirm(otp)
-      .then(() => {
-        console.log("OTP verified Successfully");
-        alert("Phone number verified");
-      })
-      .catch((error) => {
-        console.log("Error verifying OTP: ", error);
-        alert("Invalid OTP!");
-      });
-  };
-*/
 
   // Temp OTP Verification
 

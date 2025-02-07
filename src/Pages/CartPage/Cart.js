@@ -55,7 +55,7 @@ const Cart = () => {
   //manage checkoutstage
 
   const handleCheckoutStage = () => {
-    if (checkOutStage < steps.length -1) {
+    if (checkOutStage < steps.length) {
       setCheckOutStage((prev) => prev + 1);
     }
   }
@@ -102,7 +102,7 @@ const Cart = () => {
         <CheckoutProgressDiv>
           {steps.map((step, index) => (
             <>
-              {index <= steps.length &&
+              {index < steps.length &&
               <CheckoutProgressStatus key={step.key}>
                 {getProgressIcon(index)}
                 <CheckoutProgressText>{step.key}</CheckoutProgressText>
@@ -114,7 +114,7 @@ const Cart = () => {
       }
 
       <CheckoutContainer>
-        {checkOutStage < 2 && cartItems.length > 0 && steps[checkOutStage].component}
+        {checkOutStage <= 2 && cartItems.length > 0 && steps[checkOutStage].component}
         <BillingComponent steps={steps} checkOutStage={checkOutStage} totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice} handleCheckoutStage={handleCheckoutStage} />
       </CheckoutContainer>
 

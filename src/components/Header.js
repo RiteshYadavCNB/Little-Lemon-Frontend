@@ -70,7 +70,7 @@ const Hamburger = styled.button`
 
 const HamburgerMenu = styled.div`
     position: absolute;
-    display: ${(props) => props.burgermenu ? 'flex' : 'none'};
+    display: flex;
     top: 60px;
     right: 0px;
     padding: 20px;
@@ -195,13 +195,13 @@ const Header = () => {
                 </Hamburger>
             </MediaNavContainer>
 
-            <HamburgerMenu burgermenu={hamburgerMenuState}>
+            {hamburgerMenuState && <HamburgerMenu>
                 <NavList>
                     <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
                     <Link style={LinkStyle} to='/order-online'><NavLink>Order Online</NavLink></Link>
                     <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
                 </NavList>
-            </HamburgerMenu>
+            </HamburgerMenu>}
 
         </HeaderContainer>
     );
