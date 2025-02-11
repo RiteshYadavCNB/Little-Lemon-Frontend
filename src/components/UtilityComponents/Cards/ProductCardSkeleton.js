@@ -4,6 +4,7 @@ const SkeletonContainer = styled.div`
     display: flex;
     width: 800px;
     height: 150px;
+    margin: 20px 0px;
 `;
 
 const DummyInfoContainer = styled.div`

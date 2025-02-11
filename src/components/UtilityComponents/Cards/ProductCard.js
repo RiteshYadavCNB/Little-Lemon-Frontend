@@ -169,10 +169,10 @@ const OrderQuantity = styled.div`
 export const ProductCard = ({ product }) => {
 
 
-    const {id, mealType, category, name, price, description, image, availability} = product;
+    const {_id, mealType, category, name, price, description, image, availability} = product;
 
     const { cartItems, updateCart } = useCartItemContext();
-    const existingProduct = cartItems.find((item) => item.id === id);
+    const existingProduct = cartItems.find((item) => item._id === _id);
     const quantity = existingProduct?.quantity || 0;
 
 
@@ -181,7 +181,7 @@ export const ProductCard = ({ product }) => {
 
 
     return(
-        <ProductCardContainer>
+        <ProductCardContainer key={product._id}>
             <ProductInfo>
                 {mealType === "veg" && <ProductType src="./veg.png" alt="veg"/>}
                 {mealType === "non-veg" && <ProductType src="./non-veg.png" alt="non-veg"/>}

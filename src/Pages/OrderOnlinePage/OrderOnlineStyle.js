@@ -28,6 +28,8 @@ export const ProductContainer = styled.div`
     }
 `;
 
+
+
 export const ProductDivider = styled.div`
     width: 100%;
     height: 1px;

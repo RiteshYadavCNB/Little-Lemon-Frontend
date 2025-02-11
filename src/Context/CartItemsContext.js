@@ -9,7 +9,7 @@ export const CartItemProvider = ({children}) => {
     const updateCart = (product, quantity) => {
         setCartItems((prevCartItems) => {
             //checking if the item already exists
-            const existingItemIndex = prevCartItems.findIndex(cartItem => cartItem.id === product.id);
+            const existingItemIndex = prevCartItems.findIndex(cartItem => cartItem._id === product._id);
 
             if (existingItemIndex !== -1){
                 //if item exists, update its quantity or remove if quantity is 0
