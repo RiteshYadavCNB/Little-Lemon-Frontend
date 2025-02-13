@@ -8,6 +8,7 @@ const ProductCardContainer = styled.div`
     flex-direction: row;
     flex-wrap: no-wrap;
     width: 100%;
+    height: max-content;
     gap: 30px;
     margin-bottom: 20px;
 
@@ -181,7 +182,7 @@ export const ProductCard = ({ product }) => {
 
 
     return(
-        <ProductCardContainer key={product._id}>
+        <ProductCardContainer>
             <ProductInfo>
                 {mealType === "veg" && <ProductType src="./veg.png" alt="veg"/>}
                 {mealType === "non-veg" && <ProductType src="./non-veg.png" alt="non-veg"/>}

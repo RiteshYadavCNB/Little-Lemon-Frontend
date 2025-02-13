@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const SkeletonContainer = styled.div`
     display: flex;
-    width: 800px;
+    width: 100%;
     height: 150px;
     margin: 20px 0px;
 `;
@@ -56,7 +56,7 @@ const DummyAvailability = styled.div`
 `;
 
 const DummyDescription = styled.div`
-    width: 600px;
+    width: 94%;
     height: 30px;
     background: #322f1020;
     border-radius: 4px;

@@ -1,7 +1,8 @@
 import { ProductCard } from "../../components/UtilityComponents/Cards/ProductCard";
-import { OrderOnlinePage, ProductContainer, ProductDivider } from "./OrderOnlineStyle";
-import { useEffect, useState, useRef } from "react";
+import { MainBody, OrderOnlinePage, PageTitle, ProductContainer, ProductDivider, ProductFilters, ProductSkeletonContainer, ProductView } from "./OrderOnlineStyle";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { ProductCardSkeleton } from "../../components/UtilityComponents/Cards/ProductCardSkeleton";
+import MultiRangeSlider from "src/components/UtilityComponents/SliderInput/MultiRangeSlider";
 
 const OrderOnline = () => {
 
@@ -12,6 +13,15 @@ const [apiCall, setApiCall] = useState(1);
 // track if there are more products in the db
 const [hasMore, setHasMore] = useState(true);
 const observerRef = useRef(null);
+// price range
+const [minPrice, setMinPrice] = useState(200);
+const [maxPrice, setMaxPrice] = useState(800);
+// filtered products
+const [filterProducts, setFilterProducts] = useState([])
+
+// GET products URL
+const getProductsUrl = `${process.env.REACT_APP_GET_PRODUCTS_BASE_URL}?page=${page}&limit=5`;
+console.log(getProductsUrl);
 
 
 // fetching products from backend
@@ -24,7 +34,7 @@ useEffect(() => {
         if(!hasMore) return;
 
         try{
-            const response = await fetch(`https://little-lemon-backend-3y4f.onrender.com/api/products?page=${page}&limit=5`);
+            const response = await fetch(getProductsUrl);
 
             if(!response.ok){
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -77,35 +87,130 @@ useEffect(() => {
 }, [products.length]);
 
 // issue -- observer is diconnected as soon as hasMore changes
-// if hasMore temporarily becomes false and new data arrives the observer never reattaches.
+// if hasMore temporarily becomes false and new data arrives the observer never reattaches
+
+// filters
+
+// handle Price Range
+const handleMinChange = (e) => {
+    const value = Math.min(Number(e.target.value), maxPrice - 100);
+    setMinPrice(value);
+};
+
+const handleMaxChange = (e) => {
+    const value = Math.max(Number(e.target.value), minPrice + 100);
+    setMaxPrice(value);
+};
+
+// filter methods
 
 
 return(
     <OrderOnlinePage>
 
-        {products.length === 0 && hasMore &&
-        <>
-            <ProductCardSkeleton/>
-            <ProductCardSkeleton/>
-            <ProductCardSkeleton/>
-            <ProductCardSkeleton/>
-            <ProductCardSkeleton/>
-        </>
-        }
+        <MainBody>
 
-        <ProductContainer>
-            {products.map(product => {
-                return (
-                    <>  <ProductCard
-                            product={product}
-                        />
-                        <ProductDivider/>
-                    </>
-                );
-            })}
-        </ProductContainer>
+            <ProductFilters>
+                <div className="filter">Filters</div>
 
-        { products.length > 0 && hasMore && <div ref={observerRef} style={{height: "30px"}}/>}
+                <div className="general-div">
+                    <input className="search-box" type="textfield" maxLength={30} placeholder="search by name"/>
+                </div>
+
+                <div className="general-div">
+                    <p>Price Range</p>
+                    <MultiRangeSlider
+                        min={200}
+                        max={800}
+                        step={100}
+                        minVal={minPrice}
+                        maxVal={maxPrice}
+                        handleMaxVal={handleMaxChange}
+                        handleMinVal={handleMinChange}
+                    />
+                </div>
+
+                <div className="general-div">
+                    <p>Meal Type</p>
+                    <ul>
+                        <li>
+                            <input type="checkbox"/>
+                            <span>veg</span>
+                        </li>
+                        <li>
+                            <input type="checkbox"/>
+                            <span>non-veg</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="general-div">
+                    <p>Meal Course</p>
+                    <ul>
+                        <li>
+                            <input type="checkbox"/>
+                            <span>Appetizers</span>
+                        </li>
+
+                        <li>
+                            <input type="checkbox"/>
+                            <span>Salads</span>
+                        </li>
+
+                        <li>
+                            <input type="checkbox"/>
+                            <span>Sides</span>
+                        </li>
+
+                        <li>
+                            <input type="checkbox"/>
+                            <span>Soups</span>
+                        </li>
+
+                        <li>
+                            <input type="checkbox"/>
+                            <span>Main Course</span>
+                        </li>
+
+                        <li>
+                            <input type="checkbox"/>
+                            <span>Desserts</span>
+                        </li>
+                    </ul>
+                </div>
+            </ProductFilters>
+
+            <ProductView>
+                <PageTitle>Order Now</PageTitle>
+
+                {products.length === 0 && hasMore &&
+                 <ProductSkeletonContainer key={"product-card-skeleton"}>
+                    <ProductCardSkeleton/>
+                    <ProductCardSkeleton/>
+                    <ProductCardSkeleton/>
+                    <ProductCardSkeleton/>
+                </ProductSkeletonContainer>}
+
+                <ProductContainer>
+
+                {products.length > 0 &&
+                    products.map(product => (
+                        <>
+                            <ProductCard
+                                product={product}
+                            />
+                            <ProductDivider/>
+                        </>
+                    ))
+                }
+                </ProductContainer>
+
+                { products.length > 0 && hasMore && <div ref={observerRef} style={{height: "30px"}}/>}
+
+            </ProductView>
+
+
+        </MainBody>
 
     </OrderOnlinePage>
 );
