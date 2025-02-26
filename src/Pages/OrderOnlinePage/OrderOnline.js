@@ -103,6 +103,8 @@ const handleMaxChange = (e) => {
 };
 
 // filter methods
+// state obj to store filter values, list of parameters for each category
+// function to itirate over the products array to match the keys from the filter object on button click
 
 
 return(
