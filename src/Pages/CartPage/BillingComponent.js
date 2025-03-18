@@ -9,7 +9,7 @@ import {
     BillBreakUp,
     EmptyCartContainer,
     LinkStyle,
-    CheckoutButton,
+    CheckoutButton
   } from "./CartStyle";
 
 import { useCartItemContext } from "src/Context/CartItemsContext";
@@ -18,18 +18,17 @@ import { OrderConfirmation } from "./ConfirmationComponent";
 
 
 
-export const BillingComponent = ({steps, checkOutStage, totalDiscount, deliveryFee, discountedPrice, handleCheckoutStage}) => {
+export const BillingComponent = ({steps, orderStatus, checkOutStage, totalDiscount, deliveryFee, discountedPrice, handleCheckoutStage}) => {
 
 const { cartItems } = useCartItemContext();
 
 const handleCheckoutButton = () => {
     handleCheckoutStage();
-    console.log(steps[checkOutStage].key);
 }
 
 return (
         <>
-        { cartItems.length > 0 ?
+        { cartItems.length > 0 || orderStatus ?
 
         <BillingContainer>
 
@@ -82,7 +81,7 @@ return (
 
         </BillingContainer> :
 
-        <EmptyCartContainer>
+        !orderStatus && <EmptyCartContainer>
             <img src="./emptyCart.gif" alt="emptycart"/>
             <p>Oops! Your Cart is Empty</p>
             <Link style={LinkStyle} to='/order-online'>Let's Add to Cart</Link>

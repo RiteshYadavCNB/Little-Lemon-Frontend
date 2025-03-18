@@ -22,12 +22,13 @@ import { PaymentComponent } from "./PaymentComponent";
 
 const Cart = () => {
 
-  const { cartItems } = useCartItemContext();
+  const { cartItems, clearCart } = useCartItemContext();
   const [ totalPrice, setTotalPrice ] = useState(0);
   const [ totalDiscount, setTotalDiscount ] = useState(0);
   const [ discountedPrice, setDiscountedPrice ] = useState(0);
   const [ deliveryFee, setDeliveryFee ] = useState(0);
   const [ checkOutStage, setCheckOutStage ] = useState(0);
+  const [ orderStatus, setOrderStatus ] = useState(false);
 
 
   //Checkout Stage array
@@ -57,6 +58,10 @@ const Cart = () => {
   const handleCheckoutStage = () => {
     if (checkOutStage < steps.length) {
       setCheckOutStage((prev) => prev + 1);
+      if (checkOutStage === 2) {
+        clearCart();
+        setOrderStatus(true);
+      }
     }
   }
 
@@ -115,7 +120,7 @@ const Cart = () => {
 
       <CheckoutContainer>
         {checkOutStage <= 2 && cartItems.length > 0 && steps[checkOutStage].component}
-        <BillingComponent steps={steps} checkOutStage={checkOutStage} totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice} handleCheckoutStage={handleCheckoutStage} />
+        <BillingComponent orderStatus={orderStatus} steps={steps} checkOutStage={checkOutStage} totalDiscount={totalDiscount} deliveryFee={deliveryFee} discountedPrice={discountedPrice} handleCheckoutStage={handleCheckoutStage} />
       </CheckoutContainer>
 
 

@@ -28,13 +28,20 @@ export const CartItemProvider = ({children}) => {
         });
     };
 
+    //clear cart
+    const clearCart = () => {
+        setCartItems([]);
+    };
+
 
     return (
-        <CartItemContext.Provider value={{cartItems, updateCart}}>
+        <CartItemContext.Provider value={{cartItems, updateCart, clearCart}}>
             {children}
         </CartItemContext.Provider>
     )
 };
+
+// custom hook for cartItemContext
 
 export const useCartItemContext = () => {
     return useContext(CartItemContext);

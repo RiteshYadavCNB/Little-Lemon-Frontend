@@ -1,6 +1,6 @@
 import { ProductCard } from "../../components/UtilityComponents/Cards/ProductCard";
 import { MainBody, OrderOnlinePage, PageTitle, ProductContainer, ProductDivider, ProductFilters, ProductSkeletonContainer, ProductView } from "./OrderOnlineStyle";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ProductCardSkeleton } from "../../components/UtilityComponents/Cards/ProductCardSkeleton";
 import MultiRangeSlider from "src/components/UtilityComponents/SliderInput/MultiRangeSlider";
 
@@ -17,12 +17,10 @@ const observerRef = useRef(null);
 const [minPrice, setMinPrice] = useState(200);
 const [maxPrice, setMaxPrice] = useState(800);
 // filtered products
-const [filterProducts, setFilterProducts] = useState([])
+const [filterProducts, setFilterProducts] = useState([]);
 
 // GET products URL
 const getProductsUrl = `${process.env.REACT_APP_GET_PRODUCTS_BASE_URL}?page=${page}&limit=5`;
-console.log(getProductsUrl);
-
 
 // fetching products from backend
 useEffect(() => {
