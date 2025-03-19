@@ -4,6 +4,7 @@ export const ContactMain = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     margin-top: 60px;
     align-items: center;
     background: #fefbdc;
