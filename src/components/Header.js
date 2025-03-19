@@ -90,15 +90,6 @@ const NavList = styled.ul`
     }
 `;
 
-const NavLink = styled.li`
-    display: flex;
-    width: auto;
-    text-decoration: none;
-    color: #756300;
-    font-size: 16px;
-    font-weight: 600;
-`;
-
 const LogoText = styled.h1`
     font-family: "Monsieur La Doulaise", cursive;
     font-size: 24px;
@@ -133,6 +124,9 @@ const CartValue = styled.p`
 
 const LinkStyle = {
     textDecoration: "none",
+    color: "#756300",
+    fontSize: "16px",
+    fontWeight: "600"
 };
 
 const MediaNavContainer = styled.div`
@@ -176,9 +170,9 @@ const Header = () => {
                         {cartItems.length !== 0 && <CartValue>{cartItems.length}</CartValue>}
                         </CartContainer>
                     </Link>
-                    <Link style={LinkStyle} to='/order-online'><NavLink>Order Online</NavLink></Link>
-                    <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
-                    <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
+                    <Link style={LinkStyle} to='/order-online'>Order Online</Link>
+                    <Link style={LinkStyle} to='/table-booking'>Book Table</Link>
+                    <Link style={LinkStyle} to='/contact'>Contact</Link>
                 </NavList>
             </NavContainer>
 
@@ -197,9 +191,9 @@ const Header = () => {
 
             {hamburgerMenuState && <HamburgerMenu>
                 <NavList>
-                    <Link style={LinkStyle} to='/table-booking'><NavLink>Book Table</NavLink></Link>
-                    <Link style={LinkStyle} to='/order-online'><NavLink>Order Online</NavLink></Link>
-                    <Link style={LinkStyle} to='/'><NavLink>Contact</NavLink></Link>
+                    <Link style={LinkStyle} to='/table-booking'>Book Table</Link>
+                    <Link style={LinkStyle} to='/order-online'>Order Online</Link>
+                    <Link style={LinkStyle} to='/contact'>Contact</Link>
                 </NavList>
             </HamburgerMenu>}
 

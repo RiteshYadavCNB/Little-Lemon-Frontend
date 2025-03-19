@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/L
 import OrderOnline from './Pages/OrderOnlinePage/OrderOnline';
 import { CartItemProvider } from './Context/CartItemsContext';
 import  Cart from './Pages/CartPage/Cart';
+import Contact from './Pages/ContactPage/Contact';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/cart' element={<Cart/>} />
           <Route path='/table-booking' element={<Booking />}/>
           <Route path='/order-online' element={<OrderOnline />}/>
+          <Route path='/contact' element={<Contact/>} />
         </Routes>
       </LocalizationProvider>
 

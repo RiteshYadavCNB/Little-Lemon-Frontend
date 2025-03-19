@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DishCarousel from "../../components/DishCatalogue/DishCarousel";
 import { ContactCard } from "../../components/UtilityComponents/Cards/ContactCard";
 import { DisplayCard } from "../../components/UtilityComponents/Cards/DisplayCards";
@@ -18,10 +19,20 @@ const Homepage = () => {
                 </div>
 
                 <DisplayCardContainer>
-                    <DisplayCard title="Dine Out" subHead="Experience Dining" value="20%" imgSource="./DineOut.png" />
-                    <DisplayCard title="Order Online" subHead="Lemon Cravings" value="40%" imgSource="./Order.png" />
-                    <DisplayCard title="Gift a Lemon" subHead="Taste, that Joys!" last="true" imgSource="./Gift.png" value="30%"
-                        customStyle={{width: '180px', height: '180px', right: '20px'}} />
+
+                    <Link style={{textDecoration: "none"}} to='/table-booking'>
+                        <DisplayCard title="Dine Out" subHead="Experience Dining" value="20%" imgSource="./DineOut.png" />
+                    </Link>
+
+                    <Link style={{textDecoration: "none"}} to='/order-online'>
+                        <DisplayCard title="Order Online" subHead="Lemon Cravings" value="40%" imgSource="./Order.png" />
+                    </Link>
+
+                    <Link style={{textDecoration: "none"}} to='/order-online'>
+                        <DisplayCard title="Gift a Lemon" subHead="Taste, that Joys!" last="true" imgSource="./Gift.png" value="30%" 
+                            customStyle={{width: '180px', height: '180px', right: '20px'}} />
+                    </Link>
+
                 </DisplayCardContainer>
 
             </HeroSection>
