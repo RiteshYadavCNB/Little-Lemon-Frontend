@@ -26,7 +26,8 @@ jobs:
         run: npm list --depth=0  # Prints installed packages for debugging
 
       - name: Build the project
-        run: CI = False npm run build # Fix: Set CI=false to prevent treating warnings as errors
+        run: CI=false
+             npm run build # Fix: Set CI=false to prevent treating warnings as errors
 
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
