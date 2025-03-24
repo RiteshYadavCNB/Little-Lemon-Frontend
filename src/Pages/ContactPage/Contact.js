@@ -1,19 +1,18 @@
 import { ContactMain, ProfileContainer, ProfileDescription, ProfileImg } from './ContactStyle';
-import { Link } from 'react-router-dom';
 
 const Contact = () => {
   return (
     <ContactMain>
 
         <ProfileContainer>
-            <ProfileImg src='./profile-image.png'/>
+            <ProfileImg src='./profile-image.png' alt='profile-image' loading='lazy'/>
             <ProfileDescription>
                 <p className='profile-name'>Ritesh Yadav</p>
 
                 <div className='profile-description'>
                     <p>Bridging Design & Development | Crafting Seamless Digital Experiences<br/>
                     Engineer. Designer. Problem Solver</p>
-                    
+
                     <p>riteshyadavknp1999@gmail.com | +91 9452730213</p>
                 </div>
 

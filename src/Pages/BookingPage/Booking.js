@@ -5,6 +5,7 @@ import  createBooking  from '../../firebaseService';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { Snackbar } from "@mui/material";
 
 import InputField from "../../components/UtilityComponents/InputField";
 import DropDownSelection from "../../components/UtilityComponents/DropDownSelection";
@@ -17,9 +18,9 @@ const Booking = () => {
 
     // state variables
 
-    const [isPopUpOpen, setIsPopUpOpen] = useState(false)
-    const [availableTimeSlots, setAvailableTimeSlots] = useState({})
-    const [bookingStatus, setBookingStatus] = useState(false)
+    const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+    const [availableTimeSlots, setAvailableTimeSlots] = useState({});
+    const [bookingStatus, setBookingStatus] = useState(false);
 
     /* state table reservatian form */
 
@@ -57,14 +58,9 @@ const Booking = () => {
     /* handle form submission */
 
     const handleSubmit = (e) => {
-        console.log({formData});
-
         // call createBooking function with form data from the OTP popup page
-
-        createBooking(formData);
-        console.log("called createBooking");
+        createBooking(formData, setBookingStatus);
         closePopUp();
-        setBookingStatus(true);
         setFormData({
             userName: "",
             bookingDate: "",
@@ -78,26 +74,26 @@ const Booking = () => {
     /*handle available time slots*/
 
      const handleTimeSlots = (e) => {
-
         setFormData((formData) => ({...formData, timeSlot: e }))
+     }
 
 
-        // to update available time slots
-        //const updatedSlots = availableTimeSlots[formData.bookingDate].filter((slot) => slot !== e )
-        //console.log("updated slots: ", updatedSlots)
+    // to update available time slots
+    //const updatedSlots = availableTimeSlots[formData.bookingDate].filter((slot) => slot !== e )
+    //console.log("updated slots: ", updatedSlots)
 
-        //setAvailableTimeSlots(prev => ({...prev, [formData.bookingDate]:prev[formData.bookingDate].filter((slot)=> slot !== e)}))
-        //what we did here: setAvailableTimeSlots()is a function it will only take parameters so if we want to pass a computation here we need to
-        //write the arrow function --- in the arrow function we are passing the prev state as obj and inside the function we are spreading it
-        //after spreading the prev obj we are accessing the particular property in this case, date and than we are telling the fun that for
-        //this date property you need to reassign a new filtered array here ":prev[date]" to reassign and "prev[date].filter()" to tell what to assign
-        //in filter() method we are giving it an array as slot and then we are telling it that return all those value which are not equal to "e"
-        //"e" is the selected time slot
+    //setAvailableTimeSlots(prev => ({...prev, [formData.bookingDate]:prev[formData.bookingDate].filter((slot)=> slot !== e)}))
+    //what we did here: setAvailableTimeSlots()is a function it will only take parameters so if we want to pass a computation here we need to
+    //write the arrow function --- in the arrow function we are passing the prev state as obj and inside the function we are spreading it
+    //after spreading the prev obj we are accessing the particular property in this case, date and than we are telling the fun that for
+    //this date property you need to reassign a new filtered array here ":prev[date]" to reassign and "prev[date].filter()" to tell what to assign
+    //in filter() method we are giving it an array as slot and then we are telling it that return all those value which are not equal to "e"
+    //"e" is the selected time slot
 
-        //we are getting an issue here slotpicker was not showing the selected value because we are using the state to map the options so when we change
-        //the state the slotpicker component gets re-rendered and by default select element shows the first option instead of the selection we made
-        //how we cured this bug --- we are not updating the availabletimeslots state for now.
-    }
+    //we are getting an issue here slotpicker was not showing the selected value because we are using the state to map the options so when we change
+    //the state the slotpicker component gets re-rendered and by default select element shows the first option instead of the selection we made
+    //how we cured this bug --- we are not updating the availabletimeslots state for now.
+
 
 
     /*OTP pop up*/
@@ -124,7 +120,7 @@ const Booking = () => {
                     </BookingHeadingContainer>
             </BookingHead>
 
-            <BookingSectionContainer>
+            <BookingSectionContainer >
 
                 <BookingSection>
                         <InputField
@@ -139,6 +135,7 @@ const Booking = () => {
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     sx={MuiDatePickerStyles}
+                                    autoFocus={false}
                                     value={formData.bookingDate != null ? dayjs(formData.bookingDate) : null}
                                     label={"Pick Date"}
                                     format="MM-DD-YYYY"
@@ -184,15 +181,40 @@ const Booking = () => {
             </BookingSectionContainer>
 
 
-            {bookingStatus && console.log(formData) &&
+            {/*bookingStatus &&
             <div>
-                {/* <p>Reservation Confirmed</p>
+                <p>Reservation Confirmed</p>
                 <p>Name: {formData.userName}</p>
                 <p>Date: {formData.bookingDate ? dayjs(formData.bookingDate).format('ddd DD MMMM') : 'No date selected'}</p>
                 <p>Time: {formData.timeSlot ? formData.timeSlot : 'No time slots selected'}</p>
                 <p>Occasion: {formData.occasion}</p>
-                <p>Guests: {formData.guests}</p> */}
-            </div>}
+                <p>Guests: {formData.guests}</p>
+            </div>*/}
+
+            <Snackbar
+                    open={bookingStatus}
+                    anchorOrigin={{ horizontal: 'center', vertical: 'center' }}
+                    sx={{
+                        top: '120px !important',
+                        display: 'flex',
+                        alignContent: 'center',
+                        justifyContent: 'center',
+                        zIndex: 2
+                    }}
+                    ContentProps={{
+                        sx: {
+                            display: 'flex',
+                            alignContent: 'center',
+                            justifyContent: 'center',
+                            background: 'linear-gradient(#fbec52, #c9bd42)',
+                            color: '#191808',
+                            fontWeight: 500
+                        }
+                    }}
+                    message="Booking Confirmed"
+                    autoHideDuration={1000}
+                    onClose={()=>setBookingStatus(false)}
+            />
 
         </BookingPage>
     )

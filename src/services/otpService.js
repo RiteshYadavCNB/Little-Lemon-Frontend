@@ -189,14 +189,9 @@ const MobileOTP = ({actionCall}) => {
   const tempVerifyOTP = (inputOTP, actionCall) => {
     const sentOTP = "123456";
     const intOTP = inputOTP.join("");
-    console.log(sentOTP);
-    console.log(intOTP);
-    console.log('verification call');
     if (sentOTP === intOTP){
       setConfirmationResult(true);
-      console.log('OTP verified Successfully');
       if(actionCall){
-        console.log(actionCall);
         actionCall();
       }
     };
@@ -213,14 +208,11 @@ const MobileOTP = ({actionCall}) => {
     ){
       setOtpRequest(true);
       setIsOtpSent(true);
-      console.log('condtn 1 check', otpAddress);
       if (otpRequest && isOtpSent && !confirmationResult) {
         tempVerifyOTP(inputOTP, actionCall);
-        console.log('condtn 2 check');
       }
     } else {
       setOTPRequestError(true);
-      console.log('condtn 3 check');
     }
   };
 
@@ -246,6 +238,7 @@ const MobileOTP = ({actionCall}) => {
             placeholder="mobile number"/>
 
         </MobileNumberContainer>
+        <p>use mobile no: 9452730213</p>
 
         {phoneNumbererror && otpRequestError && <InputError>incorrect mobile number</InputError>}
 
@@ -253,7 +246,7 @@ const MobileOTP = ({actionCall}) => {
 
       <Label>Verify Mobile Number</Label>
 
-      {otpRequest && <OTPInputContainer>{mapOTPFields(inputOTP)}</OTPInputContainer>}
+      {otpRequest && <><OTPInputContainer>{mapOTPFields(inputOTP)}</OTPInputContainer> <p>use otp: 123456</p></>}
 
       {isOtpSent && confirmationResult === 'false' && otpRequestError === 'false' && <InputError>Wrong OTP</InputError>}
 
