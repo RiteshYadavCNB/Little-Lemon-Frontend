@@ -104,7 +104,7 @@ const ActionButton = styled.button`
 
     @media (max-width: 768px){
         font-size: 14px;
-        background: ${(props) => props.bgColor ? props.bgColor : 'none'};
+        background: ${(props) => props.background ? props.background : 'none'};
         border-radius: 8px;
     }
 `;
@@ -125,7 +125,7 @@ export const ContactCard = () => {
             </TextContainer>
             <Divider />
             <ActionContainer>
-                <ActionButton bgColor='#F5F5DC'><CallIcon sx={{width: '20px'}}/>Call</ActionButton>
+                <ActionButton background='#F5F5DC'><CallIcon sx={{width: '20px'}}/>Call</ActionButton>
                 <Divider width='2px' height='24px' />
                 <ActionButton><NearMeIcon sx={{width: '20px'}}/>Direction</ActionButton>
             </ActionContainer>

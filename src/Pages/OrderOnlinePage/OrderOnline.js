@@ -13,11 +13,26 @@ const [apiCall, setApiCall] = useState(1);
 // track if there are more products in the db
 const [hasMore, setHasMore] = useState(true);
 const observerRef = useRef(null);
+
+// filters
 // price range
-const [minPrice, setMinPrice] = useState(200);
+const [minPrice, setMinPrice] = useState(100);
 const [maxPrice, setMaxPrice] = useState(800);
-// filtered products
-const [filterProducts, setFilterProducts] = useState([]);
+// meal types
+const [mealTypes, setMealTypes] = useState([]);
+// meal category
+const [mealCategory, setMealCategory] = useState([]);
+
+const [filterProducts, setFilterProducts] = useState(products);
+
+useEffect(()=>{
+    setFilterProducts(products.filter((product)=>
+        product.price > minPrice &&
+        product.price < maxPrice &&
+        (mealTypes.length === 0 || mealTypes.includes(product.mealType)) &&
+        (mealCategory.length === 0 || mealCategory.includes(product.category))
+    ))
+},[minPrice, maxPrice, mealTypes, mealCategory, products]);
 
 // GET products URL
 const getProductsUrl = `${process.env.REACT_APP_GET_PRODUCTS_BASE_URL}?page=${page}&limit=5`;
@@ -120,7 +135,7 @@ return(
                 <div className="general-div">
                     <p>Price Range</p>
                     <MultiRangeSlider
-                        min={200}
+                        min={100}
                         max={800}
                         step={100}
                         minVal={minPrice}
@@ -132,13 +147,13 @@ return(
 
                 <div className="general-div">
                     <p>Meal Type</p>
-                    <ul>
+                    <ul onClick={(e)=>setMealTypes((prev)=> [...prev, e.target.value])}>
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="veg"/>
                             <span>veg</span>
                         </li>
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="non-veg"/>
                             <span>non-veg</span>
                         </li>
                     </ul>
@@ -146,34 +161,34 @@ return(
 
                 <div className="general-div">
                     <p>Meal Course</p>
-                    <ul>
+                    <ul onClick={(e)=>setMealCategory((prev)=> [...prev, e.target.value])}>
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="Appetizers" />
                             <span>Appetizers</span>
                         </li>
 
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="Salads" />
                             <span>Salads</span>
                         </li>
 
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="Sides" />
                             <span>Sides</span>
                         </li>
 
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="Soups" />
                             <span>Soups</span>
                         </li>
 
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="Main Course" />
                             <span>Main Course</span>
                         </li>
 
                         <li>
-                            <input type="checkbox"/>
+                            <input type="checkbox" value="Desserts" />
                             <span>Desserts</span>
                         </li>
                     </ul>
@@ -193,8 +208,8 @@ return(
 
                 <ProductContainer>
 
-                {products.length > 0 &&
-                    products.map(product => (
+                {filterProducts.length > 0 &&
+                    filterProducts.map(product => (
                         <>
                             <ProductCard
                                 product={product}

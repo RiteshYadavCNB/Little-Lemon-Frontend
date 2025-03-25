@@ -73,7 +73,7 @@ const ProductStatus = styled.p`
     font-weight: 500;
     padding: 4px 12px;
     color: ${(props) => props.color};
-    background: ${(props)=> props.bgColor};
+    background: ${(props)=> props.$background};
     border-radius: 8px;
 
     @media(max-width: 600px){
@@ -190,8 +190,8 @@ export const ProductCard = ({ product }) => {
                 <ProductPrice>{price ? `₹ ${price}` : "price"}</ProductPrice>
                 <GeneralDiv>
                     {category && <ProductCategory>{category}</ProductCategory>}
-                    {availability ? <ProductStatus color="#008000" bgColor="#D0F0C0">Pan on Stove</ProductStatus> :
-                        <ProductStatus color="#800000" bgColor="#fd5c6340">Out of Stock</ProductStatus>}
+                    {availability ? <ProductStatus color="#008000" $background="#D0F0C0">Pan on Stove</ProductStatus> :
+                        <ProductStatus color="#800000" $background="#fd5c6340">Out of Stock</ProductStatus>}
                 </GeneralDiv>
                 <ProductDescription>{description || "Product Description"}</ProductDescription>
             </ProductInfo>

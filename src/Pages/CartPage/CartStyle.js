@@ -63,9 +63,11 @@ export const ProgressBar = styled.div`
 
 export const CheckoutContainer = styled.div`
     display: flex;
-    width: max-content;
+    width: 100%;
     gap: 40px;
-    padding: 40px 130px;
+    padding: 40px 40px;
+    align-items: center;
+    justify-content: center;
 
     @media(max-width: 1080px){
         width: 100%;
@@ -298,7 +300,8 @@ export const CouponCodeButton = styled.button`
 export const BillBreakUp = styled.div`
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     align-items: flex-start;
     padding: 20px;
     border: 2px solid #7e762980;
