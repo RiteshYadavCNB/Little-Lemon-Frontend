@@ -1,8 +1,14 @@
 import { ProductCard } from "../../components/UtilityComponents/Cards/ProductCard";
-import { MainBody, OrderOnlinePage, PageTitle, ProductContainer, ProductDivider, ProductFilters, ProductSkeletonContainer, ProductView } from "./OrderOnlineStyle";
-import { useEffect, useState, useRef } from "react";
+import { FilterPopupOptions, FilterSelections, MainBody, MobileFilterButton, MobileFilterContainer,
+    MobileFilterMain,
+    MobileFilterPopup, MobileFilterPopupHeader, MobileFilterSearch, OrderOnlinePage, PageTitle, ProductContainer, ProductDivider, 
+    ProductFilters, ProductSkeletonContainer, ProductView } from "./OrderOnlineStyle";
+import { useEffect, useState, useRef, useCallback } from "react";
+import React from "react";
 import { ProductCardSkeleton } from "../../components/UtilityComponents/Cards/ProductCardSkeleton";
 import MultiRangeSlider from "src/components/UtilityComponents/SliderInput/MultiRangeSlider";
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 
 const OrderOnline = () => {
 
@@ -10,29 +16,53 @@ const OrderOnline = () => {
 const [products, setProducts] = useState([]);
 const [page, setPage] = useState(1);
 const [apiCall, setApiCall] = useState(1);
+
 // track if there are more products in the db
 const [hasMore, setHasMore] = useState(true);
 const observerRef = useRef(null);
 
-// filters
+// ref for debouncing search param
+const debounceFilterSearchRef = useRef(null);
+
+// filter states
+// search params
+const [searchParam, setSearchParam] = useState("");
 // price range
 const [minPrice, setMinPrice] = useState(100);
 const [maxPrice, setMaxPrice] = useState(800);
 // meal types
 const [mealTypes, setMealTypes] = useState([]);
 // meal category
-const [mealCategory, setMealCategory] = useState([]);
-
+const [mealCategories, setMealCategory] = useState([]);
+// filtered products
 const [filterProducts, setFilterProducts] = useState(products);
 
+// ---Mobile--- max-width: 720px
+// Mobile Filter Pop-up state
+const [mobileFilterPopupState, setMobileFilterPopupState] = useState(true);
+// Filter Option State
+const [selectedFilterOption, setSelectedFilterOption] = useState("pricerange");
+// Filter Options
+const filterOptions = ["Price Range", "Meal Type", "Meal Category"];
+// default focus on first filter option
+const filterOptionRef = useRef([]);
+// focused filter option
+const [focusedIndex, setFocusedIndex] = useState(0);
+
+useEffect(() => {
+    filterOptionRef.current[focusedIndex].focus();
+},[focusedIndex]);
+
+// filtering products in filterPrdocuts array
 useEffect(()=>{
     setFilterProducts(products.filter((product)=>
+        (searchParam === "" || product.name.toLowerCase().includes(searchParam)) &&
         product.price > minPrice &&
         product.price < maxPrice &&
         (mealTypes.length === 0 || mealTypes.includes(product.mealType)) &&
-        (mealCategory.length === 0 || mealCategory.includes(product.category))
-    ))
-},[minPrice, maxPrice, mealTypes, mealCategory, products]);
+        (mealCategories.length === 0 || mealCategories.includes(product.category))
+    ));
+},[searchParam, minPrice, maxPrice, mealTypes, mealCategories, products]);
 
 // GET products URL
 const getProductsUrl = `${process.env.REACT_APP_GET_PRODUCTS_BASE_URL}?page=${page}&limit=5`;
@@ -54,9 +84,7 @@ useEffect(() => {
             }
 
             const data = await response.json();
-            if(page >= 1){
 
-            }
             setProducts((prev) => [...prev, ...data.products]);
             setHasMore(data.hasMore);
 
@@ -68,11 +96,9 @@ useEffect(() => {
     getProducts();
 },[page, apiCall]);
 
-// useEffect runs immediately before component renders.
-// the first API call happens automatically, and then the observer may also trigger another req
-// may cause double API call on first load --- to avoid explicity stop the first call
-
-
+// Observer may trigger multiple API call on first load
+// --- to avoid explicity stop the first call ---
+// observer callback function
 const observerCallbackFunction = (entries) => {
     const [entry] = entries;
     if (entry.isIntersecting && hasMore){
@@ -80,9 +106,7 @@ const observerCallbackFunction = (entries) => {
     }
 }
 
-// observer will trigger API calls even when there are no more products to load
-// put check hasMore state to stop unnecessary API calls
-
+// intersection observer mount
 useEffect(() => {
     if (!observerRef.current || !hasMore) return;
 
@@ -99,12 +123,38 @@ useEffect(() => {
     return () => observer.disconnect();
 }, [products.length]);
 
-// issue -- observer is diconnected as soon as hasMore changes
-// if hasMore temporarily becomes false and new data arrives the observer never reattaches
+// ---filter functions---
+// set Mobile Filter Pop-up state
+const handleFilterPopup = () => {
+    setMobileFilterPopupState(!mobileFilterPopupState);
+    console.log('focused index', focusedIndex);
+    console.log(filterOptions[focusedIndex]);
+    setTimeout(() => filterOptionRef.current[0].focus(), 100);
+    console.log(filterOptionRef.current[0]);
+}
 
-// filters
+// set Mobile Filter Option State
+const handleFilterOption = (e) => {
+    const filterOption = e.target.textContent.toLowerCase().split(' ').join("");
+    const index = filterOptions.indexOf(e.target.innertext);
+    if (index !== -1) setFocusedIndex(index);
+    setSelectedFilterOption(filterOption);
+}
+
+// handle search queries through deboucing
+const handleSearchQuery = useCallback((e) => {
+    // convert query to lower case for case-insensitive search
+    let updatedSearchQuery = e.target.value.toLowerCase();
+    // clear prev timeOut
+    if (debounceFilterSearchRef.current) clearTimeout(debounceFilterSearchRef.current);
+    // new timeOut
+    debounceFilterSearchRef.current = setTimeout(() => {
+        setSearchParam(updatedSearchQuery);
+    }, 1000);
+},[]);
 
 // handle Price Range
+// ***implement debouncing
 const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxPrice - 100);
     setMinPrice(value);
@@ -115,21 +165,37 @@ const handleMaxChange = (e) => {
     setMaxPrice(value);
 };
 
-// filter methods
-// state obj to store filter values, list of parameters for each category
-// function to itirate over the products array to match the keys from the filter object on button click
+// handle meal type change
+const handleMealTypeChange = (e) => {
+    // check if event.target.value has a valid value
+    if(e.target.value === 0) return;
+    const mealType = e.target.value;
+    setMealTypes(prev =>
+        prev.includes(mealType) ? prev.filter(type => type !== mealType) : [...prev, mealType]
+    );
+}
 
+// handle meal category change
+const handleMealCategoryChange = (e) => {
+    // check if event.target.value has a valid value
+    if(e.target.value === 0) return;
+    const mealCategory = e.target.value;
+    setMealCategory(prev =>
+        prev.includes(mealCategory) ? prev.filter(category => category !== mealCategory) : [...prev, mealCategory]
+    );
+}
 
+// Component
 return(
     <OrderOnlinePage>
 
         <MainBody>
-
+            {/* ---Desktop Filter--- */}
             <ProductFilters>
                 <div className="filter">Filters</div>
 
                 <div className="general-div">
-                    <input className="search-box" type="textfield" maxLength={30} placeholder="search by name"/>
+                    <input className="search-box" type="textfield" maxLength={30} placeholder="search by name" onChange={handleSearchQuery}/>
                 </div>
 
                 <div className="general-div">
@@ -147,7 +213,7 @@ return(
 
                 <div className="general-div">
                     <p>Meal Type</p>
-                    <ul onClick={(e)=>setMealTypes((prev)=> [...prev, e.target.value])}>
+                    <ul onClick={handleMealTypeChange}>
                         <li>
                             <input type="checkbox" value="veg"/>
                             <span>veg</span>
@@ -161,7 +227,7 @@ return(
 
                 <div className="general-div">
                     <p>Meal Course</p>
-                    <ul onClick={(e)=>setMealCategory((prev)=> [...prev, e.target.value])}>
+                    <ul onClick={handleMealCategoryChange}>
                         <li>
                             <input type="checkbox" value="Appetizers" />
                             <span>Appetizers</span>
@@ -195,6 +261,105 @@ return(
                 </div>
             </ProductFilters>
 
+            {/* ---Mobile Filter--- */}
+            <MobileFilterContainer>
+
+                <MobileFilterSearch>
+                <input className="search-box" type="textfield" maxLength={30} placeholder="search by name" onChange={handleSearchQuery}/>
+                </MobileFilterSearch>
+
+                <MobileFilterButton onClick={handleFilterPopup}>
+                    <TuneRoundedIcon sx={{fontSize: 20}}/>
+                    <span>Filters</span>
+                </MobileFilterButton>
+
+            </MobileFilterContainer>
+
+            {/* ---Mobile Filter Pop-up--- */}
+            <MobileFilterPopup display={mobileFilterPopupState}>
+                <MobileFilterPopupHeader>
+                    <p>Filters</p>
+                    <CancelRoundedIcon onClick={handleFilterPopup}/>
+                </MobileFilterPopupHeader>
+
+                <MobileFilterMain>
+                    <FilterPopupOptions>
+                        <ul onClick={handleFilterOption} >
+                            {filterOptions.map((option, index) => (
+                                <li
+                                    key={index}
+                                    ref={(el) => (filterOptionRef.current[index] = el)}
+                                    tabIndex={index === focusedIndex ? "0" : "-1"}
+                                >{option}</li>
+                            ))}
+                        </ul>
+                    </FilterPopupOptions>
+
+                    <FilterSelections>
+                        {selectedFilterOption === "pricerange" &&
+                            <MultiRangeSlider
+                                min={100}
+                                max={800}
+                                step={100}
+                                minVal={minPrice}
+                                maxVal={maxPrice}
+                                handleMaxVal={handleMaxChange}
+                                handleMinVal={handleMinChange}
+                            />
+                        }
+
+                        {selectedFilterOption === "mealtype" &&
+                            <ul onClick={handleMealTypeChange}>
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="veg"/>
+                                    <span>veg</span>
+                                </li>
+
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="non-veg"/>
+                                    <span>non-veg</span>
+                                </li>
+                            </ul>
+                        }
+
+                        {selectedFilterOption === "mealcategory" &&
+                            <ul style={{gap: '4px'}} onClick={handleMealCategoryChange}>
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="Appetizers" />
+                                    <span>Appetizers</span>
+                                </li>
+
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="Salads" />
+                                    <span>Salads</span>
+                                </li>
+
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="Sides" />
+                                    <span>Sides</span>
+                                </li>
+
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="Soups" />
+                                    <span>Soups</span>
+                                </li>
+
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="Main Course" />
+                                    <span>Main Course</span>
+                                </li>
+
+                                <li tabIndex={0}>
+                                    <input type="checkbox" value="Desserts" />
+                                    <span>Desserts</span>
+                                </li>
+                            </ul>
+                        }
+                    </FilterSelections>
+                </MobileFilterMain>
+            </MobileFilterPopup>
+
+            {/* ---Product View--- */}
             <ProductView>
                 <PageTitle>Order Now</PageTitle>
 
@@ -210,12 +375,12 @@ return(
 
                 {filterProducts.length > 0 &&
                     filterProducts.map(product => (
-                        <>
+                        <React.Fragment key={product.id}>
                             <ProductCard
                                 product={product}
                             />
                             <ProductDivider/>
-                        </>
+                        </React.Fragment>
                     ))
                 }
                 </ProductContainer>

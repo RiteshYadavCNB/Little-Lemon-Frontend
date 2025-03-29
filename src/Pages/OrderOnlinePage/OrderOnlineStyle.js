@@ -10,6 +10,10 @@ export const OrderOnlinePage = styled.div`
     margin-top: 60px;
     padding-bottom: 60px;
     background: #fefbdc;
+
+    @media(max-width: 720px){
+        position: relative;
+    }
 `;
 
 export const MainBody = styled.div`
@@ -19,8 +23,13 @@ export const MainBody = styled.div`
     justify-content: center;
     margin-top: 60px;
     gap: 60px;
+
+    @media(max-width: 720px){
+        margin-top: 74px;
+    }
 `;
 
+// Filter Component Styles ---Desktop---
 export const ProductFilters = styled.div`
     display: flex;
     flex-direction: column;
@@ -85,6 +94,158 @@ export const ProductFilters = styled.div`
     }
 `;
 
+// Filter Components ---Mobile---
+export const MobileFilterContainer = styled.div`
+    position: absolute;
+    top: 0px;
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    padding: 16px 16px;
+    gap: 16px;
+    background: #fefbdc;
+    font-size: 18px;
+    font-weight: 500;
+`;
+
+export const MobileFilterSearch = styled.div`
+    display: none;
+    width: 100%;
+    height: max-content;
+
+    .search-box{
+        display: flex;
+        width: 100%;
+        height: 40px;
+        padding: 0px 16px;
+        border-radius: 30px;
+        border: 2px solid #4b471930;
+    }
+
+    .search-box:focus {
+        outline: 1px solid #4b471960;
+    }
+
+    @media(max-width: 720px){
+        display: flex;
+    }
+`;
+
+export const MobileFilterButton = styled.div`
+    display: flex;
+    width: max-content;
+    height: 40px;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fefbdc;
+    background: #4b4719;
+    border-radius: 30px;
+    border: 2px solid #4b471930;
+`;
+
+// Mobile Filter Pop-up
+export const MobileFilterPopup = styled.div`
+    position: fixed;
+    bottom: 0px;
+    display: ${(prop) => prop.display === true ? 'flex' : 'none'};
+    flex-direction: column;
+    width: 100vw;
+    background: #fefbdc;
+    box-shadow: 0px -2px 20px 12px #4b471940;
+    border-radius: 16px 16px 0px 0px;
+    z-index: 10;
+`;
+
+export const MobileFilterPopupHeader = styled.div`
+    display: flex;
+    width: 100%;
+    padding: 16px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #4b471930;
+
+    p{
+        font-size: 18px;
+        font-weight: 500;
+    }
+`;
+
+export const MobileFilterMain = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
+export const FilterPopupOptions = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    align-items: center;
+    border-right: 1px solid #4b471930;
+    padding-bottom: 20px;
+
+    ul{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        list-style: none;
+    }
+
+    li{
+        display: flex;
+        width: 100%;
+        height: 44px;
+        font-size: 14px;
+        font-weight: 400;
+        align-items: center;
+        padding-left: 16px;
+    }
+
+    li:focus {
+        outline: none;
+        font-weight: 500;
+        color: #645e21;
+        background: #645e2120;
+    }
+`;
+
+export const FilterSelections = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 20px 16px;
+
+    .general-div{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 8px 0px;
+    }
+
+    ul{
+        list-style: none;
+    }
+
+    li{
+        display: flex;
+        padding: 4px 0px;
+        align-items: center;
+    }
+
+    input{
+        width: 16px;
+        height: 16px;
+    }
+
+    span{
+        padding: 0px 12px;
+    }
+`;
+
+// Product Components
 export const ProductView = styled.div`
     position: relative;
     display: flex;
@@ -111,8 +272,6 @@ export const PageTitle = styled.div`
     font-size: 24px;
     font-weight: 600;
     padding-bottom: 20px;
-    background: #fefbdc;
-    z-index: 10;
 `;
 
 export const ProductSkeletonContainer = styled.div`

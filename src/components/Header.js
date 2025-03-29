@@ -54,13 +54,22 @@ const NavContainer = styled.nav`
         display: none;
     }
 `;
+// mobile header nav
+const MediaNavContainer = styled.div`
+    display: none;
+    right: 0px;
+    gap: 20px;
+
+    @media(max-width: 768px){
+        display: flex;
+    }
+`;
 
 const Hamburger = styled.button`
+    display: none;
 
     @media (max-width: 768px){
         display: flex;
-        right: 16px;
-        z-index: 10;
         background: #475e17;
         border: none;
         border-radius: 4px;
@@ -128,18 +137,6 @@ const LinkStyle = {
     fontSize: "16px",
     fontWeight: "600"
 };
-
-const MediaNavContainer = styled.div`
-    position: absolute;
-    display: none;
-    right: 0px;
-    padding-right: 2vw;
-    gap: 20px;
-
-    @media(max-width: 768px){
-        display: flex;
-    }
-`;
 
 
 

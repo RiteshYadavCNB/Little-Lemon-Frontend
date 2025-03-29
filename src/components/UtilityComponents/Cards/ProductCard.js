@@ -131,7 +131,7 @@ const AddOrder = styled.div`
     border-radius: 8px;
     box-shadow: inset 0px 0px 8px 1px #645e2120;
     filter: drop-shadow(0px 8px 12px #00000012);
-    z-index: 10;
+    z-index: 2;
 `;
 
 const AddOrderButton = styled.button`
