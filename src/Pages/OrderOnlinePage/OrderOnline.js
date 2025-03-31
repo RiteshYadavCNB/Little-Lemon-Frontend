@@ -3,7 +3,7 @@ import { FilterPopupOptions, FilterSelections, MainBody, MobileFilterButton, Mob
     MobileFilterMain,
     MobileFilterPopup, MobileFilterPopupHeader, MobileFilterSearch, OrderOnlinePage, PageTitle, ProductContainer, ProductDivider, 
     ProductFilters, ProductSkeletonContainer, ProductView } from "./OrderOnlineStyle";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import React from "react";
 import { ProductCardSkeleton } from "../../components/UtilityComponents/Cards/ProductCardSkeleton";
 import MultiRangeSlider from "src/components/UtilityComponents/SliderInput/MultiRangeSlider";
@@ -25,7 +25,7 @@ const observerRef = useRef(null);
 const debounceFilterSearchRef = useRef(null);
 
 // filter states
-// search params
+// product search params
 const [searchParam, setSearchParam] = useState("");
 // price range
 const [minPrice, setMinPrice] = useState(100);
@@ -39,19 +39,42 @@ const [filterProducts, setFilterProducts] = useState(products);
 
 // ---Mobile--- max-width: 720px
 // Mobile Filter Pop-up state
-const [mobileFilterPopupState, setMobileFilterPopupState] = useState(true);
+const [mobileFilterPopupState, setMobileFilterPopupState] = useState(false);
 // Filter Option State
 const [selectedFilterOption, setSelectedFilterOption] = useState("pricerange");
 // Filter Options
-const filterOptions = ["Price Range", "Meal Type", "Meal Category"];
+const filterOptions = useMemo(() => ["Price Range", "Meal Type", "Meal Category"], []);
+// meal categories
+const mealCategorySelections = useMemo(() => ["Appetizers", "Salads", "Sides", "Soups", "Main Course", "Desserts"], []);
 // default focus on first filter option
 const filterOptionRef = useRef([]);
 // focused filter option
 const [focusedIndex, setFocusedIndex] = useState(0);
 
+// restoring focus to filter option when a click outsidde the filter option is detected
+// focus is lost once we click outside the filter options list
 useEffect(() => {
-    filterOptionRef.current[focusedIndex].focus();
-},[focusedIndex]);
+    // check if popup is open
+    if(!mobileFilterPopupState) return;
+
+    const handleClickOutside = (e) => {
+        // check if the click is inside the filter options
+        const isInsideFilterOptions = filterOptionRef.current.some(
+            (el) => el && el.contains(e.target)
+        );
+
+        // if clicked outside, immediately refocus without delay
+        if (!isInsideFilterOptions && filterOptionRef.current[focusedIndex]) {
+            filterOptionRef.current[focusedIndex].focus();
+        }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+        document.removeEventListener("click", handleClickOutside);
+    };
+},[mobileFilterPopupState, focusedIndex]);
 
 // filtering products in filterPrdocuts array
 useEffect(()=>{
@@ -126,19 +149,21 @@ useEffect(() => {
 // ---filter functions---
 // set Mobile Filter Pop-up state
 const handleFilterPopup = () => {
-    setMobileFilterPopupState(!mobileFilterPopupState);
-    console.log('focused index', focusedIndex);
-    console.log(filterOptions[focusedIndex]);
-    setTimeout(() => filterOptionRef.current[0].focus(), 100);
-    console.log(filterOptionRef.current[0]);
+    setMobileFilterPopupState((prev) => !prev);
+    filterOptionRef.current[focusedIndex].focus();
+    const currentFilterOption = filterOptions[focusedIndex].toLowerCase().split(' ').join("");
+    setSelectedFilterOption(currentFilterOption);
 }
 
 // set Mobile Filter Option State
 const handleFilterOption = (e) => {
     const filterOption = e.target.textContent.toLowerCase().split(' ').join("");
-    const index = filterOptions.indexOf(e.target.innertext);
-    if (index !== -1) setFocusedIndex(index);
-    setSelectedFilterOption(filterOption);
+    const index = filterOptions.indexOf(e.target.textContent);
+    if (focusedIndex !== index) setFocusedIndex(index);
+    // defer state update
+    requestAnimationFrame(() => {
+        setSelectedFilterOption(filterOption);
+    });
 }
 
 // handle search queries through deboucing
@@ -311,7 +336,7 @@ return(
                         {selectedFilterOption === "mealtype" &&
                             <ul onClick={handleMealTypeChange}>
                                 <li tabIndex={0}>
-                                    <input type="checkbox" value="veg"/>
+                                    <input type="checkbox" value="veg" />
                                     <span>veg</span>
                                 </li>
 
@@ -324,35 +349,15 @@ return(
 
                         {selectedFilterOption === "mealcategory" &&
                             <ul style={{gap: '4px'}} onClick={handleMealCategoryChange}>
-                                <li tabIndex={0}>
-                                    <input type="checkbox" value="Appetizers" />
-                                    <span>Appetizers</span>
-                                </li>
-
-                                <li tabIndex={0}>
-                                    <input type="checkbox" value="Salads" />
-                                    <span>Salads</span>
-                                </li>
-
-                                <li tabIndex={0}>
-                                    <input type="checkbox" value="Sides" />
-                                    <span>Sides</span>
-                                </li>
-
-                                <li tabIndex={0}>
-                                    <input type="checkbox" value="Soups" />
-                                    <span>Soups</span>
-                                </li>
-
-                                <li tabIndex={0}>
-                                    <input type="checkbox" value="Main Course" />
-                                    <span>Main Course</span>
-                                </li>
-
-                                <li tabIndex={0}>
-                                    <input type="checkbox" value="Desserts" />
-                                    <span>Desserts</span>
-                                </li>
+                                {mealCategorySelections.map((selection, index) => (
+                                    <li
+                                        key={index}
+                                        tabIndex={0}
+                                    >
+                                        <input type="checkbox" value={selection} checked={mealCategories.includes(selection)}/>
+                                        <span>{selection}</span>
+                                    </li>
+                                ))}
                             </ul>
                         }
                     </FilterSelections>
