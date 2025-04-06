@@ -7,7 +7,7 @@ const CashOnDelivery = styled.div`
     height: 40px;
     align-items: center;
     justify-content: center;
-    background: #b0a53960;
+    background: #b0a53910;
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -16,7 +16,7 @@ const CashOnDelivery = styled.div`
     cursor: pointer;
 `;
 
-export const GooglePayModule = () => {
+export const GooglePayModule = ({ payableAmount, updateTransaction }) => {
     return(
         <GooglePayButton
             environment="TEST"
@@ -51,13 +51,16 @@ export const GooglePayModule = () => {
             transactionInfo: {
                 totalPriceStatus: 'FINAL',
                 totalPriceLabel: 'Total',
-                totalPrice: '100.00',
+                totalPrice: `${payableAmount}.00`,
                 currencyCode: 'INR',
                 countryCode: 'IN',
             },
             }}
             onLoadPaymentData={paymentRequest => {
-            console.log('load payment data', paymentRequest);
+                const { info: { cardDetails, cardNetwork},
+                        type: paymentType
+                    } = paymentRequest.paymentMethodData;
+                updateTransaction(cardDetails, cardNetwork, paymentType);
             }}
         />
     );

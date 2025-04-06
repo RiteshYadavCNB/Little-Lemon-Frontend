@@ -1,69 +1,91 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   PaymentContainer,
   PaymentMode,
   PaymentModeDescription,
-  PaymentModeSelection,
   Divider
 } from "./CartStyle";
 
-import Radio from "@mui/material/Radio";
+import { RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { CashOnDeliveryModule, GooglePayModule } from "./PaymentModules";
 
+import { useDispatch } from "react-redux";
+import { updatePayment } from "src/redux/slices/orderSlice";
 
-export const PaymentComponent = () => {
-  const [paymentMode, setPaymentMode] = useState("card");
+export const PaymentComponent = ({ payableAmount }) => {
 
+  const dispatch = useDispatch();
 
-  // handle payment mode
+  const [ paymentMethod, setPaymentMethod ] = useState('CARD');
 
-  const handlePaymentMode = (e) =>{
-    setPaymentMode(e.target.value);
-  };
+  // payment data
+  const [payment, setPayment] = useState({
+                                        paymentMethod: null,
+                                        paymentStatus: null,
+                                        cardDetails: {
+                                            cardNumber: null,
+                                            cardNetwrok: null,
+                                        }
+                                      });
+
+  // handle payment method
+  const handlePaymentMethod = (e) => {
+    if(e.target.name === 'CARD'){
+      setPaymentMethod('CARD');
+    }
+    if(e.target.name === 'COD'){
+      setPayment((prev) => ({ ...prev, paymentMethod: e.target.value, paymentStatus: 'pending'}));
+      setPaymentMethod('COD');
+      const updatedPayment = {
+        ...payment,
+        paymentMethod: e.target.value,
+        paymentStatus: 'pending'
+      }
+      // update redux state
+      dispatch(updatePayment(updatedPayment));
+    }
+  }
+
+  // update transaction details
+  const updateTransaction = (cardDetails, cardNetwrok, paymentType) => {
+    paymentType === 'CARD' && setPayment((prev) => ({
+      ...prev,
+      paymentMethod: 'CARD',
+      paymentStatus: 'completed',
+      cardDetails: {
+        ...prev.cardDetails,
+        cardNumber: cardDetails,
+        cardNetwrok: cardNetwrok
+      }
+    }));
+    dispatch(updatePayment(payment));
+  }
 
   // dynamic payment Gateway
-
   const PAYMENT_MODULE = {
-    card: { id: "card", component: <GooglePayModule /> },
-    cod: { id: "cod", component: <CashOnDeliveryModule />}
+    CARD: { id: 'CARD', component: <GooglePayModule payableAmount={payableAmount} updateTransaction={updateTransaction} /> },
+    COD: { id: 'COD', component: <CashOnDeliveryModule />}
   };
 
-  const CustomComponent = PAYMENT_MODULE?.[paymentMode]?.component || null;
-
+  const customComponent = PAYMENT_MODULE?.[paymentMethod]?.component || null;
 
   return (
     <PaymentContainer>
       <PaymentMode>
-        <PaymentModeSelection>
-          <ul>
-            <li>
-                  <Radio
-                    checked={paymentMode === "card"}
-                    onChange={handlePaymentMode}
-                    value={"card"}
-                    name="radio-buttons"
-                    inputProps={{ "aria-label": "cardpayment" }}
-                  />
-                  <p>Credit/Debit Card</p>
-            </li>
+          <RadioGroup
+              onChange={handlePaymentMethod}
+              row={true} sx={{ width:'100%', justifyContent:'flex-start', gap: '16px', padding: '0px 16px'}}
+              defaultValue='CARD'
+          >
+            <FormControlLabel name='CARD' value='CARD' control={<Radio color='#4b4719' size='small' />} label='Credit/Debit Card' />
+            <FormControlLabel name='COD' value='COD' control={<Radio color='#4b4719' size='small' />} label='Cash on Delivery' />
 
-            <li>
-                <Radio
-                  checked={paymentMode === "cod"}
-                  onChange={handlePaymentMode}
-                  value={"cod"}
-                  name="radio-buttons"
-                  inputProps={{ "aria-label": "cashondelivery" }}
-                />
-                <p>Cash on Delivery</p>
-            </li>
-          </ul>
-        </PaymentModeSelection>
+          </RadioGroup>
 
         <Divider />
 
           <PaymentModeDescription>
-            {CustomComponent}
+            {customComponent}
           </PaymentModeDescription>
 
       </PaymentMode>

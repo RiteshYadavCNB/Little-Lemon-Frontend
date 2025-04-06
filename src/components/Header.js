@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from 'react';
 import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded';
-import { useCartItemContext } from 'src/Context/CartItemsContext';
+import { useCartItemContext } from 'src/context/CartItemsContext';
 
 
 const HeaderContainer = styled.header`

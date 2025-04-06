@@ -134,13 +134,14 @@ const MobileOTP = ({actionCall}) => {
   const [isOtpSent, setIsOtpSent] = useState(false);
 
 
-  const handleOTPInput = (e, key) => {
+  const handleOTPInput = (e, index) => {
+    if(isNaN(e)) return;
     const updatedOTP = [...inputOTP];
-    updatedOTP[key] = e;
+    updatedOTP[index] = e;
     setInputOTP(updatedOTP);
 
-    if (e !== "" && key < 5){
-      document.getElementById(`otp-input-${key+1}`).focus();
+    if (e !== "" && index < 5){
+      document.getElementById(`otp-input-${index+1}`).focus();
     }
   };
 
@@ -152,6 +153,7 @@ const MobileOTP = ({actionCall}) => {
       return (
         <OTPInputField
           key={index}
+          type="number"
           id={`otp-input-${index}`}
           maxLength={1}
           onChange={(e) => handleOTPInput(e.target.value, index)}

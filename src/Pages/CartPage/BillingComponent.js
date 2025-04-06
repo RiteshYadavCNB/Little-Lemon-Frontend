@@ -9,22 +9,17 @@ import {
     BillBreakUp,
     EmptyCartContainer,
     LinkStyle,
-    CheckoutButton
+    CheckoutButton,
+    DeliveryFee
   } from "./CartStyle";
 
-import { useCartItemContext } from "src/Context/CartItemsContext";
+import { useCartItemContext } from "src/context/CartItemsContext";
 import LocalOfferRoundedIcon from '@mui/icons-material/LocalOfferRounded';
 import { OrderConfirmation } from "./ConfirmationComponent";
 
-
-
-export const BillingComponent = ({steps, orderStatus, checkOutStage, totalDiscount, deliveryFee, discountedPrice, handleCheckoutStage}) => {
+export const BillingComponent = ({ bill, orderStatus, checkOutStage, handleCheckoutButton}) => {
 
 const { cartItems } = useCartItemContext();
-
-const handleCheckoutButton = () => {
-    handleCheckoutStage();
-}
 
 return (
         <>
@@ -40,7 +35,7 @@ return (
                 <h2>Apply Coupon Code</h2>
             </div>
             <div>
-                <CouponCodeInput placeholder='enter coupon code' />
+                <CouponCodeInput placeholder='enter coupon code' value={"SAVE-100"} readOnly/>
                 <CouponCodeButton>Apply</CouponCodeButton>
             </div>
             </CouponDiv>}
@@ -60,12 +55,17 @@ return (
 
             <dl>
                 <dt>Discount</dt>
-                <dd>{`- ₹ ${totalDiscount}`}</dd>
+                <dd>{`- ₹ ${bill.itemDiscount}`}</dd>
             </dl>
 
             <dl>
                 <dt>Delivery Fee</dt>
-                <dd>{`- ₹ ${deliveryFee}`}</dd>
+                <DeliveryFee $decoration={bill.deliveryFee} color={bill.deliveryFee}>₹ 30</DeliveryFee>
+            </dl>
+
+            <dl>
+                <dt>Taxes</dt>
+                <dd>{`₹ ${bill.taxFee}`}</dd>
             </dl>
 
             <Divider />
@@ -73,8 +73,17 @@ return (
             <dl>
                 <dt>Total Amount</dt>
                 { checkOutStage >2 ?
-                    <dt style={{display: 'flex', flexDirection: 'row', gap: '16px'}}><p style={{fontSize:'12px', letterSpacing: '0.5px', padding: '4px 12px', color: '#ffffff', backgroundColor: 'green', borderRadius: '30px'}}>Paid</p>₹ {discountedPrice}</dt> :
-                    <CheckoutButton onClick={() => handleCheckoutButton()}>{`Continue ₹ ${discountedPrice}`}</CheckoutButton>}
+                    <dt style={{display: 'flex', flexDirection: 'row', gap: '16px'}}>
+                        <p style={{fontSize:'12px',
+                                letterSpacing: '0.5px',
+                                padding: '4px 12px',
+                                color: '#ffffff',
+                                backgroundColor: 'green',
+                                borderRadius: '30px'}}
+                        >Paid</p>
+                        ₹ {bill.payableAmount}
+                    </dt> :
+                    <CheckoutButton onClick={() => handleCheckoutButton()}>{`Continue ₹ ${bill.payableAmount}`}</CheckoutButton>}
             </dl>
 
             </BillBreakUp>

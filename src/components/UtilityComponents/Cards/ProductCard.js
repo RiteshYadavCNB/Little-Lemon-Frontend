@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-import { useCartItemContext } from "src/Context/CartItemsContext";
+import { useCartItemContext } from "src/context/CartItemsContext";
 
 const ProductCardContainer = styled.div`
     display: flex;

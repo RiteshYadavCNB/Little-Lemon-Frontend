@@ -301,7 +301,7 @@ return(
             </MobileFilterContainer>
 
             {/* ---Mobile Filter Pop-up--- */}
-            <MobileFilterPopup display={mobileFilterPopupState}>
+            <MobileFilterPopup $display={mobileFilterPopupState}>
                 <MobileFilterPopupHeader>
                     <p>Filters</p>
                     <CancelRoundedIcon onClick={handleFilterPopup}/>

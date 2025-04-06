@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FormControlLabel, styled as muiStyled } from "@mui/material";
 
 // Page main Container
 
@@ -263,15 +264,18 @@ export const CouponDiv = styled.div`
 
 export const CouponCodeInput = styled.input`
     width: 100%;
-    max-width: 400px;
     border: 1px solid #7e762940;
     height: 40px;
     padding: 0px 16px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     background: #ffffff80;
     border-radius: 8px;
     color: #7e7629;
+
+    input::placeholder {
+        font-weight: 400;
+    }
 
     input:focus{
         outline: 1px solid #7e7629;
@@ -341,6 +345,11 @@ export const BillBreakUp = styled.div`
         width: 100%;
         max-width: 800px;
     }
+`;
+
+export const DeliveryFee = styled.dd`
+    text-decoration: ${(prop) => (prop.$decoration === 0) ? 'line-through' : 'none'};
+    color: ${(prop) => prop.color === 0 ? '#2b380e96': '#2b380e'};
 `;
 
 export const CheckoutButton = styled.button`
@@ -428,7 +437,7 @@ export const ContactField = styled.div`
 
 `;
 
-export const AddressField = styled.div`
+export const Address = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -438,12 +447,17 @@ export const AddressField = styled.div`
     border-radius: 12px;
     gap: 30px;
 
-    div{
-        display: flex;
-        flex-direction: column;
+    @media(max-width: 1080px){
         width: 100%;
-        gap: 16px;
+        max-width: 800px;
     }
+`;
+
+export const AddressFields = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
 
     label{
         font-size: 16px;
@@ -473,28 +487,22 @@ export const AddressField = styled.div`
     input:focus{
         outline: 1px solid #7e7629;
     }
-
-    @media(max-width: 1080px){
-        width: 100%;
-        max-width: 800px;
-    }
 `;
 
-export const AddressTag = styled.button`
-    width: 60px;
-    height: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #4b4719;
-    border-radius: 30px;
-    background-color: #fefbdc;
-    border: 1px solid #4b4719;
-    cursor: pointer;
-
-    &:focus{
-        background-color: #fcf286;
-    }
-`;
+export const StyledFormControlLabel = muiStyled(FormControlLabel)(({ theme }) => ({
+    width: 'max-content',
+    height: '30px',
+    padding: '4px 12px 4px 0px',
+    borderRadius: '30px',
+    backgroundColor: '#fefbdc',
+    border: '1px solid #4b4719',
+    cursor: 'pointer',
+    '& .MuiFormControlLabel-label': {
+    fontSize: '14px',
+    fontWeight: 500,
+    color: '#4b4719',
+  },
+}));
 
 // Payment Component
 
@@ -528,36 +536,6 @@ export const PaymentMode = styled.div`
         width: 100%;
         max-width: 800px;
     }
-`;
-
-export const PaymentModeSelection = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 16px;
-
-    ul{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    li{
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        width: 200px;
-        height: 60px;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
-        font-weight: 500;
-        color: #4b4719;
-        cursor: pointer;
-    }
-
 `;
 
 

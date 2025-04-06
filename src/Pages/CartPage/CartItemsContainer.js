@@ -1,7 +1,7 @@
 
 import { ProductCard } from "src/components/UtilityComponents/Cards/ProductCard";
 import { CartItemsContainer, CartOfferContainer, ProductDivider, CartitemsDiv } from "./CartStyle";
-import { useCartItemContext } from "src/Context/CartItemsContext";
+import { useCartItemContext } from "src/context/CartItemsContext";
 
 export const CartItemsComponent = () => {
 
